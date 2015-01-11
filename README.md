@@ -11,7 +11,7 @@ Shop:
 
 ## Features
 * TI TFP401 HDMI to RGB Converter
-* Atmel ATmega32U4 with Arduino Leonardo compatible Bootloader
+* Atmel ATmega32U4 with Arduino Leonardo compatible Bootloader (Caterina)
 * 24LC02B EDID EEPROM
 * LED Backlight Boost Regulator (Voltage up to 35V)
 * 3.3V - 5V tolerant UART and I2C interface
@@ -21,3 +21,8 @@ Shop:
 
 ## Hardware
 * [Schematics + Layout](https://github.com/watterott/HDMI-Display/tree/master/pcb)
+
+
+## Software
+* [FAQ (Frequently Asked Questions)](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md)
+* [ATmega32U4 Firmware](https://github.com/watterott/HDMI-Display/tree/master/src)

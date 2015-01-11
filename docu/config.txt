@@ -1,4 +1,4 @@
-#Raspberry Pi settings - http://elinux.org/RPiconfig
+# Raspberry Pi Settings - http://elinux.org/RPiconfig
 
 hdmi_ignore_edid=0xa5000080
 hdmi_group=2
@@ -10,7 +10,7 @@ hdmi_mode=87
 # uncomment for 480x272 Display
 #hdmi_timings=480 0 1 41 2 272 0 2 10 2 0 0 0 60 0 9009000 3
 
-# normal
+# 0 degrees - normal
 #display_rotate=0
 # 90 degrees
 #display_rotate=1
