@@ -1,22 +1,21 @@
-# HDMI-Display
-Universal HDMI displays with touch panel based on TI TFP401A and Atmel ATmega32u4.
+# HDMI-Display / HDMI to RGB Adapter
+Universal HDMI Displays with Touch Panel based on TI TFP401A and Atmel ATmega32u4 (with Arduino Leonardo compatible Bootloader).
 
 Shop:
 [HDMI to RGB Adapter](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller),
-[HDMI 5" 800x480 Display with Touch](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch),
-[HDMI 7" 800x480 Display with Touch](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
+[5" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch),
+[7" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
 
 [![HDMI-Display](https://raw.github.com/watterott/HDMI-Display/master/pcb/HDMI-Display_v10dev.jpg)](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
 
 
 ## Features
 * TI TFP401 HDMI to RGB Converter
-* Atmel ATmega32U4 with Arduino Leonardo compatible Bootloader (Caterina)
-* 24LC02B EDID EEPROM
-* LED Backlight Boost Regulator (Voltage up to 35V)
+* Atmel ATmega32U4 to control Backlight and Touch Panel (normal USB HID Mouse with absolute coordinates)
+* EDID EEPROM (24LC02B) for display settings
+* LED Backlight Boost Regulator (up to 35V)
 * 3.3V - 5V tolerant UART and I2C interface
-* MicroUSB connector
-* Single 5V Power Supply via USB
+* Single 5V Power Supply via MicroUSB connector
 
 
 ## Hardware

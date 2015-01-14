@@ -11,7 +11,7 @@ If there are any problems, then the settings can be made manually:
 [BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt)
 
 
-## Which display are compatible with HDMI-RGB Adapter board?
+## Which displays are compatible with HDMI to RGB Adapter board?
 Here is a [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md).
 
 
@@ -21,3 +21,4 @@ It is an Arduino Leonardo compatible bootloader (Caterina).
 
 ## How to flash/update the EDID EEPROM?
 The EEPROM (I2C) can be flashed via the ATmega32u4, when the SDA+SCL jumpers are closed.
+An example can be found [here](https://github.com/watterott/HDMI-Display/tree/master/src/edid-prog).

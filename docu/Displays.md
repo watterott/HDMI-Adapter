@@ -1,18 +1,18 @@
 # HDMI-to-RGB-Adapter Display Compatibility List
 
-Display                | Size  | Resolution | LED
----------------------- | ----- | ---------- | ----
-                       |       |            |     
- 480272E-TMH-PW-N      |  4.3" |  480 x 272 | 20mA
- 480272G-TMH-PW-N      |  4.3" |  480 x 272 | 40mA
- 480272I-TMH-PW-N      |  4.3" |  480 x 272 | 20mA
- 800320A-TMH-PW-N      |  4.6" |  800 x 320 | 60mA
- 800480D-TMH-PW-N      |  5.0" |  800 x 480 | 40mA
- 800480E-TMH-PW-N      |  5.0" |  800 x 480 | 40mA
-                       |       |            |
- TFT043-3              |  4.3" |  480 x 272 | 20mA
- TFT050-3              |  5.0" |  800 x 480 | 40mA
- TFT070-4              |  7.0" |  800 x 480 | 40mA
+Display            | Size  | Resolution | LED
+------------------ | ----- | ---------- | ----
+**DEM**            |       |            |
+ 480272E-TMH-PW-N  |  4.3" |  480 x 272 | 20mA
+ 480272G-TMH-PW-N  |  4.3" |  480 x 272 | 40mA
+ 480272I-TMH-PW-N  |  4.3" |  480 x 272 | 20mA
+ 800320A-TMH-PW-N  |  4.6" |  800 x 320 | 60mA
+ 800480D-TMH-PW-N  |  5.0" |  800 x 480 | 40mA
+ 800480E-TMH-PW-N  |  5.0" |  800 x 480 | 40mA
+**ER**             |       |            |
+ TFT043-3          |  4.3" |  480 x 272 | 20mA
+ TFT050-3          |  5.0" |  800 x 480 | 40mA
+ TFT070-4          |  7.0" |  800 x 480 | 40mA
 
 
 ## Display Connector Pinout
