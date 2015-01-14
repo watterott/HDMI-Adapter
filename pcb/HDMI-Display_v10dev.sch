@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -11768,7 +11768,7 @@ ER-TFT070-4 - 7.0" 800x480 (LED @ 40mA @ 20.4V)&lt;br&gt;</description>
 <part name="VCCIO" library="we-rcl" deviceset="JUMPER3" device="-NOCREAM"/>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
-<part name="R7B" library="we-rcl" deviceset="RESISTOR" device="-R0402" value="100k"/>
+<part name="R7B" library="we-rcl" deviceset="RESISTOR" device="-R0402" value="NM"/>
 <part name="SDA" library="we-rcl" deviceset="JUMPER2" device="" value="JUMPER2"/>
 <part name="SCL" library="we-rcl" deviceset="JUMPER2" device="" value="JUMPER2"/>
 <part name="POWER" library="we-con" deviceset="USB" device="-MICRO"/>
@@ -12865,6 +12865,9 @@ ER-TFT070-4 - 7.0" 800x480 (LED @ 40mA @ 20.4V)&lt;br&gt;</description>
 <text x="162.56" y="15.24" size="1.27" layer="95">Designed by Andreas Watterott (Watterott electronic)</text>
 <text x="162.56" y="12.7" size="1.27" layer="95">Based on the work of Hubert Kahlert (HK-Datentechnik)</text>
 <wire x1="222.25" y1="79.375" x2="222.25" y2="77.47" width="0.4064" layer="94"/>
+<text x="199.39" y="116.84" size="1.778" layer="97" align="top-left">Raspberry Pi compatible 
+Pin 1-10 with ATmega32u4
+Pin 1-16 without ATmega32u4</text>
 </plain>
 <instances>
 <instance part="IC4" gate="IC" x="72.39" y="111.76"/>
@@ -13713,4 +13716,10 @@ ER-TFT070-4 - 7.0" 800x480 (LED @ 40mA @ 20.4V)&lt;br&gt;</description>
 </sheets>
 </schematic>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>
