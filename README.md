@@ -1,5 +1,5 @@
 # HDMI-Display / HDMI to RGB Adapter
-Universal HDMI Displays with Touch Panel based on TI TFP401A and Atmel ATmega32u4 (with Arduino Leonardo compatible Bootloader).
+Universal HDMI/DVI Displays with Touch Panel based on TI TFP401A and Atmel ATmega32u4 (with Arduino Leonardo compatible Bootloader).
 
 Shop:
 [HDMI to RGB Adapter](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller),
@@ -11,7 +11,9 @@ Shop:
 
 ## Features
 * TI TFP401 HDMI to RGB Converter
-* Atmel ATmega32U4 to control Backlight and Touch Panel (normal USB HID Mouse with absolute coordinates)
+* Pixel Rates up to 165MHz, 1080p and WUXGA (1920x1200) at 60Hz
+* HDMI compatible (DVI, no Sound, no HDCP, no CEC)
+* Atmel ATmega32U4 to control Backlight and Touch Panel (USB HID Mouse with absolute coordinates)
 * EDID EEPROM (24LC02B) for display settings
 * LED Backlight Boost Regulator (up to 35V)
 * 3.3V - 5V tolerant UART and I2C interface
