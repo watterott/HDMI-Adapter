@@ -4,7 +4,10 @@ Written by Hubert Kahlert (HK-Datentechnik, www.hk-datentechnik.de) for Watterot
 
 Visit https://github.com/watterott/HDMI-Display for updates.
 
-The Firmware can be compiled with Arduino IDE v1.0.6
+Installation:
+see HDMI-Display.ino
+https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/HDMI-Display.ino
 
-License: see license.txt
-         https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/license.txt
+License:
+see license.txt
+https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/license.txt

@@ -1,4 +1,4 @@
-Copy these files in your Arduino 1.0.6 programm directory:
+Copy these files in your Arduino 1.0.6 program directory:
 <ARDUINO>/hardware/arduino/cores/arduino/
 
 Absolute Mouse Mode based on:
