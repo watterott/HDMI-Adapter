@@ -5,12 +5,14 @@
   for Watterott electronic (www.watterott.com).
   
   Compiling and Uploading
-    The firmware can be compiled with Arduino IDE v1.0.6 after the patches have been applied.
-    * Copy the patch files from the patches directory in your Arduino program directory:
-      <ARDUINO>/hardware/arduino/cores/arduino/
+    The firmware can be compiled with the Arduino IDE.
+    * On Arduino IDE 1.5 the following support package has to be installed:
+      https://github.com/watterott/wattuino/tree/master/src/Arduino
+    * Copy the patch files from the patches directory in your Arduino program directory
     * Open the Sketch HDMI-Display.ino
-    * Choose Tools->Board->Arduino Leonardo
-    * Choose Tools->Serial Port->Port of Arduino Leonardo
+    * Arduino IDE 1.0: Choose Tools->Board->Arduino Leonardo
+    * Arduino IDE 1.5: Choose Tools->Board->ATmega32u4 (16 MHz)
+    * Choose respective port under Tools->Serial Port
     * Press Upload
   
   USB-Mouse (Touchpanel)

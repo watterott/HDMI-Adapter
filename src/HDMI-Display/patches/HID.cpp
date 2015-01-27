@@ -1,7 +1,7 @@
 
 
 /* Copyright (c) 2011, Peter Barrett  
-**
+** 
 ** Permission to use, copy, modify, and/or distribute this software for  
 ** any purpose with or without fee is hereby granted, provided that the  
 ** above copyright notice and this permission notice appear in all copies.  
@@ -16,9 +16,10 @@
 ** SOFTWARE.  
 */
 
+#if ARDUINO < 150
 #include "Platform.h"
+#endif
 #include "USBAPI.h"
-#include "USBDesc.h"
 
 #if defined(USBCON)
 #ifdef HID_ENABLED
@@ -48,6 +49,7 @@ Keyboard_ Keyboard;
 #define HID_REPORTID_RAWHID (3)
 #define HID_REPORTID_SYSTEMCONTROL (4)
 #define HID_REPORTID_MOUSE_ABS (5)
+
 extern const u8 _hidReportDescriptor[] PROGMEM;
 const u8 _hidReportDescriptor[] = {
 	
@@ -122,7 +124,7 @@ const u8 _hidReportDescriptor[] = {
     0xa1, 0x01,                    // COLLECTION (Application)
     0x85, HID_REPORTID_KEYBOARD,   //   REPORT_ID (2)
     0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-   
+    
     // Keyboard Modifiers (shift, alt, ...)
     0x19, 0xe0,                    //   USAGE_MINIMUM (Keyboard LeftControl)
     0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
@@ -135,7 +137,7 @@ const u8 _hidReportDescriptor[] = {
     0x95, 0x01,                    //   REPORT_COUNT (1)
     0x75, 0x08,                    //   REPORT_SIZE (8)
     0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
-
+    
     // Keyboard keys
     0x95, 0x06,                    //   REPORT_COUNT (6)
     0x75, 0x08,                    //   REPORT_SIZE (8)
@@ -147,7 +149,7 @@ const u8 _hidReportDescriptor[] = {
     0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
     0xc0,                          // END_COLLECTION
 
-#if RAWHID_ENABLED
+#ifdef RAWHID_ENABLED
 	//	RAW HID
 	0x06, LSB(RAWHID_USAGE_PAGE), MSB(RAWHID_USAGE_PAGE),	// 30
 	0x0A, LSB(RAWHID_USAGE), MSB(RAWHID_USAGE),
@@ -192,7 +194,7 @@ int WEAK HID_GetInterface(u8* interfaceNum)
 	return USB_SendControl(TRANSFER_PGM,&_hidInterface,sizeof(_hidInterface));
 }
 
-int WEAK HID_GetDescriptor(int i)
+int WEAK HID_GetDescriptor(int /* i */)
 {
 	return USB_SendControl(TRANSFER_PGM,_hidReportDescriptor,sizeof(_hidReportDescriptor));
 }
@@ -286,7 +288,7 @@ void Mouse_::move(signed char x, signed char y, signed char wheel)
 	m[3] = wheel;
 	HID_SendReport(HID_REPORTID_MOUSE,m,sizeof(m));
 }
-	
+
 void Mouse_::buttons(uint8_t b)
 {
 	if (b != _buttons)
@@ -295,17 +297,17 @@ void Mouse_::buttons(uint8_t b)
 		move(0,0,0);
 	}
 }
-	
+
 void Mouse_::press(uint8_t b) 
 {
 	buttons(_buttons | b);
 }
-	
+
 void Mouse_::release(uint8_t b)
 {
 	buttons(_buttons & ~b);
 }
-	
+
 bool Mouse_::isPressed(uint8_t b)
 {
 	if ((b & _buttons) > 0) 
@@ -568,9 +570,9 @@ void Keyboard_::releaseAll(void)
 
 size_t Keyboard_::write(uint8_t c)
 {	
-	uint8_t p = press(c);		// Keydown
-	uint8_t r = release(c);		// Keyup
-	return (p);					// just return the result of press() since release() almost always returns 1
+	uint8_t p = press(c);  // Keydown
+	release(c);            // Keyup
+	return p;              // just return the result of press() since release() almost always returns 1
 }
 
 #endif

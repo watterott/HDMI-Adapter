@@ -1,8 +1,11 @@
-Copy these files in your Arduino 1.0.6 program directory:
-<ARDUINO>/hardware/arduino/cores/arduino/
+Copy these files in your Arduino program directory:
+
+Arduino 1.0.6: <ARDUINO>/hardware/arduino/cores/arduino/
+
+Arduino 1.5.8: <ARDUINO>/hardware/arduino/avr/cores/arduino/
 
 Absolute Mouse Mode based on:
 https://github.com/nospam2000/Arduino
 
-These files are licensed under LGPL and the original files can be found here:
+The original files can be found here:
 https://github.com/arduino/Arduino

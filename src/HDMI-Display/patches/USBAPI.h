@@ -1,10 +1,46 @@
+/*
+  USBAPI.h
+  Copyright (c) 2005-2014 Arduino.  All right reserved.
 
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #ifndef __USBAPI__
 #define __USBAPI__
 
+#if ARDUINO >= 150
+#include <inttypes.h>
+#include <avr/pgmspace.h>
+#include <avr/eeprom.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned long u32;
+
+#include "Arduino.h"
+#endif
+
 #if defined(USBCON)
 #define MOUSE_ABS_ENABLED //enable absolute mouse coordinates
+
+#if ARDUINO >= 150
+#include "USBDesc.h"
+#include "USBCore.h"
+#endif
 
 //================================================================================
 //================================================================================
@@ -25,6 +61,15 @@ extern USBDevice_ USBDevice;
 //================================================================================
 //================================================================================
 //	Serial over CDC (Serial1 is the physical port)
+#if ARDUINO >= 150
+struct ring_buffer;
+#endif
+
+#if (RAMEND < 1000)
+#define SERIAL_BUFFER_SIZE 16
+#else
+#define SERIAL_BUFFER_SIZE 64
+#endif
 
 class Serial_ : public Stream
 {
@@ -44,8 +89,15 @@ public:
 	virtual size_t write(const uint8_t*, size_t);
 	using Print::write; // pull in write(str) and write(buf, size) from Print
 	operator bool();
+#if ARDUINO >= 150
+	volatile uint8_t _rx_buffer_head;
+	volatile uint8_t _rx_buffer_tail;
+	unsigned char _rx_buffer[SERIAL_BUFFER_SIZE];
+#endif
 };
 extern Serial_ Serial;
+
+#define HAVE_CDCSERIAL
 
 //================================================================================
 //================================================================================
