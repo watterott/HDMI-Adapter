@@ -13,6 +13,10 @@ Display            | Size  | Resolution | LED
  TFT043-3          |  4.3" |  480 x 272 | 20mA
  TFT050-3          |  5.0" |  800 x 480 | 40mA
  TFT070-4          |  7.0" |  800 x 480 | 40mA
+**Innolux**        |       |            |
+ AT050TN33         |  5.0" |  480 x 272 | 40mA
+**Universal**      |       |            |
+ KD50G21-40NT      |  5.0" |  800 x 480 | 40mA
 
 
 ## Display Connector Pinout
