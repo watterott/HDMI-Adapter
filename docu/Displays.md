@@ -13,6 +13,11 @@ Display            | Size  | Resolution | LED
  TFT043-3          |  4.3" |  480 x 272 | 20mA
  TFT050-3          |  5.0" |  800 x 480 | 40mA
  TFT070-4          |  7.0" |  800 x 480 | 40mA
+**Hantronix**      |       |            |
+ HDA500-GH         |  5.0" |  800 x 480 | 40mA
+**HAOYU**          |       |            |
+ HY070CTP-A        |  7.0" |  800 x 480 | 40mA
+ HY070CTP-HD       |  7.0" | 1024 x 600 | 40mA
 **Innolux**        |       |            |
  AT050TN33         |  5.0" |  480 x 272 | 40mA
 **Universal**      |       |            |
@@ -38,7 +43,11 @@ Pin    | Signal
     34 | DE (Data Enable)
     35 | NC (Not Connected)
     36 | Gnd
-    37 | XR/X+
-    38 | YD/Y-
+    37 | XR/X+ (TP_SDA closed -> SDA)
+    38 | YD/Y- (TP_SCL closed -> SCL)
     39 | XL/X-
-    40 | YU/Y+
+    40 | YU/Y+ (TP_INT closed -> INT)
+
+**Note:** When using a **resistive touchpanel** on pin 37-40 the jumpers TP_SDA+TP_SCL+TP_INT have to be open and
+for a **capacitive touchpanel** (e.g. FT5206 controller) the jumpers TP_SDA+TP_SCL+TP_INT have to be closed and VCCIO set to 3V3.
+Also the respective firmware has to be flashed to the ATmega32u4 to insure that the correct logic voltage (3V3) is set to the pins 37-40.
