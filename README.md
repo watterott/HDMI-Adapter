@@ -6,7 +6,7 @@ Shop:
 [5" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch),
 [7" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
 
-[![HDMI-Display](https://raw.github.com/watterott/HDMI-Display/master/pcb/HDMI-Display_v10dev.jpg)](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
+[![HDMI-Display](https://raw.github.com/watterott/HDMI-Display/master/pcb/HDMI-Display_v10.jpg)](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
 
 
 ## Features
