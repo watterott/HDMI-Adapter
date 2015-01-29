@@ -3,7 +3,7 @@
 #include "config.h"
 #include "HDMI-Display.h"
 
-PROGMEM Settings::Data Settings::defaults =
+const PROGMEM Settings::Data Settings::defaults =
 {
   80, 930,          // default calibration values x-axis
   825, 160,         // default calibration values y-axis

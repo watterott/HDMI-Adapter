@@ -14,7 +14,7 @@ class Settings
   };
 
   private:
-    static PROGMEM Data defaults;    // default values
+    static const PROGMEM Data defaults;    // default values
 
   public:
     Data data;
