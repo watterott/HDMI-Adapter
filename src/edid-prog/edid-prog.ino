@@ -14,6 +14,12 @@
 #define BACKLIGHT  9 //backlight control PB5
 #define SW_1      (1<<5) //switch PD5
 
+#define AXM        A1 //PF6
+#define AXP        A3 //PF4
+#define AYM        A2 //PF5
+#define AYP        A0 //PF7
+#define INT        4  //PD4
+
 //uncomment for 480x272 display
 /*const uint8_t PROGMEM eepromdata[128] =
 {
@@ -73,12 +79,21 @@ void eeprom_write_byte(uint16_t addr, byte data)
 
 void setup()
 {
-  DDRD &= ~SW_1; //set pin to input, because USB serial using this as an output (txled)
+  //set pin to input, because USB serial using this as an output (txled)
+  DDRD &= ~SW_1;
   PORTD |= SW_1;
+  //set analog pins to input
+  pinMode(AXM, INPUT);
+  pinMode(AXP, INPUT);
+  pinMode(AYM, INPUT);
+  pinMode(AYP, INPUT);
+  pinMode(INT, INPUT);
+  //set LEDs
   pinMode(LED_1, OUTPUT);
-  pinMode(LED_2, OUTPUT);
   digitalWrite(LED_1, HIGH); //on
+  pinMode(LED_2, OUTPUT);
   digitalWrite(LED_2, LOW); //off
+  //set backlight
   pinMode(BACKLIGHT, OUTPUT);
   digitalWrite(BACKLIGHT, LOW); //off
 
