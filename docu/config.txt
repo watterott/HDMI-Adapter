@@ -4,10 +4,10 @@ hdmi_ignore_edid=0xa5000080
 hdmi_group=2
 hdmi_mode=87
 
-# uncomment for 800x480 Display
+# uncomment for 800x480 Display (TFT050-3, TFT070-4)
 #hdmi_cvt=800 480 60 6 0 0 0
 
-# uncomment for 480x272 Display
+# uncomment for 480x272 Display (TFT043-3)
 #hdmi_timings=480 0 1 41 2 272 0 2 10 2 0 0 0 60 0 9009000 3
 
 # 0 degrees - normal
