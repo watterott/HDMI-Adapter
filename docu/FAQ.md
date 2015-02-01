@@ -8,7 +8,10 @@ Depending on the display and backlight current between 400 to 600mA.
 In general all boards/computers with a HDMI output can drive the display and the respective settings are loaded from the EDID EEPROM automatically.
 If there are any problems, then the settings can be made manually:
 [Raspberry Pi](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt),
-[BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt)
+[BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt),
+[CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.scr),
+[ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini)
+*Note: We have not tested all configurations.)*
 
 
 ## Which displays are compatible with HDMI to RGB Adapter board?

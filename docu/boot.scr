@@ -1,0 +1,17 @@
+# Cubieboard Settings - http://linux-sunxi.org/Display
+# FEX infos (script.fex): http://linux-sunxi.org/Fex_Guide#disp_init_configuration
+
+# save as boot.script and compile with
+# mkimage -C none -A arm -T script -d boot.script boot.scr
+
+# uncomment for 720x480 display (first EDID then fallback)
+#setenv bootargs console=tty0 hdmi.audio=EDID:0 disp.screen0_output_mode=EDID:720x480p60 root=/dev/mmcblk0p1 rootwait panic=10
+
+# uncomment for 800x480 display (first EDID then fallback)
+#setenv bootargs console=tty0 hdmi.audio=EDID:0 disp.screen0_output_mode=EDID:800x480p60 root=/dev/mmcblk0p1 rootwait panic=10
+
+# uncomment for 800x600 display (first EDID then fallback)
+#setenv bootargs console=tty0 hdmi.audio=EDID:0 disp.screen0_output_mode=EDID:800x600p60 root=/dev/mmcblk0p1 rootwait panic=10
+
+# uncomment for 1024x600 display (first EDID then fallback)
+#setenv bootargs console=tty0 hdmi.audio=EDID:0 disp.screen0_output_mode=EDID:1024x600p60 root=/dev/mmcblk0p1 rootwait panic=10
