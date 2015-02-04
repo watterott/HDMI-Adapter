@@ -1,17 +1,16 @@
 /*
-  Backlight Test Programm
+  Backlight Test Program
  */
 
-#define LED_1      5 //first LED PC6
-#define LED_2     13 //second LED PC7
-#define BACKLIGHT  9 //backlight control PB5
 #define SW_1      (1<<5) //switch PD5
-
-#define AXM        A1 //PF6
-#define AXP        A3 //PF4
-#define AYM        A2 //PF5
-#define AYP        A0 //PF7
-#define INT        4  //PD4
+#define LED_1     (5)  //first LED PC6
+#define LED_2     (13) //second LED PC7
+#define BACKLIGHT (9)  //backlight control PB5
+#define AXM       (A1) //touch X- PF6
+#define AXP       (A3) //touch X+ PF4
+#define AYM       (A2) //touch Y- PF5
+#define AYP       (A0) //touch Y+ PF7
+#define INT       (4)  //touch interrupt PD4
 
 int backlight_power=1;
 
