@@ -1,8 +1,8 @@
 Copy these files in your Arduino program directory:
 
-Arduino 1.0.6: <ARDUINO>/hardware/arduino/cores/arduino/
+Arduino 1.0: <ARDUINO>/hardware/arduino/cores/arduino/
 
-Arduino 1.5.8: <ARDUINO>/hardware/arduino/avr/cores/arduino/
+Arduino 1.5: <ARDUINO>/hardware/arduino/avr/cores/arduino/
 
 Absolute Mouse Mode based on:
 https://github.com/nospam2000/Arduino

@@ -2,7 +2,7 @@
 #include "config.h"
 #include "HDMI-Display.h"
 
-Touchscreen::Touchscreen()
+Touchpanel_Resistive::Touchpanel_Resistive()
 {
   ax.point = &settings.data.x0;
   ax.firstTouch = 0;
@@ -14,12 +14,12 @@ Touchscreen::Touchscreen()
   mouseX = mouseY = 0;
   mouseButtonState = 0;
 }
-  
-void Touchscreen::setup()
+
+void Touchpanel_Resistive::setup()
 { 
 }
     
-int Touchscreen::calcPoint(int value, struct Axis *axis)
+int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)
 {   
   int delta = axis->firstTouch - value;
   if(delta < 0)
@@ -36,7 +36,7 @@ int Touchscreen::calcPoint(int value, struct Axis *axis)
   return screen;
 }
   
-int Touchscreen::readX()
+int Touchpanel_Resistive::readX()
 { 
   uint8_t i;
   int x;
@@ -57,7 +57,7 @@ int Touchscreen::readX()
   return x;
 }
     
-int Touchscreen::readY()
+int Touchpanel_Resistive::readY()
 {
   uint8_t i;
   int y;
@@ -78,7 +78,7 @@ int Touchscreen::readY()
   return y;
 }
   
-bool Touchscreen::readZ()
+bool Touchpanel_Resistive::readZ()
 {
   pinMode(AXP, INPUT);  
   pinMode(AYM, INPUT);  
@@ -100,7 +100,7 @@ bool Touchscreen::readZ()
   return (zFilter > TOUCH_DETECTION_LEVEL);
 }
 
-void Touchscreen::calibration()
+void Touchpanel_Resistive::calibration()
 {
   uint8_t count0, count1, led = 0;
   unsigned long x0, x1, y0, y1;
@@ -212,7 +212,7 @@ void Touchscreen::calibration()
   settings.save();
 }
   
-void Touchscreen::loop()
+void Touchpanel_Resistive::loop()
 {
   uint8_t led = LOW;
     
@@ -225,23 +225,33 @@ void Touchscreen::loop()
       mouseX  = calcPoint(x, &ax);
       mouseY  = calcPoint(y, &ay);      
       mouseButtonState = 1;
-
-      Mouse.moveAbs(mouseX, mouseY, mouseButtonState);
+      Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
       backlight.screensaverNotify();   // reset screensaver on touch
       led = HIGH;
+
+      #if DEBUG > 0
+        Serial.print(mouseX);
+        Serial.print(" ");
+        Serial.print(mouseY);
+        Serial.print(" ");
+        Serial.println(mouseButtonState);
+      #endif
     }
-        
-    /*Serial.print(x);
-    Serial.print(" ");
-    Serial.print(y);
-    Serial.println("");*/
   }
   else
   {
     if(mouseButtonState)
     {
       mouseButtonState = 0;
-      Mouse.moveAbs(mouseX, mouseY, mouseButtonState);
+      Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
+
+      #if DEBUG > 0
+        Serial.print(mouseX);
+        Serial.print(" ");
+        Serial.print(mouseY);
+        Serial.print(" ");
+        Serial.println(mouseButtonState);
+      #endif
     }
   }
   digitalWrite(LED_2, led);  

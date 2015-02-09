@@ -10,14 +10,19 @@
       https://github.com/watterott/wattuino/tree/master/src/Arduino
     * Copy the patch files from the patches directory in your Arduino program directory
     * Open the Sketch HDMI-Display.ino
+    * Set the configuration for touch display and touchscreen in config.h
     * Arduino IDE 1.0: Choose Tools->Board->Arduino Leonardo
     * Arduino IDE 1.5: Choose Tools->Board->ATmega32u4 (16 MHz)
     * Choose respective port under Tools->Serial Port
     * Press Upload
+    * Before connecting the TFT-Screen, check the jumper settings.
+      Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
+      Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
+      https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
   
   USB-Mouse (Touchpanel)
     The Touchpanel acts as normal USB Mouse.
-
+  
   USB-CDC Virtual COM-Port
     Settings:
       9600 8N1
@@ -25,7 +30,7 @@
       AT     -> Version information
       ATA    -> Backlight on
       ATH    -> Backlight off
-      ATEx   -> Set EDID x (0 = 480x272, 1 = 720x480, 2 = 800x480)
+      ATE    -> Set EDID
       ATSx?  -> Read register x
       ATSx=y -> Write register x (value y)
     Registers:
@@ -36,7 +41,7 @@
       4 -> Time for Screensaver (0 = always on)
       5 -> Backlight (0...255)
   
-  Touchpanel Calibration
+  Resitive Touchpanel Calibration
     1. Hold down the switch and plug in the USB connector (power on).
     2. Press on the left edge (x axis) about 5s till the LED blinking changes.
     3. Press on the right edge (x axis) about 5s till the LED blinking changes.
@@ -52,7 +57,13 @@
 
 Settings settings;
 Backlight backlight;
-Touchscreen touchscreen;
+#if TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
+  Touchpanel_FT5x06 touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_NONE
+  Touchpanel_None touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
+  Touchpanel_Resistive touchpanel;
+#endif
 EDID edid;
 
 bool isButtonPressed()
@@ -74,23 +85,41 @@ void waitButtonReleased()
 
 void setup()
 {
-  Serial.begin(9600);
-  Serial.setTimeout(10); //wait 10ms for data
-  //while(!Serial); //wait for serial port to connect
-
-  Mouse.begin();
-
+  DDRD &= ~SW_1; //set pin to input, because USB serial using this as an output (txled)
+  PORTD |= SW_1;
   pinMode(LED_1, OUTPUT);
   digitalWrite(LED_1, LOW);
   pinMode(LED_2, OUTPUT);
   digitalWrite(LED_2, LOW);
 
+  Serial.begin(9600);
+  Serial.setTimeout(10); //wait 10ms for data
+  #if DEBUG > 0
+    for(uint8_t port=0; !Serial.available() && !isButtonPressed();) //wait for serial data or button press
+    {
+      if(Serial && port == 0)
+      {
+        port = 1;
+        Serial.println(F("DEBUG ON"));
+        Serial.println(F("Hit any key to start"));
+      }
+      digitalWrite(LED_2, LOW);
+      delay(250);
+      digitalWrite(LED_2, HIGH);
+      delay(250);
+    }
+  #endif
+
+  Wire.begin();
+  Wire.setClock(100000); // 100 kHz
+  Mouse.begin();
+
   settings.setup();
   backlight.setup();
-  touchscreen.setup();
+  touchpanel.setup();
 
   if(isButtonPressed())
-    touchscreen.calibration();
+    touchpanel.calibration();
 }
 
 void sendAck()
@@ -155,19 +184,11 @@ void ATCommandsLoop()
         Serial.setTimeout(10);
         break;
         
-      case 'E': // write EDID to external EEPROM. (ATE0, ATE1, ATE2)
-        Serial.setTimeout(10000);
-        reg = Serial.parseInt();
-        if(reg >= 0 && reg < 3)
-        {
-          if(edid.writeEDID(reg))
-            sendAck();
-          else
-            sendNack();
-        }
+      case 'E': // write EDID to external EEPROM
+        if(edid.writeEDID())
+          sendAck();
         else
           sendNack();
-        Serial.setTimeout(10);
         break;
     }
   }  
@@ -184,7 +205,7 @@ void loop()
 
     if(backlight.isOn())
     {
-      touchscreen.loop();
+      touchpanel.loop();
     }
 
     if(isButtonPressed())

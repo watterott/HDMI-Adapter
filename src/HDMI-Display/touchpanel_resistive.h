@@ -1,18 +1,12 @@
-#ifndef TOUCHSCREEN_H
-#define TOUCHSCREEN_H
-
-// touchscreen analog inputs 
-#define AXM            A1 //PF6
-#define AXP            A3 //PF4
-#define AYM            A2 //PF5
-#define AYP            A0 //PF7
+#ifndef TOUCHPANEL_RESISTIVE_H
+#define TOUCHPANEL_RESISTIVE_H
 
 #define TOUCHMAX            4095L
 #define SAMPLES                16 
 #define JITTER_THRESHOLD        2
 #define TOUCH_DETECTION_LEVEL 200
   
-class Touchscreen
+class Touchpanel_Resistive
 {
   private:
     struct Axis
@@ -33,10 +27,10 @@ class Touchscreen
     bool readZ();
 
   public:
-    Touchscreen();
+    Touchpanel_Resistive();
     void setup();
     void calibration();
     void loop();  
 };
 
-#endif //TOUCHSCREEN_H
+#endif //TOUCHPANEL_RESISTIVE_H
