@@ -15,7 +15,9 @@ hdmi_mode=87
 #hdmi_timings=800 0 40 48 88 480 0 13 3 32 0 0 0 60 0 31000000 6
 
 # uncomment for 800x480 display (HY070CTP-A)
-#hdmi_timings=800 0 16 1 45 480 0 22 1 23 0 0 0 60 0 27200000 6
+#hdmi_timings=800 0 16 10 40 480 0 21 1 22 0 0 0 60 0 27300000 6
+#hdmi_timings=800 0 16 16 34 480 0 21 1 22 0 0 0 60 0 27300000 6
+#hdmi_timings=800 0 16 5 45 480 0 13 3 32 0 0 0 60 0 27200000 6
 
 # uncomment for 1024x600 display (HY070CTP-HD)
 #hdmi_cvt=1024 600 60 3 0 0 0

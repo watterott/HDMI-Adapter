@@ -11,13 +11,13 @@ If there are any problems, then the settings can be made manually:
 [BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt),
 [CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.scr),
 [ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini)
-*Note: We have not tested all configurations.)*
+*(Note: We have not tested all configurations.)*
 
 
 ## Which displays are compatible with HDMI to RGB Adapter board?
 All displays with the standard 40 pin connector (parallel RGB interface) are compatible.
-If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.
-Here is also a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) and further infos.
+**If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.**
+Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) with further infos.
 
 
 ## Which bootloader is on the ATmega32u4?
@@ -27,3 +27,4 @@ It is an Arduino Leonardo compatible bootloader (Caterina).
 ## How to flash/update the EDID EEPROM?
 The EEPROM (I2C) can be flashed via the ATmega32u4 microcontroller, when the SDA+SCL jumpers are closed.
 An example can be found [here](https://github.com/watterott/HDMI-Display/tree/master/src/edid-prog).
+To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.
