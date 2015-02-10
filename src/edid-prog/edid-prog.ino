@@ -111,10 +111,19 @@ void setup()
   digitalWrite(BACKLIGHT, LOW); //off
 
   Serial.begin(9600); //9600 baud
-  while(!Serial); //wait for serial port to connect
-  Serial.println(F("I2C-EEPROM WRITER"));
-  Serial.println(F("Hit any key to start"));
-  while(!Serial.available() && (PIND & SW_1)); //wait for serial data or button press
+  for(uint8_t port=0; !Serial.available() && (PIND & SW_1);) //wait for serial data or button press
+  {
+    if(Serial && port == 0)
+    {
+      port = 1;
+      Serial.println(F("I2C-EEPROM WRITER"));
+      Serial.println(F("Hit any key to start"));
+    }
+    digitalWrite(LED_2, LOW);
+    delay(250);
+    digitalWrite(LED_2, HIGH);
+    delay(250);
+  }
 
   Serial.println(F("Writing..."));
   digitalWrite(LED_1, LOW); //off
@@ -134,9 +143,9 @@ void setup()
     eeprom_write_byte(addr, b);
     delay(5);
   }
-  Serial.print(F("Done."));
+  Serial.println(F("Done."));
 
-  Serial.println(F("\n\rVerifying..."));
+  Serial.println(F("Verifying..."));
   for(uint16_t addr=0; addr < EEPROMSIZE; addr++)
   {
     byte b, d;
@@ -151,13 +160,14 @@ void setup()
     d = eeprom_read_byte(addr);
     if (b != d)
     {
-      Serial.print(F("failed at 0x")); Serial.println(addr);
+      Serial.print(F("failed at 0x"));
+      Serial.println(addr, HEX);
       while(1);
     }
   }
   digitalWrite(LED_1, HIGH); //on
   digitalWrite(LED_2, HIGH); //on
-  Serial.print(F("Done."));
+  Serial.println(F("Done."));
 }
  
 void loop()
