@@ -42,9 +42,14 @@
 #define VERSION_STRING  "Version 1.01"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
-//#define DEBUG           1 // set debugging output level 0=nothing, 1=min...
+//#define DEBUG           1 // set debugg output level (0=nothing, 1=minimal...)
 #define LOOPTIME       16 // 60 Hz polling interval
-#define SCREENSAVERTIME 0 // seconds timeout
+#define SCREENSAVERTIME 180 // seconds timeout
+
+#if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
+#  undef SCREENSAVERTIME
+#  define SCREENSAVERTIME 0
+#endif
 
 // IO ports
 #define LED_1           5 // first LED PC6
