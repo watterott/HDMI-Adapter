@@ -16,7 +16,11 @@ uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
   Wire.write(addr);
   Wire.endTransmission();
   Wire.requestFrom(FT5x06_ADDR, 1);
-  while(!Wire.available());
+  for(unsigned long ms = millis(); !Wire.available();)
+  {
+    if((millis()-ms) >= 1000) //1 seconds timeout
+      break;
+  }
   return Wire.read();
 }
 
