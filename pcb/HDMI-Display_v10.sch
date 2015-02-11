@@ -12244,8 +12244,6 @@ ER-TFT070-4 - 7.0" 800x480 (LED @ 40mA @ 20.4V)&lt;br&gt;</description>
 <text x="179.07" y="88.9" size="1.27" layer="97" rot="R90">TFT070-4 - 7" 800x480 BL:40mA
 TFT050-3 - 5" 800x480 BL:40mA
 TFT043-3 - 4.3" 480x272 BL:20mA</text>
-<wire x1="41.91" y1="53.34" x2="44.45" y2="53.34" width="0.4064" layer="94"/>
-<wire x1="41.91" y1="60.96" x2="44.45" y2="60.96" width="0.4064" layer="94"/>
 <text x="175.895" y="137.16" size="1.27" layer="95" align="center-left">SDA /</text>
 <text x="175.895" y="129.54" size="1.27" layer="95" align="center-left">SCL /</text>
 <text x="175.895" y="134.62" size="1.27" layer="95" align="center-left">RES /</text>
