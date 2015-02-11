@@ -4,6 +4,8 @@
 When using a *resistive touchpanel* on pin 37-40 the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *open* and
 for a *capacitive touchpanel* (e.g. FT5206 controller) the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *closed* and ```VCCIO``` set to 3V3.
 Also the respective firmware has to be flashed to the ATmega32u4 microcontroller to insure that the correct logic voltage (3V3) is set to the pins 37-40.
+Further infos can also be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb).
+
 
 Display            | Size  | Resolution | LED
 ------------------ | ----- | ---------- | ----
