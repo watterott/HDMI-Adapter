@@ -1,4 +1,5 @@
-# Cubieboard Settings - http://linux-sunxi.org/Display
+# Cubieboard Settings - boot.scr
+# http://linux-sunxi.org/Display
 # FEX infos (script.fex): http://linux-sunxi.org/Fex_Guide#disp_init_configuration
 
 # save as boot.script and compile with

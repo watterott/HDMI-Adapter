@@ -1,10 +1,15 @@
-# BeagleBone Settings - http://elinux.org/Beagleboard:BeagleBoneBlack_HDMI
+# BeagleBone Settings - /boot/uEnv.txt
+# http://elinux.org/Beagleboard:BeagleBoneBlack_HDMI
+# https://eewiki.net/display/linuxonarm/BeagleBone+Black
 
 # uncomment for 480x272 display
 #kms_force_mode=video=HDMI-A-1:480x272M@160
 
 # uncomment for 800x480 display
 #kms_force_mode=video=HDMI-A-1:800x480M@60
+
+# uncomment for 800x600 display
+#kms_force_mode=video=HDMI-A-1:800x600M@60
 
 # uncomment for 1024x600 display
 #kms_force_mode=video=HDMI-A-1:1024x600M@60

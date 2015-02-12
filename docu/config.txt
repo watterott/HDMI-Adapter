@@ -1,4 +1,5 @@
-# Raspberry Pi Settings - http://elinux.org/RPiconfig
+# Raspberry Pi Settings - /boot/config.txt
+# http://elinux.org/RPiconfig
 # hdmi_cvt=<width> <height> <framerate> <aspect> <margins> <interlaced> <reduced_blanking>
 # hdmi_timing=<h_active_pixels> <h_sync_polarity> <h_front_porch> <h_sync_pulse> <h_back_porch> <v_active_lines> <v_sync_polarity> <v_front_porch> <v_sync_pulse> <v_back_porch> <v_sync_offset_a> <v_sync_offset_b> <pixel_rep> <framerate> <interlaced> <pixel_freq> <aspect>
 # aspect ratio: 1=4:3, 2=14:9, 3=16:9, 4=5:4, 5=16:10, 6=15:9, 7=21:9, 8=64:27

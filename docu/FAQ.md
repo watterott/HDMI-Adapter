@@ -10,7 +10,8 @@ If there are any problems, then the settings can be made manually:
 [Raspberry Pi](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt),
 [BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt),
 [CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.scr),
-[ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini)
+[ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini),
+[UDOO](http://www.elinux.org/UDOO_setup_lvds_panels)
 *(Note: We have not tested all configurations.)*
 
 
