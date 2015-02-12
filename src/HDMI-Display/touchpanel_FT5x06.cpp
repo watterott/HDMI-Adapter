@@ -7,7 +7,17 @@ Touchpanel_FT5x06::Touchpanel_FT5x06()
 {
   mouseX = mouseY = 0;
   mouseButtonState = 0;
-  err = 255;
+  power = 1;
+}
+
+void Touchpanel_FT5x06::on()
+{
+  power = 1;
+}
+
+void Touchpanel_FT5x06::off()
+{
+  power = 0;
 }
 
 uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
@@ -44,20 +54,24 @@ void Touchpanel_FT5x06::setup()
   pinMode(INT, INPUT);
 
   // wait for startup
-  for(i=0; i<10; i++)
+  for(i=0; i < 10; i++)
   {
     delay(500);
     b = i2cReadByte(REG_CIPHER);
     if(b == CHIP_VENDOR_ID)
       break;
   }
-  
+
   // chip vendor wrong
   if(b != CHIP_VENDOR_ID)
   {
+    #if DEBUG > 0
+      Serial.print(F("TP Chip Vendor wrong: 0x"));
+      Serial.println(b, HEX);
+    #endif
     for(;;)
     {
-      digitalWrite(LED_2, LOW);    
+      digitalWrite(LED_2, LOW);
       delay(250);
       digitalWrite(LED_2, HIGH);
       delay(250);
@@ -65,14 +79,28 @@ void Touchpanel_FT5x06::setup()
   }
 
   //check error register
-  do
+  for(i=0; i < 10; i++)
   {
-    err = i2cReadByte(REG_ERR);
-    #if DEBUG > 1
+    b = i2cReadByte(REG_ERR);
+    if(b == 0)
+      break;
+  }
+
+  // error
+  if(b != 0)
+  {
+    #if DEBUG > 0
       Serial.print(F("TP Error: 0x"));
-      Serial.println(err, HEX);
+      Serial.println(b, HEX);
     #endif
-  } while(err != 0);
+    for(;;)
+    {
+      digitalWrite(LED_2, LOW);
+      delay(250);
+      digitalWrite(LED_2, HIGH);
+      delay(250);
+    }
+  }
 
   #if DEBUG > 0
     b = i2cReadByte(REG_CIPHER);
@@ -107,15 +135,8 @@ void Touchpanel_FT5x06::setup()
     Serial.println(i2cReadByte(i));
   }*/
 
-  //check state register
-  do
-  {
-    b = i2cReadByte(REG_STATE);
-    #if DEBUG > 1
-      Serial.print(F("TP State: 0x"));
-      Serial.println(b, HEX);
-    #endif
-  } while(b != STATE_WORK);
+  //touchpanel on as default
+  on();
 }
 
 void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)
@@ -141,6 +162,13 @@ void Touchpanel_FT5x06::mouseButtonUp()
   {
     mouseButtonState = 0;
     Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
+
+    #if DEBUG > 0
+      Serial.print(mouseX);
+      Serial.print(" ");
+      Serial.print(mouseY);
+      Serial.println(" up");
+    #endif
   }
 }
 
@@ -149,73 +177,76 @@ void Touchpanel_FT5x06::loop()
   uint8_t b, led = LOW;
   int8_t z;
 
-  if(err == 0)
+  if(!power)
+    return;
+
+  b = i2cReadByte(REG_STATE);
+  #if DEBUG > 2
+    Serial.print(F("TP State: 0x"));
+    Serial.println(b, HEX);
+  #endif
+  if(b == STATE_WORK)
   {
-    b = i2cReadByte(REG_STATE);
-    #if DEBUG > 2
-      Serial.print(F("TP State: 0x"));
-      Serial.println(b, HEX);
-    #endif
-    if(b == STATE_WORK)
+    b = i2cReadByte(REG_TD_STATUS);
+    if(b != 0 && b != 255) // no touch points on 0 and 255
     {
-      b = i2cReadByte(REG_TD_STATUS);
-      if(b != 0 && b != 255) // no touch points on 0 and 255
+      nrPoints = b & 0x07;
+      readTouchPoint(REG_TOUCH_1, &touch[0]);
+      // no multi touch support at the moment
+      // readTouchPoint(REG_TOUCH_2, &touch[1]);
+      // readTouchPoint(REG_TOUCH_3, &touch[2]);
+      // readTouchPoint(REG_TOUCH_4, &touch[3]);
+      // readTouchPoint(REG_TOUCH_5, &touch[4]);
+      gestureID = i2cReadByte(REG_GESTURE_ID);
+
+      #if DEBUG > 1
+        Serial.print(F("TP Points: 0x"));
+        Serial.print(nrPoints, HEX);
+        Serial.print(F(" ID: 0x"));
+        Serial.print(touch[0].id, HEX);
+        Serial.print(F(" Event: 0x"));
+        Serial.println(touch[0].event, HEX);
+      #endif
+
+      if(nrPoints >= 1 && touch[0].id == 0 && (touch[0].event == 0 || touch[0].event == 2)) // put down or contact
       {
-        nrPoints = b & 0x07;
-        readTouchPoint(REG_TOUCH_1, &touch[0]);
-        // no multi touch support at the moment
-        // readTouchPoint(REG_TOUCH_2, &touch[1]);
-        // readTouchPoint(REG_TOUCH_3, &touch[2]);
-        // readTouchPoint(REG_TOUCH_4, &touch[3]);
-        // readTouchPoint(REG_TOUCH_5, &touch[4]);
-        gestureID = i2cReadByte(REG_GESTURE_ID);
+        mouseX  = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
+        mouseY  = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
 
-        #if DEBUG > 1
-          Serial.print(F("TP Points: 0x"));
-          Serial.print(nrPoints, HEX);
-          Serial.print(F(" ID: 0x"));
-          Serial.print(touch[0].id, HEX);
-          Serial.print(F(" Event: 0x"));
-          Serial.println(touch[0].event, HEX);
-        #endif
-
-        if(nrPoints >= 1 && touch[0].id == 0 && (touch[0].event == 0 || touch[0].event == 2)) // Put Down or Contact
+        mouseButtonState = 1;
+        if(gestureID == GESTURE_ZOOM_IN)
         {
-          mouseX  = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
-          mouseY  = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
-              
-          mouseButtonState = 1;
-          if(gestureID == GESTURE_ZOOM_IN)
-          {
-            z = 1;
-            mouseButtonState = 0;
-          }
-          else if(gestureID == GESTURE_ZOOM_OUT)
-          {
-            z = -1;
-            mouseButtonState = 0;
-          }
-          else
-            z = 0;
-
-          Mouse.moveAbs(mouseX, mouseY, z, mouseButtonState);
-          backlight.screensaverNotify();   // reset screensaver on touch
-          led = HIGH;
-
-          #if DEBUG > 0
-            Serial.print(mouseX);
-            Serial.print(" ");
-            Serial.print(mouseY);
-            Serial.print(" ");
-            Serial.print(z);
-            Serial.print(" ");
-            Serial.println(mouseButtonState);
-          #endif
+          z = 1;
+          mouseButtonState = 0;
         }
-        else  // Put Up
-          mouseButtonUp();
+        else if(gestureID == GESTURE_ZOOM_OUT)
+        {
+          z = -1;
+          mouseButtonState = 0;
+        }
+        else
+          z = 0;
+
+        Mouse.moveAbs(mouseX, mouseY, z, mouseButtonState);
+        backlight.screensaverNotify();   // reset screensaver on touch
+        led = HIGH;
+
+        #if DEBUG > 0
+          Serial.print(mouseX);
+          Serial.print(" ");
+          Serial.print(mouseY);
+          Serial.print(" ");
+          Serial.print(z);
+          Serial.print(" ");
+          Serial.println(mouseButtonState);
+        #endif
       }
+      else
+        mouseButtonUp();
     }
+    else
+      mouseButtonUp();
   }
+
   digitalWrite(LED_2, led);
 }

@@ -56,15 +56,14 @@ class Touchpanel_FT5x06
       uint8_t   id;
       uint16_t  x, y;
     };
-    
+
     uint8_t    nrPoints;
     TouchPoint touch[5];
     uint8_t    gestureID;
-    
+
+    bool power;
     uint16_t mouseX, mouseY;         // mouse coordinates  (0..4095)
     uint8_t  mouseButtonState;       // mouse button state (0..1)    
-    
-    uint8_t  err;
 
   private:
     uint8_t i2cReadByte(uint8_t addr);
@@ -74,8 +73,10 @@ class Touchpanel_FT5x06
 
   public:
     Touchpanel_FT5x06();
-    inline void calibration() {}
+    void on();
+    void off();
     void setup();
+    inline void calibration() {}
     void loop();
 };
 

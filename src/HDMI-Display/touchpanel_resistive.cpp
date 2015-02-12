@@ -6,19 +6,39 @@ Touchpanel_Resistive::Touchpanel_Resistive()
 {
   ax.point = &settings.data.x0;
   ax.firstTouch = 0;
-    
+
   ay.point = &settings.data.y0;
   ay.firstTouch = 0;
-    
+
   zFilter = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
+  power = 1;
+}
+
+void Touchpanel_Resistive::on()
+{
+  power = 1;
+}
+
+void Touchpanel_Resistive::off()
+{
+  power = 0;
 }
 
 void Touchpanel_Resistive::setup()
-{ 
+{
+  //set analog pins to input
+  pinMode(AXM, INPUT);
+  pinMode(AXP, INPUT);
+  pinMode(AYM, INPUT);
+  pinMode(AYP, INPUT);
+  pinMode(INT, INPUT);
+
+  //touchpanel on as default
+  on();
 }
-    
+
 int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)
 {   
   int delta = axis->firstTouch - value;
@@ -215,6 +235,9 @@ void Touchpanel_Resistive::calibration()
 void Touchpanel_Resistive::loop()
 {
   uint8_t led = LOW;
+
+  if(!power)
+    return;
     
   if(readZ())
   {

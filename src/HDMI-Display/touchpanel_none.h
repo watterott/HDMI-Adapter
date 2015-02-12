@@ -1,13 +1,14 @@
 #ifndef TOUCHPANEL_NONE_H
 #define TOUCHPANEL_NONE_H
 
-// No Touchpanel present. Do nothing
-class Touchpanel_None
+class Touchpanel_None // no Touchpanel present - do nothing
 {
   public:
     inline Touchpanel_None() {}
-    inline void calibration() {}
+    inline void on() {}
+    inline void off() {}
     inline void setup() {}
+    inline void calibration() {}
     inline void loop() {}
 };
 

@@ -30,6 +30,8 @@
       AT     -> Version information
       ATA    -> Backlight on
       ATH    -> Backlight off
+      ATT    -> Touchpanel on
+      ATU    -> Touchpanel off
       ATE    -> Set EDID
       ATSx?  -> Read register x
       ATSx=y -> Write register x (value y)
@@ -68,12 +70,15 @@ EDID edid;
 
 bool isButtonPressed()
 {
+#if ARDUINO < 150
   cli();
-  PORTD |= SW_1;
-  DDRD &= ~SW_1; // switch pin to input, because USB serial uses it as output (txled)
+  SW_1_SETUP(); // switch pin to input, because USB serial uses it as output (txled)
   __asm__("nop\n\t");
-  bool rc = !(PIND & SW_1);
+  bool rc = SW_1_PRESSED();
   sei();
+#else
+  bool rc = SW_1_PRESSED();
+#endif
   return rc;
 }
 
@@ -85,8 +90,7 @@ void waitButtonReleased()
 
 void setup()
 {
-  DDRD &= ~SW_1; //set pin to input, because USB serial using this as an output (txled)
-  PORTD |= SW_1;
+  SW_1_SETUP(); // switch pin to input, because USB serial uses it as output (txled)
   pinMode(LED_1, OUTPUT);
   digitalWrite(LED_1, LOW);
   pinMode(LED_2, OUTPUT);
@@ -120,6 +124,8 @@ void setup()
 
   if(isButtonPressed())
     touchpanel.calibration();
+
+  digitalWrite(LED_1, HIGH);
 }
 
 void sendAck()
@@ -146,17 +152,34 @@ void ATCommandsLoop()
         Serial.println(F(INFO_STRING));
         sendAck();
         break;
-  
+
       case 'A':  // Backlight on
         backlight.on();
-        sendAck();        
+        sendAck();
         break;
-  
+
       case 'H':  // Backlight off
         backlight.off();
         sendAck();
         break;
-     
+
+      case 'T':  // Touchpanel on
+        touchpanel.on();
+        sendAck();
+        break;
+
+      case 'U':  // Touchpanel off
+        touchpanel.off();
+        sendAck();
+        break;
+
+      case 'E': // write EDID to external EEPROM
+        if(edid.writeEDID())
+          sendAck();
+        else
+          sendNack();
+        break;
+
       case 'S':  // Read/Write setting registers
         Serial.setTimeout(10000);
         reg = Serial.parseInt();
@@ -180,15 +203,10 @@ void ATCommandsLoop()
             sendNack();
         }
         else
+        {
           sendNack();
+        }
         Serial.setTimeout(10);
-        break;
-        
-      case 'E': // write EDID to external EEPROM
-        if(edid.writeEDID())
-          sendAck();
-        else
-          sendNack();
         break;
     }
   }  
@@ -203,11 +221,6 @@ void loop()
   {
     lastT = t + LOOPTIME;
 
-    if(backlight.isOn())
-    {
-      touchpanel.loop();
-    }
-
     if(isButtonPressed())
     {
       backlight.onOff();          
@@ -215,6 +228,8 @@ void loop()
     }
 
     backlight.loop();
+
+    touchpanel.loop();
   }
 
   ATCommandsLoop();

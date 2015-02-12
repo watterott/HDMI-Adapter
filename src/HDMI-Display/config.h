@@ -6,6 +6,8 @@
 #define DISPLAY_800x480         2 // 800x480 (TFT050-3, TFT070-4)
 #define DISPLAY_800x480_720x480 3 // 800x480 (TFT050-3, TFT070-4) with 720x480 (480p) fallback
 #define DISPLAY_800x480HY       4 // 800x480 (HY070CTP-A)
+#define DISPLAY_800x600         5 // 800x600
+#define DISPLAY_1024x600HY      6 // 1024x600 (HY070CTP-HD)
 
 // Touchpanel types
 #define TOUCHPANEL_NONE         1 // No Touchpanel present
@@ -31,6 +33,12 @@
 #elif DISPLAY_TYPE == DISPLAY_800x480HY
 #  define SCREEN_WIDTH   800
 #  define SCREEN_HEIGHT  480
+#elif DISPLAY_TYPE == DISPLAY_800x600
+#  define SCREEN_WIDTH   800
+#  define SCREEN_HEIGHT  600
+#elif DISPLAY_TYPE == DISPLAY_1024x600HY
+#  define SCREEN_WIDTH   1024
+#  define SCREEN_HEIGHT  600
 #else
 #  error "Please select a DISPLAY_TYPE"
 #endif
@@ -39,11 +47,11 @@
 #  error "Please select a TOUCHPANEL_TYPE"
 #endif
 
-#define VERSION_STRING  "Version 1.01"
+#define VERSION_STRING  "Version 1.02"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
 //#define DEBUG           1 // set debugg output level (0=nothing, 1=minimal...)
-#define LOOPTIME       16 // 60 Hz polling interval
+#define LOOPTIME         16 // 60 Hz polling interval
 #define SCREENSAVERTIME 180 // seconds timeout
 
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
@@ -57,6 +65,8 @@
 #define BACKLIGHT       9 // backlight control PB5
 #define SW_1       (1<<5) // switch PD5
 #define INT             4 // touch interrupt PD4
+#define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
+#define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
 
 // Touchpanel analog inputs 
 #define AXM            A1 // touch X- PF6

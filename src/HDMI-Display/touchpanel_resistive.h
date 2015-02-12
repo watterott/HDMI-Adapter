@@ -17,6 +17,7 @@ class Touchpanel_Resistive
 
     uint16_t zFilter;
 
+    bool power;
     uint16_t mouseX, mouseY;         // mouse coordinates  (0..4095)
     uint8_t  mouseButtonState;       // mouse button state (0..1)
 
@@ -28,6 +29,8 @@ class Touchpanel_Resistive
 
   public:
     Touchpanel_Resistive();
+    void on();
+    void off();
     void setup();
     void calibration();
     void loop();  

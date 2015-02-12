@@ -14,14 +14,13 @@ void Backlight::setup()
 
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, power);
-  digitalWrite(LED_1, HIGH);
 }
-  
+
 void Backlight::setLight(uint8_t light)
 {
   power = targetPower = light;
   lastTouchTime = millis();   
-  loop();   
+  analogWrite(BACKLIGHT, power);
 }
 
 bool Backlight::isOn()
@@ -41,7 +40,7 @@ void Backlight::off()
 
 void Backlight::onOff() // toggle backlight
 {
-  if(isOn())
+  if(power)
     off();
   else
     on();
@@ -58,24 +57,10 @@ void Backlight::setLightSmooth(uint8_t light, uint8_t speed)
   fadeSpeed = speed;
 }
   
-void Backlight::loop()  // backlight statemachine. call it from loop()
+void Backlight::loop()  // backlight statemachine - call it from loop()
 {
-  if(power != targetPower)
-  {
-    if(power < targetPower)
-    {
-      power += fadeSpeed;
-      if(power > targetPower)
-        power = targetPower;
-    }
-    else
-    {
-      power -= fadeSpeed;
-      if(power < targetPower)
-        power = targetPower;        
-    }
-  }
-    
+  int16_t p = power;
+
   // screensaver
   if(settings.data.screensaverTime != 0 && isOn())
   {    
@@ -83,11 +68,37 @@ void Backlight::loop()  // backlight statemachine. call it from loop()
     int dt = (t - lastTouchTime) / 1000;
       
     if(dt >= settings.data.screensaverTime)
+    {
       setLightSmooth(0, 2);
+      #if DEBUG > 0
+        Serial.print(F("\nStart Screensaver"));
+      #endif
+    }
   }
-    
-  analogWrite(BACKLIGHT, power);
-    
-  if(!power)
+
+  // fade power
+  if(p != targetPower)
+  {
+    if(p < targetPower)
+    {
+      p += fadeSpeed;
+      if(p > targetPower)
+        p = targetPower;
+    }
+    else
+    {
+      p -= fadeSpeed;
+      if(p < targetPower)
+        p = targetPower;
+    }
+  }
+
+  if(p != power)
+  {
+    power = p;
+    analogWrite(BACKLIGHT, p);
+  }
+
+  if(!p)
     digitalWrite(LED_2, HIGH);
 }
