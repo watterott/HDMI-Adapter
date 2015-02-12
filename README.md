@@ -6,8 +6,8 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 
 ## Shop
 * [HDMI to RGB Adapter](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
-* [5" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch)
-* [7" 800x480 HDMI-Display with Touch](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
+* [5" 800x480 HDMI-Display with Touchpanel](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch)
+* [7" 800x480 HDMI-Display with Touchpanel](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
 
 
 ## Features
