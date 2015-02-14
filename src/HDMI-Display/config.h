@@ -3,21 +3,28 @@
 
 // Display types
 #define DISPLAY_480x272         1 // 480x272 (TFT043-3)
-#define DISPLAY_800x480         2 // 800x480 (TFT050-3, TFT070-4)
-#define DISPLAY_800x480_720x480 3 // 800x480 (TFT050-3, TFT070-4) with 720x480 (480p) fallback
-#define DISPLAY_800x480HY       4 // 800x480 (HY070CTP-A)
+#define DISPLAY_800x480         2 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
+#define DISPLAY_800x480_720x480 3 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD) with 720x480 (480p) fallback
+#define DISPLAY_800x480HY       4 // 800x480 (HY070CTP-A capacitive touchpanel)
 #define DISPLAY_800x600         5 // 800x600
-#define DISPLAY_1024x600HY      6 // 1024x600 (HY070CTP-HD)
+#define DISPLAY_1024x600HY      6 // 1024x600 (HY070CTP-HD capacitive touchpanel)
 
 // Touchpanel types
 #define TOUCHPANEL_NONE         1 // No Touchpanel present
 #define TOUCHPANEL_RESISTIVE    2 // Resitive
-#define TOUCHPANEL_FT5x06       3 // Capacitive (HY070CTP-A)
+#define TOUCHPANEL_FT5x06       3 // Capacitive FT5x06 (HY070CTP-A, HY070CTP-HD)
 
 
 //***** Select your Display and Touchpanel here ******
-#define DISPLAY_TYPE            DISPLAY_800x480 //DISPLAY_480x272 DISPLAY_800x480 DISPLAY_800x480HY
-#define TOUCHPANEL_TYPE         TOUCHPANEL_NONE //TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
+#define DISPLAY_TYPE            DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600HY
+#define TOUCHPANEL_TYPE         TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
+
+/*
+  Watterott electronic display configurations:
+  5" display: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7" display: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7" display with capacitive touch: DISPLAY_800x480HY or DISPLAY_1024x600HY + TOUCHPANEL_FT5x06
+*/
 
 
 // Display configuration

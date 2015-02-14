@@ -6,8 +6,8 @@
 
 //uncomment one display/EDID data
 //#define EDID_480x272          //480x272 (TFT043-3)
-//#define EDID_800x480          //800x480 (TFT050-3, TFT070-4)
-//#define EDID_800x480_720x480  //800x480 (TFT050-3, TFT070-4) with 720x480 (480p) fallback
+//#define EDID_800x480          //800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
+//#define EDID_800x480_720x480  //800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD) with 720x480 (480p) fallback
 //#define EDID_800x480HY        //800x480 (HY070CTP-A)
 
 #include <Wire.h>
