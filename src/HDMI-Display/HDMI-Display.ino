@@ -32,7 +32,7 @@
       ATH    -> Backlight off
       ATT    -> Touchpanel on
       ATU    -> Touchpanel off
-      ATE    -> Set EDID
+      ATE    -> Set EDID to EEPROM (SDA+SCL closed)
       ATSx?  -> Read register x
       ATSx=y -> Write register x (value y)
     Registers:

@@ -10,5 +10,5 @@ The examples can be compiled and uploaded using the Arduino IDE with our ATmega3
 ## Upload
 * Open the example.
 * Select as Board: **ATmega32u4 (16 MHz)**.
-* Choose respective port under Tools->Serial Port
+* Choose respective port under **Tools->Serial Port**
 * Select Upload.
