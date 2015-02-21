@@ -7,8 +7,9 @@ class Settings
   {
     int16_t   x0, x1;           // calibration values x-axis
     int16_t   y0, y1;           // calibration values y-axis
-    uint16_t  screensaverTime;  // time in seconds. 0 = screensaver disabled
+    uint16_t  screensaverTime;  // time in seconds, 0 = always on
     uint16_t  brightness;       // backlight brightness (0..255)
+    uint16_t  orientation;      // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes)
     //--------------------------
     uint8_t   checksum;         // checksum of the data above
   };

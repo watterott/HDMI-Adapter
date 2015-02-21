@@ -20,6 +20,11 @@ void Touchpanel_FT5x06::off()
   power = 0;
 }
 
+void Touchpanel_FT5x06::orientation(uint8_t o)
+{
+  axes = o;
+}
+
 uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
 {
   Wire.beginTransmission(FT5x06_ADDR);
@@ -156,18 +161,70 @@ void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)
   tp->y |= i2cReadByte(addr);
 }
 
+void Touchpanel_FT5x06::mouseButtonDown()
+{
+  uint16_t x, y;
+
+  backlight.screensaverNotify(); // reset screensaver on touch
+
+  mouseButtonState = 1;
+
+  if(zoom)
+  {
+    mouseButtonState = 0;
+  }
+
+  if(axes & 0x01)
+    x = TOUCHMAX-mouseX;
+  else
+    x = mouseX;
+
+  if(axes & 0x02)
+    y = TOUCHMAX-mouseY;
+  else
+    y = mouseY;
+
+  if(axes & 0x04)
+    SWAP(x, y);
+
+  Mouse.moveAbs(x, y, zoom, mouseButtonState);
+
+  #if DEBUG > 0
+    Serial.print(mouseX);
+    Serial.print(" ");
+    Serial.print(mouseY);
+    Serial.println(F(" down"));
+  #endif
+}
+
 void Touchpanel_FT5x06::mouseButtonUp()
 {
+  uint16_t x, y;
+
   if(mouseButtonState)
   {
     mouseButtonState = 0;
-    Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
+
+    if(axes & 0x01)
+      x = TOUCHMAX-mouseX;
+    else
+      x = mouseX;
+
+    if(axes & 0x02)
+      y = TOUCHMAX-mouseY;
+    else
+      y = mouseY;
+
+    if(axes & 0x04)
+      SWAP(x, y);
+
+    Mouse.moveAbs(x, y, 0, mouseButtonState);
 
     #if DEBUG > 0
       Serial.print(mouseX);
       Serial.print(" ");
       Serial.print(mouseY);
-      Serial.println(" up");
+      Serial.println(F(" up"));
     #endif
   }
 }
@@ -175,7 +232,6 @@ void Touchpanel_FT5x06::mouseButtonUp()
 void Touchpanel_FT5x06::loop()
 {
   uint8_t b, led = LOW;
-  int8_t z;
 
   if(!power)
     return;
@@ -197,7 +253,6 @@ void Touchpanel_FT5x06::loop()
       // readTouchPoint(REG_TOUCH_3, &touch[2]);
       // readTouchPoint(REG_TOUCH_4, &touch[3]);
       // readTouchPoint(REG_TOUCH_5, &touch[4]);
-      gestureID = i2cReadByte(REG_GESTURE_ID);
 
       #if DEBUG > 1
         Serial.print(F("TP Points: 0x"));
@@ -210,36 +265,23 @@ void Touchpanel_FT5x06::loop()
 
       if(nrPoints >= 1 && touch[0].id == 0 && (touch[0].event == 0 || touch[0].event == 2)) // put down or contact
       {
+        led = HIGH;
         mouseX  = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
         mouseY  = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
 
-        mouseButtonState = 1;
-        if(gestureID == GESTURE_ZOOM_IN)
+        b = i2cReadByte(REG_GESTURE_ID);
+        if(b == GESTURE_ZOOM_IN)
         {
-          z = 1;
-          mouseButtonState = 0;
+          zoom = 1;
         }
-        else if(gestureID == GESTURE_ZOOM_OUT)
+        else if(b == GESTURE_ZOOM_OUT)
         {
-          z = -1;
-          mouseButtonState = 0;
+          zoom = -1;
         }
         else
-          z = 0;
+          zoom = 0;
 
-        Mouse.moveAbs(mouseX, mouseY, z, mouseButtonState);
-        backlight.screensaverNotify();   // reset screensaver on touch
-        led = HIGH;
-
-        #if DEBUG > 0
-          Serial.print(mouseX);
-          Serial.print(" ");
-          Serial.print(mouseY);
-          Serial.print(" ");
-          Serial.print(z);
-          Serial.print(" ");
-          Serial.println(mouseButtonState);
-        #endif
+        mouseButtonDown();
       }
       else
         mouseButtonUp();

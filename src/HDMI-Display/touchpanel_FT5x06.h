@@ -7,11 +7,11 @@
 #define REG_DEVICE_MODE    0x00      //Device Mode, 0 = Normal Operating Mode
 #define REG_GESTURE_ID     0x01      // 48h Zoom In, 49h Zoom Out, 00h No Gesture
 #define REG_TD_STATUS      0x02      // Touch Points (0...5)
-#define REG_TOUCH_1        0x03
-#define REG_TOUCH_2        0x09
-#define REG_TOUCH_3        0x0F
-#define REG_TOUCH_4        0x15
-#define REG_TOUCH_5        0x1B
+#define REG_TOUCH_1        0x03      // Touch Point 1
+#define REG_TOUCH_2        0x09      // Touch Point 2
+#define REG_TOUCH_3        0x0F      // Touch Point 3
+#define REG_TOUCH_4        0x15      // Touch Point 4
+#define REG_TOUCH_5        0x1B      // Touch Point 5
 #define REG_THGROUP        0x80      // Valid touching detect threshold
 #define REG_THPEAK         0x81      // Valid touching peak detect threshold
 #define REG_THCAL          0x82      // Touch focus threshold
@@ -59,22 +59,25 @@ class Touchpanel_FT5x06
 
     uint8_t    nrPoints;
     TouchPoint touch[5];
-    uint8_t    gestureID;
+    int8_t zoom;
 
     bool power;
-    uint16_t mouseX, mouseY;         // mouse coordinates  (0..4095)
-    uint8_t  mouseButtonState;       // mouse button state (0..1)    
+    uint8_t  axes;             // mouse axes
+    uint16_t mouseX, mouseY;   // mouse coordinates  (0..4095)
+    uint8_t  mouseButtonState; // mouse button state (0..1)
 
   private:
     uint8_t i2cReadByte(uint8_t addr);
     void i2cWriteByte(uint8_t addr, uint8_t data);
     void readTouchPoint(uint8_t addr, TouchPoint *tp);
+    void mouseButtonDown();
     void mouseButtonUp();
 
   public:
     Touchpanel_FT5x06();
     void on();
     void off();
+    void orientation(uint8_t o);
     void setup();
     inline void calibration() {}
     void loop();

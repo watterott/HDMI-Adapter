@@ -26,14 +26,54 @@ void Touchpanel_Resistive::off()
   power = 0;
 }
 
+void Touchpanel_Resistive::orientation(uint8_t o)
+{
+  axes = o;
+}
+
 void Touchpanel_Resistive::setup()
 {
+  int x;
+
   //set analog pins to input
   pinMode(AXM, INPUT);
   pinMode(AXP, INPUT);
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
   pinMode(INT, INPUT);
+
+  // check touchpanel connection
+  for(;;)
+  {
+    pinMode(AYM, INPUT);
+    pinMode(AYP, OUTPUT);
+    digitalWrite(AXM, LOW);
+    pinMode(AXM, OUTPUT);
+    digitalWrite(AXM, LOW);
+    pinMode(AXP, OUTPUT);
+    digitalWrite(AXP, LOW);
+    x = analogRead(AYM);
+    pinMode(AYP, INPUT);
+    pinMode(AXM, INPUT);
+    pinMode(AXP, INPUT);
+
+    #if DEBUG > 0
+      Serial.print(F("TP check: "));
+      Serial.println(x, DEC);
+    #endif
+
+    if(x < 100) // touchpanel connected
+    {
+      break;
+    }
+    else
+    {
+      digitalWrite(LED_2, LOW);
+      delay(250);
+      digitalWrite(LED_2, HIGH);
+      delay(250);
+    }
+  }
 
   //touchpanel on as default
   on();
@@ -61,18 +101,21 @@ int Touchpanel_Resistive::readX()
   uint8_t i;
   int x;
     
-  pinMode(AYM, INPUT);  
-  pinMode(AYP, INPUT);  
+  pinMode(AYM, INPUT);
+  pinMode(AYP, INPUT);
   
   pinMode(AXM, OUTPUT);  
   digitalWrite(AXM, LOW);
-  pinMode(AXP, OUTPUT);  
+  pinMode(AXP, OUTPUT);
   digitalWrite(AXP, HIGH);
   
   x = SAMPLES / 2;  // rounding
   for(int i = 0; i < SAMPLES; i++)
     x += analogRead(AYM);
   x /= SAMPLES;
+
+  pinMode(AXM, INPUT);
+  pinMode(AXP, INPUT);
 
   return x;
 }
@@ -82,18 +125,21 @@ int Touchpanel_Resistive::readY()
   uint8_t i;
   int y;
     
-  pinMode(AXM, INPUT);  
-  pinMode(AXP, INPUT);  
+  pinMode(AXM, INPUT);
+  pinMode(AXP, INPUT);
   
-  pinMode(AYM, OUTPUT);  
-  pinMode(AYP, OUTPUT);  
+  pinMode(AYM, OUTPUT);
   digitalWrite(AYM, LOW);
+  pinMode(AYP, OUTPUT);
   digitalWrite(AYP, HIGH);
         
   y = SAMPLES / 2;  // rounding
   for(int i = 0; i < SAMPLES; i++)
     y += analogRead(AXM);
   y /= SAMPLES;
+
+  pinMode(AYM, INPUT);
+  pinMode(AYP, INPUT);
 
   return y;
 }
@@ -102,12 +148,12 @@ bool Touchpanel_Resistive::readZ()
 {
   pinMode(AXP, INPUT);  
   pinMode(AYM, INPUT);  
-  
-  pinMode(AXM, OUTPUT);  
+
+  pinMode(AXM, OUTPUT);
   digitalWrite(AXM, LOW);
-  pinMode(AYP, OUTPUT);  
+  pinMode(AYP, OUTPUT);
   digitalWrite(AYP, HIGH);
-  
+
   for(uint8_t i=0; i<4; i++)
   {
     uint16_t val1 = analogRead(AXP);  
@@ -116,7 +162,10 @@ bool Touchpanel_Resistive::readZ()
     
     zFilter = (zFilter + val) / 2;
   }
-    
+
+  pinMode(AXM, INPUT);
+  pinMode(AYP, INPUT);
+
   return (zFilter > TOUCH_DETECTION_LEVEL);
 }
 
@@ -231,7 +280,71 @@ void Touchpanel_Resistive::calibration()
   settings.data.y1 = y1;
   settings.save();
 }
-  
+
+
+void Touchpanel_Resistive::mouseButtonDown()
+{
+  uint16_t x, y;
+
+  backlight.screensaverNotify(); // reset screensaver on touch
+
+  mouseButtonState = 1;
+
+  if(axes & 0x01)
+    x = TOUCHMAX-mouseX;
+  else
+    x = mouseX;
+
+  if(axes & 0x02)
+    y = TOUCHMAX-mouseY;
+  else
+    y = mouseY;
+
+  if(axes & 0x04)
+    SWAP(x, y);
+
+  Mouse.moveAbs(x, y, 0, mouseButtonState);
+
+  #if DEBUG > 0
+    Serial.print(mouseX);
+    Serial.print(" ");
+    Serial.print(mouseY);
+    Serial.println(F(" down"));
+  #endif
+}
+
+void Touchpanel_Resistive::mouseButtonUp()
+{
+  uint16_t x, y;
+
+  if(mouseButtonState)
+  {
+    mouseButtonState = 0;
+
+    if(axes & 0x01)
+      x = TOUCHMAX-mouseX;
+    else
+      x = mouseX;
+
+    if(axes & 0x02)
+      y = TOUCHMAX-mouseY;
+    else
+      y = mouseY;
+
+    if(axes & 0x04)
+      SWAP(x, y);
+
+    Mouse.moveAbs(x, y, 0, mouseButtonState);
+
+    #if DEBUG > 0
+      Serial.print(x);
+      Serial.print(" ");
+      Serial.print(y);
+      Serial.println(F(" up"));
+    #endif
+  }
+}
+
 void Touchpanel_Resistive::loop()
 {
   uint8_t led = LOW;
@@ -245,37 +358,16 @@ void Touchpanel_Resistive::loop()
     int y = readY();
     if(readZ())  // check if the touch was stable
     {
+      led = HIGH;
       mouseX  = calcPoint(x, &ax);
       mouseY  = calcPoint(y, &ay);      
-      mouseButtonState = 1;
-      Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
-      backlight.screensaverNotify();   // reset screensaver on touch
-      led = HIGH;
 
-      #if DEBUG > 0
-        Serial.print(mouseX);
-        Serial.print(" ");
-        Serial.print(mouseY);
-        Serial.print(" ");
-        Serial.println(mouseButtonState);
-      #endif
+      mouseButtonDown();
     }
   }
   else
   {
-    if(mouseButtonState)
-    {
-      mouseButtonState = 0;
-      Mouse.moveAbs(mouseX, mouseY, 0, mouseButtonState);
-
-      #if DEBUG > 0
-        Serial.print(mouseX);
-        Serial.print(" ");
-        Serial.print(mouseY);
-        Serial.print(" ");
-        Serial.println(mouseButtonState);
-      #endif
-    }
+    mouseButtonUp();
   }
   digitalWrite(LED_2, led);  
 }

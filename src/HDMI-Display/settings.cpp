@@ -7,8 +7,9 @@ const PROGMEM Settings::Data Settings::defaults =
 {
   80, 930,          // default calibration values x-axis
   825, 160,         // default calibration values y-axis
-  SCREENSAVERTIME,  // default seconds timeout
-  255               // default backlight brightness
+  SCREENSAVERTIME,  // default seconds timeout, 0 = always on
+  255,              // default backlight brightness (0..255)
+  0                 // default orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes)
 };
 
 Settings::Settings()

@@ -8,13 +8,13 @@
     The firmware can be compiled with the Arduino IDE.
     * On Arduino IDE 1.6.x the following support package has to be installed:
       https://github.com/watterott/wattuino/tree/master/src/Arduino
-    * Copy the patch files from the patches directory in your Arduino program directory
+    * Copy the files from the patches directory in your Arduino program directory
     * Open the Sketch HDMI-Display.ino
     * Set the configuration for display and touchpanel in config.h
     * Arduino IDE 1.0.x: Choose Tools->Board->Arduino Leonardo
     * Arduino IDE 1.6.x: Choose Tools->Board->ATmega32u4 (16 MHz)
-    * Choose respective port under Tools->Serial Port
-    * Press Upload
+    * Choose respective serial port under Tools->Serial Port
+    * Press File->Upload
     * Before connecting the TFT-Screen, check the jumper settings.
       Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
       Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
@@ -42,6 +42,7 @@
       3 -> Y1 touch correction
       4 -> Time for Screensaver (0 = always on)
       5 -> Backlight (0...255)
+      6 -> Axes (0x1=invert x, 0x2=invert y, 0x4=swap axes)
   
   Resitive Touchpanel Calibration
     1. Hold down the switch and plug in the USB connector (power on).
@@ -97,14 +98,14 @@ void setup()
   digitalWrite(LED_2, LOW);
 
   Serial.begin(9600);
-  Serial.setTimeout(10); //wait 10ms for data
+  Serial.setTimeout(10); // wait 10ms for data (timeout)
   #if DEBUG > 0
-    for(uint8_t port=0; !Serial.available() && !isButtonPressed();) //wait for serial data or button press
+    for(uint8_t port=0; !Serial.available() && !isButtonPressed();) // wait for serial data or button press
     {
       if(Serial && port == 0)
       {
         port = 1;
-        Serial.println(F("DEBUG ON"));
+        Serial.println(F("DEBUG BUILD"));
         Serial.println(F("Hit any key to start"));
       }
       digitalWrite(LED_2, LOW);
@@ -126,6 +127,7 @@ void setup()
     touchpanel.calibration();
 
   digitalWrite(LED_1, HIGH);
+  digitalWrite(LED_2, LOW);
 }
 
 void sendAck()
@@ -181,7 +183,7 @@ void ATCommandsLoop()
         break;
 
       case 'S':  // Read/Write setting registers
-        Serial.setTimeout(10000);
+        Serial.setTimeout(5000); // wait 5s for data (timeout)
         reg = Serial.parseInt();
         if(reg >= 0 && reg < sizeof(settings.data)/sizeof(uint16_t))
         {
@@ -197,6 +199,7 @@ void ATCommandsLoop()
             p[reg] = value;
             settings.save();
             backlight.screensaverNotify(); // refresh backlight and screensaver time
+            touchpanel.orientation(settings.data.orientation);
             sendAck();
           }
           else
@@ -206,7 +209,7 @@ void ATCommandsLoop()
         {
           sendNack();
         }
-        Serial.setTimeout(10);
+        Serial.setTimeout(10); // wait 10ms for data (timeout)
         break;
     }
   }  

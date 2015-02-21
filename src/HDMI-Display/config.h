@@ -21,9 +21,9 @@
 
 /*
   Watterott electronic display configurations:
-  5" display: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-  7" display: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-  7" display with capacitive touch: DISPLAY_800x480HY or DISPLAY_1024x600HY + TOUCHPANEL_FT5x06
+  5": DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7": DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7" with capacitive touch: DISPLAY_800x480HY or DISPLAY_1024x600HY + TOUCHPANEL_FT5x06
 */
 
 
@@ -54,16 +54,21 @@
 #  error "Please select a TOUCHPANEL_TYPE"
 #endif
 
-#define VERSION_STRING  "Version 1.02"
+#define VERSION_STRING  "Version 1.03"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
-//#define DEBUG           1 // set debugg output level (0=nothing, 1=minimal...)
-#define LOOPTIME         16 // 60 Hz polling interval
+//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
 #define SCREENSAVERTIME 180 // seconds timeout
+#define LOOPTIME         16 // 60 Hz polling interval
+#define TOUCHMAX      4095L // maximal touch/mouse position
 
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
 #  undef SCREENSAVERTIME
 #  define SCREENSAVERTIME 0
+#endif
+
+#ifndef SWAP
+#define SWAP(x,y) do{ (x)=(x)^(y); (y)=(x)^(y); (x)=(x)^(y); }while(0)
 #endif
 
 // IO ports
