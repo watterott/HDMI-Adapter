@@ -122,6 +122,7 @@ void setup()
   settings.setup();
   backlight.setup();
   touchpanel.setup();
+  touchpanel.orientation(settings.data.orientation);
 
   if(isButtonPressed())
     touchpanel.calibration();
