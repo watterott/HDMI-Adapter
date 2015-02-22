@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-// Display types
+// Display Types
 #define DISPLAY_480x272         1 // 480x272 (TFT043-3)
 #define DISPLAY_800x480         2 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
 #define DISPLAY_800x480_720x480 3 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD) with 720x480 (480p) fallback
@@ -9,7 +9,7 @@
 #define DISPLAY_800x600         5 // 800x600
 #define DISPLAY_1024x600HY      6 // 1024x600 (HY070CTP-HD capacitive touchpanel)
 
-// Touchpanel types
+// Touchpanel Types
 #define TOUCHPANEL_NONE         1 // No Touchpanel present
 #define TOUCHPANEL_RESISTIVE    2 // Resitive
 #define TOUCHPANEL_FT5x06       3 // Capacitive FT5x06 (HY070CTP-A, HY070CTP-HD)
@@ -27,7 +27,38 @@
 */
 
 
-// Display configuration
+//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
+#define ORIENTATION       0 // orientation (bit 0x1=invert x, bit 0x2=invert y, bit 0x4=swap axes)
+#define SCREENSAVERTIME 180 // seconds timeout, 0 = always on
+#define BRIGHTNESS      255 // backlight brightness (0..255)
+#define LOOPTIME         16 // 16 = 60 Hz polling interval
+#define TOUCHMAX      4095L // maximal touch/mouse position
+
+#define VERSION_STRING  "Version 1.03"
+#define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
+
+// check configurations
+#if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
+#  undef SCREENSAVERTIME
+#  define SCREENSAVERTIME 0
+#  define TPC_X0 0    // not needed - touchpanel calibration x0
+#  define TPC_X1 0    // not needed - touchpanel calibration x1
+#  define TPC_Y0 0    // not needed - touchpanel calibration y0
+#  define TPC_Y1 0    // not needed - touchpanel calibration y1
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
+#  define TPC_X0 80   // touchpanel calibration x0
+#  define TPC_X1 930  // touchpanel calibration x1
+#  define TPC_Y0 825  // touchpanel calibration y0
+#  define TPC_Y1 160  // touchpanel calibration y1
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
+#  define TPC_X0 0    // not needed - touchpanel calibration x0
+#  define TPC_X1 0    // not needed - touchpanel calibration x1
+#  define TPC_Y0 0    // not needed - touchpanel calibration y0
+#  define TPC_Y1 0    // not needed - touchpanel calibration y1
+#else
+#  error "Please select a TOUCHPANEL_TYPE"
+#endif
+
 #if DISPLAY_TYPE == DISPLAY_480x272
 #  define SCREEN_WIDTH   480
 #  define SCREEN_HEIGHT  272
@@ -48,23 +79,6 @@
 #  define SCREEN_HEIGHT  600
 #else
 #  error "Please select a DISPLAY_TYPE"
-#endif
-
-#ifndef TOUCHPANEL_TYPE
-#  error "Please select a TOUCHPANEL_TYPE"
-#endif
-
-#define VERSION_STRING  "Version 1.03"
-#define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
-
-//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
-#define SCREENSAVERTIME 180 // seconds timeout
-#define LOOPTIME         16 // 60 Hz polling interval
-#define TOUCHMAX      4095L // maximal touch/mouse position
-
-#if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
-#  undef SCREENSAVERTIME
-#  define SCREENSAVERTIME 0
 #endif
 
 #ifndef SWAP
