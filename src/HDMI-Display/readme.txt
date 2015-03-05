@@ -4,10 +4,26 @@ Written by Hubert Kahlert (HK-Datentechnik, www.hk-datentechnik.de) for Watterot
 
 Visit https://github.com/watterott/HDMI-Display for updates.
 
-Installation:
-see HDMI-Display.ino
-https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/HDMI-Display.ino
 
-License:
-see license.txt
-https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/license.txt
+Installation - Compiling - Uploading
+------------------------------------
+  The firmware can be compiled with the Arduino IDE.
+  * On Arduino IDE 1.6.x the following support package has to be installed:
+    https://github.com/watterott/wattuino/tree/master/src/Arduino
+  * Copy the files from the patches directory in your Arduino program directory
+  * Open the Sketch HDMI-Display.ino
+  * Set the configuration for display and touchpanel in config.h
+  * Arduino IDE 1.0.x: Choose Tools->Board->Arduino Leonardo
+  * Arduino IDE 1.6.x: Choose Tools->Board->ATmega32u4 (16 MHz)
+  * Choose respective serial port under Tools->Serial Port
+  * Press File->Upload
+  * Before connecting a TFT-Screen, check the jumper settings.
+      Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
+      Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
+      https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
+
+
+License
+-------
+  See license.txt
+  https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/license.txt

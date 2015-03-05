@@ -13,7 +13,8 @@ Touchpanel_Resistive::Touchpanel_Resistive()
   zFilter = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
-  power = 1;
+  axes = settings.data.orientation;
+  power = 0;
 }
 
 void Touchpanel_Resistive::on()
@@ -62,21 +63,20 @@ void Touchpanel_Resistive::setup()
       Serial.println(x, DEC);
     #endif
 
-    if(x < 100) // touchpanel connected
+    if(x < 100) // touchpanel found
     {
+      on();
       break;
     }
     else
     {
+      off();
       digitalWrite(LED_2, LOW);
       delay(250);
       digitalWrite(LED_2, HIGH);
       delay(250);
     }
   }
-
-  //touchpanel on as default
-  on();
 }
 
 int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)

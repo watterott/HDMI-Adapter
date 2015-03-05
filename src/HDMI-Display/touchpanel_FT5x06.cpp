@@ -7,7 +7,8 @@ Touchpanel_FT5x06::Touchpanel_FT5x06()
 {
   mouseX = mouseY = 0;
   mouseButtonState = 0;
-  power = 1;
+  axes = settings.data.orientation;
+  power = 0;
 }
 
 void Touchpanel_FT5x06::on()
@@ -74,6 +75,7 @@ void Touchpanel_FT5x06::setup()
       Serial.print(F("TP Chip Vendor wrong: 0x"));
       Serial.println(b, HEX);
     #endif
+    off();
     for(;;)
     {
       digitalWrite(LED_2, LOW);
@@ -98,6 +100,7 @@ void Touchpanel_FT5x06::setup()
       Serial.print(F("TP Error: 0x"));
       Serial.println(b, HEX);
     #endif
+    off();
     for(;;)
     {
       digitalWrite(LED_2, LOW);
@@ -105,6 +108,10 @@ void Touchpanel_FT5x06::setup()
       digitalWrite(LED_2, HIGH);
       delay(250);
     }
+  }
+  else
+  {
+    on();
   }
 
   #if DEBUG > 0
@@ -139,9 +146,6 @@ void Touchpanel_FT5x06::setup()
     Serial.print("  ");
     Serial.println(i2cReadByte(i));
   }*/
-
-  //touchpanel on as default
-  on();
 }
 
 void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)

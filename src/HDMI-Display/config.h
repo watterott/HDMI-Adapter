@@ -34,7 +34,7 @@
 #define LOOPTIME         16 // 16 = 60 Hz polling interval
 #define TOUCHMAX      4095L // maximal touch/mouse position
 
-#define VERSION_STRING  "Version 1.03"
+#define VERSION_STRING  "Version 1.04"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
 // check configurations
@@ -66,7 +66,7 @@
 #  define SCREEN_WIDTH   800
 #  define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_800x480_720x480
-#  define SCREEN_WIDTH   720
+#  define SCREEN_WIDTH   800 // 720
 #  define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_800x480HY
 #  define SCREEN_WIDTH   800

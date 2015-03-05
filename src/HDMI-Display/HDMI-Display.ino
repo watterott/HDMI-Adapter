@@ -4,22 +4,6 @@
   Written by Hubert Kahlert (HK-Datentechnik, www.hk-datentechnik.de)
   for Watterott electronic (www.watterott.com).
   
-  Compiling and Uploading
-    The firmware can be compiled with the Arduino IDE.
-    * On Arduino IDE 1.6.x the following support package has to be installed:
-      https://github.com/watterott/wattuino/tree/master/src/Arduino
-    * Copy the files from the patches directory in your Arduino program directory
-    * Open the Sketch HDMI-Display.ino
-    * Set the configuration for display and touchpanel in config.h
-    * Arduino IDE 1.0.x: Choose Tools->Board->Arduino Leonardo
-    * Arduino IDE 1.6.x: Choose Tools->Board->ATmega32u4 (16 MHz)
-    * Choose respective serial port under Tools->Serial Port
-    * Press File->Upload
-    * Before connecting the TFT-Screen, check the jumper settings.
-      Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
-      Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
-      https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
-  
   USB-Mouse (Touchpanel)
     The Touchpanel acts as normal USB Mouse.
   
@@ -122,7 +106,6 @@ void setup()
   settings.setup();
   backlight.setup();
   touchpanel.setup();
-  touchpanel.orientation(settings.data.orientation);
 
   if(isButtonPressed())
     touchpanel.calibration();
