@@ -20,7 +20,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our ATmega3
 ## Build and Upload
 * Start the Arduino IDE.
 * Open the Arduino Sketch ```HDMI-Display.ino```.
-* Set configurations (display type and touch panel) in ```config.h```
+* Set configurations (display and touch panel) in ```config.h```
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
 * Choose respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.

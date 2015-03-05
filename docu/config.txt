@@ -34,3 +34,6 @@ hdmi_mode=87
 #display_rotate=0x10000
 # vertical flip
 #display_rotate=0x20000
+
+# set current over USB to 1.2A (Pi1 A+/B+ and Pi2)
+#max_usb_current=1
