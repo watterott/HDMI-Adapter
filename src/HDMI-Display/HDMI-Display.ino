@@ -28,7 +28,7 @@
       5 -> Backlight (0...255)
       6 -> Axes (0x1=invert x, 0x2=invert y, 0x4=swap axes)
   
-  Resitive Touchpanel Calibration
+  Resistive Touchpanel Calibration
     1. Hold down the switch and plug in the USB connector (power on).
     2. Press on the left edge (x axis) about 5s till the LED blinking changes.
     3. Press on the right edge (x axis) about 5s till the LED blinking changes.

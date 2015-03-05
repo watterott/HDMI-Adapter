@@ -36,7 +36,7 @@ void Touchpanel_Resistive::setup()
 {
   int x;
 
-  //set analog pins to input
+  // set analog pins to input
   pinMode(AXM, INPUT);
   pinMode(AXP, INPUT);
   pinMode(AYM, INPUT);
@@ -46,13 +46,13 @@ void Touchpanel_Resistive::setup()
   // check touchpanel connection
   for(;;)
   {
-    pinMode(AYM, INPUT);
+    pinMode(AYM, INPUT);    // Y- input
     pinMode(AYP, OUTPUT);
-    digitalWrite(AXM, LOW);
+    digitalWrite(AYP, LOW); // Y+ low
     pinMode(AXM, OUTPUT);
-    digitalWrite(AXM, LOW);
+    digitalWrite(AXM, LOW); // X- low
     pinMode(AXP, OUTPUT);
-    digitalWrite(AXP, LOW);
+    digitalWrite(AXP, LOW); // X+ low
     x = analogRead(AYM);
     pinMode(AYP, INPUT);
     pinMode(AXM, INPUT);
@@ -280,7 +280,6 @@ void Touchpanel_Resistive::calibration()
   settings.data.y1 = y1;
   settings.save();
 }
-
 
 void Touchpanel_Resistive::mouseButtonDown()
 {
