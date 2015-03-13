@@ -1,20 +1,20 @@
 # ATmega32u4 Firmware
-The programs can be compiled and uploaded using the Arduino IDE with our ATmega32u4 extension.
+The programs can be compiled and uploaded using the Arduino IDE with our board support package.
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
-* [ATmega32u4 Extension](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip)
+* [Board Support Package](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip)
 * [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Download the [Extension](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip) and copy the two directories ```drivers``` and ```hardware``` to your Arduino program directory ```<ARDUINO>/```.
+* Download the [Board Support Package](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip) and copy the directory ```hardware``` to your Arduino program directory ```<ARDUINO>/```.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
   [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/src/HDMI-Display/patches/readme.png).
 * Connect the USB Data port of the HDMI-Adapter (without display) to your computer.
-* On a Windows operating system a driver installation will be started. You can find the drivers in your Arduino program directory ```<ARDUINO>/driver/caterina/```.
+* On a Windows operating system a driver installation will be started. You can find the drivers in your Arduino program directory ```<ARDUINO>/hardware/watterott/avr/drivers/caterina/```.
 
 
 ## Build and Upload
