@@ -19,8 +19,14 @@ void Backlight::setup()
 void Backlight::setLight(uint8_t light)
 {
   power = targetPower = light;
-  lastTouchTime = millis();   
+  lastTouchTime = millis();
   analogWrite(BACKLIGHT, power);
+}
+
+void Backlight::setLightSmooth(uint8_t light, uint8_t speed)
+{
+  targetPower = light;
+  fadeSpeed = speed;
 }
 
 bool Backlight::isOn()
@@ -46,17 +52,13 @@ void Backlight::onOff() // toggle backlight
     on();
 }
 
-void Backlight::screensaverNotify() // touch event
+bool Backlight::screensaverNotify() // touch event
 {
+  bool off = (!power)?1:0;
   setLight(settings.data.brightness);
+  return off;
 }
 
-void Backlight::setLightSmooth(uint8_t light, uint8_t speed)
-{
-  targetPower = light;
-  fadeSpeed = speed;
-}
-  
 void Backlight::loop()  // backlight statemachine - call it from loop()
 {
   int16_t p = power;

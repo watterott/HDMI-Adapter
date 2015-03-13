@@ -285,7 +285,10 @@ void Touchpanel_Resistive::mouseButtonDown()
 {
   uint16_t x, y;
 
-  backlight.screensaverNotify(); // reset screensaver on touch
+  if(backlight.screensaverNotify()) // reset screensaver on touch
+  {
+    return; //backlight was off
+  }
 
   mouseButtonState = 1;
 

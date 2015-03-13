@@ -52,7 +52,7 @@ void Touchpanel_FT5x06::setup()
 {
   uint8_t b, i;
 
-  //set analog pins to input
+  // set analog pins to input
   pinMode(AXM, INPUT);
   pinMode(AXP, INPUT);
   pinMode(AYM, INPUT);
@@ -169,7 +169,10 @@ void Touchpanel_FT5x06::mouseButtonDown()
 {
   uint16_t x, y;
 
-  backlight.screensaverNotify(); // reset screensaver on touch
+  if(backlight.screensaverNotify()) // reset screensaver on touch
+  {
+    return; //backlight was off
+  }
 
   mouseButtonState = 1;
 
