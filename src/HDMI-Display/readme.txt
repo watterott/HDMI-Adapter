@@ -20,6 +20,14 @@ Installation - Compiling - Uploading
       Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
       Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
       https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
+  * The touchpanel orientation (register 6) can be set via the USB serial port:
+      ATS6=1 -> invert X
+      ATS6=2 -> invert Y
+      ATS6=3 -> invert X+Y
+      ATS6=4 -> swap X+Y
+      ATS6=5 -> swap X+Y, invert X
+      ATS6=6 -> swap X+Y, invert Y
+      ATS6=7 -> swap X+Y, invert X+Y
 
 
 License

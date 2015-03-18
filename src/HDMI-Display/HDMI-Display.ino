@@ -24,7 +24,7 @@
       1 -> X1 touch correction
       2 -> Y0 touch correction
       3 -> Y1 touch correction
-      4 -> Time for Screensaver (0 = always on)
+      4 -> Time for Screensaver in seconds (0...65535, 0=always on)
       5 -> Backlight (0...255)
       6 -> Axes (0x1=invert x, 0x2=invert y, 0x4=swap axes)
   
