@@ -7,7 +7,7 @@ Touchpanel_FT5x06::Touchpanel_FT5x06()
 {
   mouseX = mouseY = 0;
   mouseButtonState = 0;
-  axes = settings.data.orientation;
+  axes = 0;
   power = 0;
 }
 
@@ -51,6 +51,12 @@ void Touchpanel_FT5x06::i2cWriteByte(uint8_t addr, uint8_t data)
 void Touchpanel_FT5x06::setup()
 {
   uint8_t b, i;
+
+  // load settings
+  mouseX = mouseY = 0;
+  mouseButtonState = 0;
+  axes = settings.data.orientation;
+  power = 0;
 
   // set analog pins to input
   pinMode(AXM, INPUT);

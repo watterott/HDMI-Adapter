@@ -13,7 +13,7 @@ Touchpanel_Resistive::Touchpanel_Resistive()
   zFilter = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
-  axes = settings.data.orientation;
+  axes  = 0;
   power = 0;
 }
 
@@ -35,6 +35,13 @@ void Touchpanel_Resistive::orientation(uint8_t o)
 void Touchpanel_Resistive::setup()
 {
   int x;
+
+  // load settings
+  zFilter = 0;
+  mouseX = mouseY = 0;
+  mouseButtonState = 0;
+  axes = settings.data.orientation;
+  power = 0;
 
   // set analog pins to input
   pinMode(AXM, INPUT);
