@@ -1,0 +1,6 @@
+ATmega32U4 Fuse Settings
+------------------------
+Extended: 0xCB
+High:     0xD8
+Low:      0xFF
+Lockbits: 0xEF (SPM prohibited in Boot Section)
