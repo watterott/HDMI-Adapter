@@ -12,7 +12,7 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
   * [5" 800x480 Display with resitive Touchpanel](http://www.watterott.com/en/5-800x480-TFT-Display)
   * [7" 800x480 Display with resitive Touchpanel](http://www.watterott.com/en/7-800x480-TFT-Display)
   * [7" 800x480 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
-
+  * [7" 1024x600 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel) *(needs hardware modification on backlight circuit)*
 
 ## Features
 * TI **TFP401A** HDMI to RGB Converter
@@ -26,7 +26,7 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 
 
 ## Hardware and Software
-* [Schematics + Layout](https://github.com/watterott/HDMI-Display/tree/master/pcb)
+* [Schematics + Layout](https://github.com/watterott/HDMI-Display/tree/master/pcb), [Enclosures (3D models)](https://www.thingiverse.com/search?q=watterott+display)
 * [ATmega32U4 Firmware](https://github.com/watterott/HDMI-Display/tree/master/src)
 * [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)
 * [FAQ (Frequently Asked Questions)](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md)

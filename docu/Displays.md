@@ -26,11 +26,13 @@ Display            | Size  | Resolution | LED
  HY5-LCD-HD        |  5.0" |  800 x 480 |  40mA
  HY7-LCD           |  7.0" |  800 x 480 |  40mA
  HY070CTP-A        |  7.0" |  800 x 480 | 130mA
- HY070CTP-HD       |  7.0" | 1024 x 600 | 160mA
+ HY070CTP-HD***    |  7.0" | 1024 x 600 | 160mA
 **Innolux**        |       |            |
  AT050TN33         |  5.0" |  480 x 272 |  40mA
 **Universal**      |       |            |
  KD50G21-40NT      |  5.0" |  800 x 480 |  40mA
+
+*** needs hardware modification
 
 
 ## Display Connector Pinout
