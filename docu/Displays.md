@@ -32,7 +32,7 @@ Display            | Size  | Resolution | LED
 **Universal**      |       |            |
  KD50G21-40NT      |  5.0" |  800 x 480 |  40mA
 
-*** needs hardware modification
+*** needs hardware modification, see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)
 
 
 ## Display Connector Pinout
