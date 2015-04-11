@@ -1,7 +1,7 @@
 #ifndef TOUCHPANEL_NONE_H
 #define TOUCHPANEL_NONE_H
 
-class Touchpanel_None // no Touchpanel present - do nothing
+class Touchpanel_None : public Touchpanel // no Touchpanel present - do nothing
 {
   public:
     inline Touchpanel_None() {}

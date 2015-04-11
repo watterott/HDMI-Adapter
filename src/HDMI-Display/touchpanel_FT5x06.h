@@ -47,7 +47,7 @@
 #define STATE_FACTORY      0x03
 #define STATE_AUTOCALIB    0x04
 
-class Touchpanel_FT5x06
+class Touchpanel_FT5x06 : public Touchpanel
 {
   private:  
     struct TouchPoint
@@ -59,25 +59,14 @@ class Touchpanel_FT5x06
 
     uint8_t    nrPoints;
     TouchPoint touch[5];
-    int8_t zoom;
-
-    bool power;
-    uint8_t  axes;             // mouse axes
-    uint16_t mouseX, mouseY;   // mouse coordinates  (0..4095)
-    uint8_t  mouseButtonState; // mouse button state (0..1)
 
   private:
     uint8_t i2cReadByte(uint8_t addr);
     void i2cWriteByte(uint8_t addr, uint8_t data);
     void readTouchPoint(uint8_t addr, TouchPoint *tp);
-    void mouseButtonDown();
-    void mouseButtonUp();
 
   public:
     Touchpanel_FT5x06();
-    void on();
-    void off();
-    void orientation(uint8_t o);
     void setup();
     inline void calibration() {}
     void loop();

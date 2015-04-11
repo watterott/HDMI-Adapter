@@ -28,13 +28,13 @@
 
 
 //#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
-#define ORIENTATION       0 // orientation (bit 0x1=invert x, bit 0x2=invert y, bit 0x4=swap axes)
-#define SCREENSAVERTIME 180 // seconds timeout, 0 = always on
+#define ORIENTATION       0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
+#define SCREENSAVERTIME 180 // seconds timeout (0...65535, 0=always on)
 #define BRIGHTNESS      255 // backlight brightness (0..255)
 #define LOOPTIME         16 // 16 = 60 Hz polling interval
 #define TOUCHMAX      4095L // maximal touch/mouse position
 
-#define VERSION_STRING  "Version 1.06"
+#define VERSION_STRING  "Version 1.07"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
 // check configurations

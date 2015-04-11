@@ -20,7 +20,6 @@
 #ifndef __USBAPI__
 #define __USBAPI__
 
-#if ARDUINO >= 150
 #include <inttypes.h>
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
@@ -32,15 +31,11 @@ typedef unsigned short u16;
 typedef unsigned long u32;
 
 #include "Arduino.h"
-#endif
 
 #if defined(USBCON)
-#define MOUSE_ABS_ENABLED //enable absolute mouse coordinates
 
-#if ARDUINO >= 150
 #include "USBDesc.h"
 #include "USBCore.h"
-#endif
 
 //================================================================================
 //================================================================================
@@ -61,9 +56,8 @@ extern USBDevice_ USBDevice;
 //================================================================================
 //================================================================================
 //	Serial over CDC (Serial1 is the physical port)
-#if ARDUINO >= 150
+
 struct ring_buffer;
-#endif
 
 #if (RAMEND < 1000)
 #define SERIAL_BUFFER_SIZE 16
@@ -89,11 +83,10 @@ public:
 	virtual size_t write(const uint8_t*, size_t);
 	using Print::write; // pull in write(str) and write(buf, size) from Print
 	operator bool();
-#if ARDUINO >= 150
+
 	volatile uint8_t _rx_buffer_head;
 	volatile uint8_t _rx_buffer_tail;
 	unsigned char _rx_buffer[SERIAL_BUFFER_SIZE];
-#endif
 };
 extern Serial_ Serial;
 
@@ -118,7 +111,7 @@ public:
 	void begin(void);
 	void end(void);
 #ifdef MOUSE_ABS_ENABLED
-	void moveAbs(uint16_t x, uint16_t y, int8_t wheel, uint8_t buttons); // x and y have the range of 0 to 4095
+	void moveAbs(unsigned int x, unsigned int y, signed char wheel, unsigned char buttons); // x and y have the range of 0 to 4095
 #else
 	void click(uint8_t b = MOUSE_LEFT);
 	void move(signed char x, signed char y, signed char wheel = 0);	

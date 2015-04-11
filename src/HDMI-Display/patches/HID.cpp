@@ -16,9 +16,6 @@
 ** SOFTWARE.  
 */
 
-#if ARDUINO < 150
-#include "Platform.h"
-#endif
 #include "USBAPI.h"
 
 #if defined(USBCON)
@@ -44,12 +41,6 @@ Keyboard_ Keyboard;
 #define RAWHID_TX_SIZE 64
 #define RAWHID_RX_SIZE 64
 
-#define HID_REPORTID_MOUSE (1)
-#define HID_REPORTID_KEYBOARD (2)
-#define HID_REPORTID_RAWHID (3)
-#define HID_REPORTID_SYSTEMCONTROL (4)
-#define HID_REPORTID_MOUSE_ABS (5)
-
 extern const u8 _hidReportDescriptor[] PROGMEM;
 const u8 _hidReportDescriptor[] = {
 	
@@ -60,7 +51,7 @@ const u8 _hidReportDescriptor[] = {
     0xa1, 0x01,                    // COLLECTION (Application)
     0x09, 0x01,                    //   USAGE (Pointer)
     0xa1, 0x00,                    //   COLLECTION (Physical)
-    0x85, HID_REPORTID_MOUSE_ABS,  //     REPORT_ID (5)
+    0x85, 0x01,                    //     REPORT_ID (1)
     0x05, 0x09,                    //     USAGE_PAGE (Button)
     0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
     0x29, 0x03,                    //     USAGE_MAXIMUM (Button 3)
@@ -95,7 +86,7 @@ const u8 _hidReportDescriptor[] = {
 
     0xc0,                          //   END_COLLECTION
     0xc0,                          // END_COLLECTION 
-        
+
 #else
     //  Mouse relative
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)	// 54
@@ -103,7 +94,7 @@ const u8 _hidReportDescriptor[] = {
     0xa1, 0x01,                    // COLLECTION (Application)
     0x09, 0x01,                    //   USAGE (Pointer)
     0xa1, 0x00,                    //   COLLECTION (Physical)
-    0x85, HID_REPORTID_MOUSE,      //     REPORT_ID (1)
+    0x85, 0x01,                    //     REPORT_ID (1)
     0x05, 0x09,                    //     USAGE_PAGE (Button)
     0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
     0x29, 0x03,                    //     USAGE_MAXIMUM (Button 3)
@@ -126,58 +117,58 @@ const u8 _hidReportDescriptor[] = {
     0x81, 0x06,                    //     INPUT (Data,Var,Rel)
     0xc0,                          //   END_COLLECTION
     0xc0,                          // END_COLLECTION
+
 #endif
 
-    //  Keyboard
+	//	Keyboard
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)	// 47
     0x09, 0x06,                    // USAGE (Keyboard)
     0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, HID_REPORTID_KEYBOARD,   //   REPORT_ID (2)
+    0x85, 0x02,                    //   REPORT_ID (2)
     0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-    
-    // Keyboard Modifiers (shift, alt, ...)
+
     0x19, 0xe0,                    //   USAGE_MINIMUM (Keyboard LeftControl)
     0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
     0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
     0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
     0x75, 0x01,                    //   REPORT_SIZE (1)
-    
+
     0x95, 0x08,                    //   REPORT_COUNT (8)
     0x81, 0x02,                    //   INPUT (Data,Var,Abs)
     0x95, 0x01,                    //   REPORT_COUNT (1)
     0x75, 0x08,                    //   REPORT_SIZE (8)
     0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
-    
-    // Keyboard keys
+
     0x95, 0x06,                    //   REPORT_COUNT (6)
     0x75, 0x08,                    //   REPORT_SIZE (8)
     0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xDF, 0x00,              //   LOGICAL_MAXIMUM (239)
+    0x25, 0x65,                    //   LOGICAL_MAXIMUM (101)
     0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
+
     0x19, 0x00,                    //   USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0xDF,                    //   USAGE_MAXIMUM (Left Control - 1)
+    0x29, 0x65,                    //   USAGE_MAXIMUM (Keyboard Application)
     0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
     0xc0,                          // END_COLLECTION
 
 #ifdef RAWHID_ENABLED
-	//	RAW HID
-	0x06, LSB(RAWHID_USAGE_PAGE), MSB(RAWHID_USAGE_PAGE),	// 30
-	0x0A, LSB(RAWHID_USAGE), MSB(RAWHID_USAGE),
+    //	RAW HID
+    0x06, LSB(RAWHID_USAGE_PAGE), MSB(RAWHID_USAGE_PAGE),	// 30
+    0x0A, LSB(RAWHID_USAGE), MSB(RAWHID_USAGE),
 
-	0xA1, 0x01,				// Collection 0x01
-	0x85, HID_REPORTID_RAWHID,		// REPORT_ID (3)
-	0x75, 0x08,				// report size = 8 bits
-	0x15, 0x00,				// logical minimum = 0
-	0x26, 0xFF, 0x00,		// logical maximum = 255
+    0xA1, 0x01,				// Collection 0x01
+    0x85, 0x03,             // REPORT_ID (3)
+    0x75, 0x08,				// report size = 8 bits
+    0x15, 0x00,				// logical minimum = 0
+    0x26, 0xFF, 0x00,		// logical maximum = 255
 
-	0x95, 64,				// report count TX
-	0x09, 0x01,				// usage
-	0x81, 0x02,				// Input (array)
+    0x95, 64,				// report count TX
+    0x09, 0x01,				// usage
+    0x81, 0x02,				// Input (array)
 
-	0x95, 64,				// report count RX
-	0x09, 0x02,				// usage
-	0x91, 0x02,				// Output (array)
-	0xC0					// end collection
+    0x95, 64,				// report count RX
+    0x09, 0x02,				// usage
+    0x91, 0x02,				// Output (array)
+    0xC0					// end collection
 #endif
 };
 
@@ -268,7 +259,7 @@ void Mouse_::end(void)
 
 #ifdef MOUSE_ABS_ENABLED
 
-void Mouse_::moveAbs(uint16_t x, uint16_t y, int8_t wheel, uint8_t buttons)
+void Mouse_::moveAbs(unsigned int x, unsigned int y, signed char wheel, unsigned char buttons)
 {
 	uint8_t m[6];
 	m[0] = buttons;
@@ -277,7 +268,7 @@ void Mouse_::moveAbs(uint16_t x, uint16_t y, int8_t wheel, uint8_t buttons)
 	m[3] = LSB(y);
 	m[4] = MSB(y);
 	m[5] = wheel;
-	HID_SendReport(HID_REPORTID_MOUSE_ABS, m, sizeof(m));
+	HID_SendReport(1,m,6);
 }
 
 #else
@@ -292,12 +283,12 @@ void Mouse_::click(uint8_t b)
 
 void Mouse_::move(signed char x, signed char y, signed char wheel)
 {
-	u8 m[4];
+	uint8_t m[4];
 	m[0] = _buttons;
 	m[1] = x;
 	m[2] = y;
 	m[3] = wheel;
-	HID_SendReport(HID_REPORTID_MOUSE,m,sizeof(m));
+	HID_SendReport(1,m,4);
 }
 
 void Mouse_::buttons(uint8_t b)
@@ -346,7 +337,7 @@ void Keyboard_::end(void)
 
 void Keyboard_::sendReport(KeyReport* keys)
 {
-	HID_SendReport(HID_REPORTID_KEYBOARD,keys,sizeof(*keys));
+	HID_SendReport(2,keys,sizeof(KeyReport));
 }
 
 extern

@@ -13,23 +13,9 @@ Touchpanel_Resistive::Touchpanel_Resistive()
   zFilter = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
+  mouseZoom = 0;
   axes  = 0;
   power = 0;
-}
-
-void Touchpanel_Resistive::on()
-{
-  power = 1;
-}
-
-void Touchpanel_Resistive::off()
-{
-  power = 0;
-}
-
-void Touchpanel_Resistive::orientation(uint8_t o)
-{
-  axes = o;
 }
 
 void Touchpanel_Resistive::setup()
@@ -37,9 +23,12 @@ void Touchpanel_Resistive::setup()
   int x;
 
   // load settings
+  ax.firstTouch = 0;
+  ay.firstTouch = 0;
   zFilter = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
+  mouseZoom = 0;
   axes = settings.data.orientation;
   power = 0;
 
@@ -288,76 +277,8 @@ void Touchpanel_Resistive::calibration()
   settings.save();
 }
 
-void Touchpanel_Resistive::mouseButtonDown()
-{
-  uint16_t x, y;
-
-  if(backlight.screensaverNotify()) // reset screensaver on touch
-  {
-    return; //backlight was off
-  }
-
-  mouseButtonState = 1;
-
-  if(axes & 0x01)
-    x = TOUCHMAX-mouseX;
-  else
-    x = mouseX;
-
-  if(axes & 0x02)
-    y = TOUCHMAX-mouseY;
-  else
-    y = mouseY;
-
-  if(axes & 0x04)
-    SWAP(x, y);
-
-  Mouse.moveAbs(x, y, 0, mouseButtonState);
-
-  #if DEBUG > 0
-    Serial.print(mouseX);
-    Serial.print(" ");
-    Serial.print(mouseY);
-    Serial.println(F(" down"));
-  #endif
-}
-
-void Touchpanel_Resistive::mouseButtonUp()
-{
-  uint16_t x, y;
-
-  if(mouseButtonState)
-  {
-    mouseButtonState = 0;
-
-    if(axes & 0x01)
-      x = TOUCHMAX-mouseX;
-    else
-      x = mouseX;
-
-    if(axes & 0x02)
-      y = TOUCHMAX-mouseY;
-    else
-      y = mouseY;
-
-    if(axes & 0x04)
-      SWAP(x, y);
-
-    Mouse.moveAbs(x, y, 0, mouseButtonState);
-
-    #if DEBUG > 0
-      Serial.print(x);
-      Serial.print(" ");
-      Serial.print(y);
-      Serial.println(F(" up"));
-    #endif
-  }
-}
-
 void Touchpanel_Resistive::loop()
 {
-  uint8_t led = LOW;
-
   if(!power)
     return;
     
@@ -367,7 +288,6 @@ void Touchpanel_Resistive::loop()
     int y = readY();
     if(readZ())  // check if the touch was stable
     {
-      led = HIGH;
       mouseX  = calcPoint(x, &ax);
       mouseY  = calcPoint(y, &ay);      
 
@@ -378,5 +298,4 @@ void Touchpanel_Resistive::loop()
   {
     mouseButtonUp();
   }
-  digitalWrite(LED_2, led);  
 }
