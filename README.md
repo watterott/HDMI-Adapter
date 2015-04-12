@@ -18,8 +18,8 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 * TI **TFP401A** HDMI to RGB Converter
 * Pixel Rates up to 165MHz, 1080p and WUXGA (1920x1200) at 60Hz
 * HDMI compatible (DVI, no Sound, no HDCP, no CEC)
-* Atmel **ATmega32U4** (@ 16 MHz) to control Backlight and Touch Panel (**USB HID Mouse** with absolute coordinates)
-* EDID EEPROM (24LC02B) for display settings
+* Atmel **ATmega32U4** (@ 16 MHz) to control Backlight and Touch Panel (**USB HID Mouse**)
+* **EDID** EEPROM (24LC02B) for display settings
 * LED Backlight Boost Regulator (up to 35V)
 * 3.3V - 5V tolerant UART and I2C interface
 * **Single 5V Power Supply** via MicroUSB connector

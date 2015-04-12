@@ -2,7 +2,7 @@
 
 
 ## How much power does the HDMI-Display need?
-Depending on the display and backlight current between 400 to 600mA.
+Depending on the display and backlight current between 400 to 700mA.
 
 
 ## With which boards/computers is the HDMI-Display compatible?
@@ -13,7 +13,8 @@ If there are any problems, then the settings can be made manually:
 [CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.scr),
 [ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini),
 [UDOO](http://www.elinux.org/UDOO_setup_lvds_panels)
-*(Note: We have not tested all configurations.)*
+
+The touchpanel acts as USB HID mouse with absolute coordinates. So you do not need a special driver. An inversion/rotation of the coordinates can be done via the serial interface (command *ATS6*).
 
 
 ## Which displays are compatible with HDMI to RGB Adapter board?
