@@ -5,11 +5,11 @@
 
 Touchpanel_FT5x06::Touchpanel_FT5x06()
 {
+  power = 0;
+  axes = &settings.data.orientation;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
   mouseZoom = 0;
-  axes = 0;
-  power = 0;
 }
 
 uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
@@ -20,7 +20,7 @@ uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
   Wire.requestFrom(FT5x06_ADDR, 1);
   for(unsigned long ms = millis(); !Wire.available();)
   {
-    if((millis()-ms) >= 1000) //1 seconds timeout
+    if((millis()-ms) >= 500) // 500ms timeout
       break;
   }
   return Wire.read();
@@ -39,11 +39,10 @@ void Touchpanel_FT5x06::setup()
   uint8_t b, i;
 
   // load settings
+  power = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
   mouseZoom = 0;
-  axes = settings.data.orientation;
-  power = 0;
 
   // set analog pins to input
   pinMode(AXM, INPUT);
@@ -78,7 +77,7 @@ void Touchpanel_FT5x06::setup()
     }
   }
 
-  //check error register
+  // check error register
   for(i=0; i < 10; i++)
   {
     b = i2cReadByte(REG_ERR);
@@ -178,10 +177,10 @@ void Touchpanel_FT5x06::loop()
       nrPoints = b & 0x07;
       readTouchPoint(REG_TOUCH_1, &touch[0]);
       // no multi touch support at the moment
-      // readTouchPoint(REG_TOUCH_2, &touch[1]);
-      // readTouchPoint(REG_TOUCH_3, &touch[2]);
-      // readTouchPoint(REG_TOUCH_4, &touch[3]);
-      // readTouchPoint(REG_TOUCH_5, &touch[4]);
+      //readTouchPoint(REG_TOUCH_2, &touch[1]);
+      //readTouchPoint(REG_TOUCH_3, &touch[2]);
+      //readTouchPoint(REG_TOUCH_4, &touch[3]);
+      //readTouchPoint(REG_TOUCH_5, &touch[4]);
 
       #if DEBUG > 1
         Serial.print(F("TP Points: 0x"));

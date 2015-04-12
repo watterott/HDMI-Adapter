@@ -1,10 +1,10 @@
 #ifndef TOUCHPANEL_FT5X06_H
 #define TOUCHPANEL_FT5X06_H
 
-#define FT5x06_ADDR        0x38      //I2C address
+#define FT5x06_ADDR        0x38      // I2C address
 
 // Registers
-#define REG_DEVICE_MODE    0x00      //Device Mode, 0 = Normal Operating Mode
+#define REG_DEVICE_MODE    0x00      // Device Mode, 0 = Normal Operating Mode
 #define REG_GESTURE_ID     0x01      // 48h Zoom In, 49h Zoom Out, 00h No Gesture
 #define REG_TD_STATUS      0x02      // Touch Points (0...5)
 #define REG_TOUCH_1        0x03      // Touch Point 1

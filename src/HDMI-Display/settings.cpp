@@ -9,7 +9,7 @@ const PROGMEM Settings::Data Settings::defaults =
   TPC_Y0, TPC_Y1,   // default calibration values y-axis
   SCREENSAVERTIME,  // default seconds timeout, 0 = always on
   BRIGHTNESS,       // default backlight brightness (0..255)
-  ORIENTATION       // default orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes)
+  ORIENTATION       // default orientation
 };
 
 Settings::Settings()

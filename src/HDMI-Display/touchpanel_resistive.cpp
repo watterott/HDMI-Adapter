@@ -4,6 +4,12 @@
 
 Touchpanel_Resistive::Touchpanel_Resistive()
 {
+  power = 0;
+  axes = &settings.data.orientation;
+  mouseX = mouseY = 0;
+  mouseButtonState = 0;
+  mouseZoom = 0;
+
   ax.point = &settings.data.x0;
   ax.firstTouch = 0;
 
@@ -11,11 +17,6 @@ Touchpanel_Resistive::Touchpanel_Resistive()
   ay.firstTouch = 0;
 
   zFilter = 0;
-  mouseX = mouseY = 0;
-  mouseButtonState = 0;
-  mouseZoom = 0;
-  axes  = 0;
-  power = 0;
 }
 
 void Touchpanel_Resistive::setup()
@@ -23,14 +24,13 @@ void Touchpanel_Resistive::setup()
   int x;
 
   // load settings
-  ax.firstTouch = 0;
-  ay.firstTouch = 0;
-  zFilter = 0;
+  power = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
   mouseZoom = 0;
-  axes = settings.data.orientation;
-  power = 0;
+  ax.firstTouch = 0;
+  ay.firstTouch = 0;
+  zFilter = 0;
 
   // set analog pins to input
   pinMode(AXM, INPUT);

@@ -44,12 +44,12 @@
 
 Settings settings;
 Backlight backlight;
-#if TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-  Touchpanel_FT5x06 touchpanel;
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_NONE
-  Touchpanel_None touchpanel;
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
+#if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   Touchpanel_Resistive touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
+  Touchpanel_FT5x06 touchpanel;
+#else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
+  Touchpanel_None touchpanel;
 #endif
 EDID edid;
 
@@ -133,7 +133,7 @@ void ATCommandsLoop()
     byte b = Serial.read();
     switch(b)
     {
-      case '\n':
+      case '\n':  // Info
       case '\r':
         Serial.println(F(INFO_STRING));
         sendAck();
@@ -183,7 +183,6 @@ void ATCommandsLoop()
             p[reg] = value;
             settings.save();
             backlight.screensaverNotify(); // refresh backlight and screensaver time
-            touchpanel.orientation(settings.data.orientation);
             sendAck();
           }
           else

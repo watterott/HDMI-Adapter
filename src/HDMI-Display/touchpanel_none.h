@@ -7,7 +7,6 @@ class Touchpanel_None : public Touchpanel // no Touchpanel present - do nothing
     inline Touchpanel_None() {}
     inline void on() {}
     inline void off() {}
-    inline void orientation(uint8_t o) {}
     inline void setup() {}
     inline void calibration() {}
     inline void loop() {}

@@ -28,6 +28,10 @@ Installation - Compiling - Uploading
       ATS6=5 -> swap X+Y, invert X
       ATS6=6 -> swap X+Y, invert Y
       ATS6=7 -> swap X+Y, invert X+Y
+      ATS6=8 -> use screen coordinates
+      ATS6=9 -> invert X and use screen coordinates
+      ATS6=10 -> invert y and use screen coordinates
+      ...
 
 
 License
