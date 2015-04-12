@@ -24,6 +24,15 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
 * Choose respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
+* Wait till *Done uploading.* is shown.
 * Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)).
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
+
+
+## Known Issues
+Sometimes the USB device of the Caterina Bootloader is not recognized correctly.
+This is the case when *Done uploading.* is not shown after the upload process.
+Check if there is a new USB device (with VID 0x1D50 + PID 0x60B0) after the upload is started in the Arduino IDE.
+Or if the driver for the device is not loaded under a Windows OS (see Device Manager), then update it by hand.
+The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).

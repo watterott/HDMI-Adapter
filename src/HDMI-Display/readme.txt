@@ -15,8 +15,8 @@ Installation - Compiling - Uploading
   * Set the configuration for display and touchpanel in config.h
   * Choose Tools->Board->ATmega32u4 (16 MHz)
   * Choose respective serial port under Tools->Serial Port
-  * Press File->Upload
-  * Before connecting a TFT-Screen, check the jumper settings.
+  * Press File->Upload and wait till "Done uploading." is shown
+  * Before connecting a TFT-Screen, check the jumper settings
       Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
       Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
       https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
