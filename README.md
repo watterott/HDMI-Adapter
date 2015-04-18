@@ -18,7 +18,7 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 * TI **TFP401A** HDMI to RGB Converter
 * Pixel Rates up to 165MHz, 1080p and WUXGA (1920x1200) at 60Hz
 * HDMI compatible (DVI, no Sound, no HDCP, no CEC)
-* Atmel **ATmega32U4** (@ 16 MHz) to control Backlight and Touch Panel (**USB HID Mouse**)
+* Atmel **ATmega32U4** Microcontroller to control Backlight and Touch Panel (USB HID Mouse)
 * **EDID** EEPROM (24LC02B) for display settings
 * LED Backlight Boost Regulator (up to 35V)
 * 3.3V - 5V tolerant UART and I2C interface
@@ -27,6 +27,6 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 
 ## Hardware and Software
 * [Schematics + Layout](https://github.com/watterott/HDMI-Display/tree/master/pcb), [Enclosures (3D models)](https://www.thingiverse.com/search?q=watterott+display)
-* [ATmega32U4 Firmware](https://github.com/watterott/HDMI-Display/tree/master/src)
+* [Firmware for ATmega32U4 Microcontroller](https://github.com/watterott/HDMI-Display/tree/master/src)
 * [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)
 * [FAQ (Frequently Asked Questions)](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md)
