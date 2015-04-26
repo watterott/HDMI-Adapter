@@ -22,7 +22,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Open the Arduino Sketch ```HDMI-Display.ino```.
 * Set configurations (display and touch panel) in ```config.h```
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
-* Choose respective serial port under **Tools->Serial Port**.
+* Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
 * Wait till *Done uploading.* is shown.
 * Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)).
