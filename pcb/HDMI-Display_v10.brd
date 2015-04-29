@@ -3895,10 +3895,10 @@ design rules under a new name.</description>
 <attribute name="DIGIKEY" value="EG4621TR-ND" x="20.0025" y="3.96875" size="1.778" layer="27" display="off"/>
 <attribute name="NAME" x="22.86" y="4.1275" size="0.8128" layer="21" font="vector" ratio="10" rot="R90" align="center"/>
 </element>
-<element name="LED1" library="we-opto" package="LED_0603" value="LED-0603" x="39.37" y="9.04875" smashed="yes" rot="R180">
+<element name="LED1" library="we-opto" package="LED_0603" value="green" x="39.37" y="9.04875" smashed="yes" rot="R180">
 <attribute name="NAME" x="38.4175" y="8.89" size="0.8128" layer="25" font="vector" ratio="10" rot="R270" align="center"/>
 </element>
-<element name="LED2" library="we-opto" package="LED_0603" value="LED-0603" x="40.79875" y="9.04875" smashed="yes" rot="R180">
+<element name="LED2" library="we-opto" package="LED_0603" value="red" x="40.79875" y="9.04875" smashed="yes" rot="R180">
 <attribute name="NAME" x="41.75125" y="8.89" size="0.8128" layer="25" font="vector" ratio="10" rot="R270" align="center"/>
 </element>
 <element name="T3" library="we-transistor" package="SOT23" value="BSS138" x="30.1625" y="10.795" smashed="yes" rot="R90">

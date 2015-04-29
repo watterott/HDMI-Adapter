@@ -12144,8 +12144,8 @@ ER-TFT070-4 - 7.0" 800x480 (LED @ 40mA @ 20.4V)&lt;br&gt;</description>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
 <part name="GND14" library="supply1" deviceset="GND" device=""/>
 <part name="SW1" library="we-switch" deviceset="SW-TACTILE" device="-TL3315"/>
-<part name="LED1" library="we-opto" deviceset="LED" device="-0603"/>
-<part name="LED2" library="we-opto" deviceset="LED" device="-0603"/>
+<part name="LED1" library="we-opto" deviceset="LED" device="-0603" value="green"/>
+<part name="LED2" library="we-opto" deviceset="LED" device="-0603" value="red"/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
