@@ -66,7 +66,7 @@ void Touchpanel::mouseButtonDown()
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
   }
 
-  Mouse.moveAbs(x, y, mouseZoom, mouseButtonState);
+  Mouse.moveAbsolute(x, y, mouseZoom, mouseButtonState);
 
   #if DEBUG > 0
     Serial.print(mouseX);
@@ -108,7 +108,7 @@ void Touchpanel::mouseButtonUp()
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
   }
 
-  Mouse.moveAbs(x, y, 0, 0);
+  Mouse.moveAbsolute(x, y, 0, 0);
 
   #if DEBUG > 0
     Serial.print(mouseX);
