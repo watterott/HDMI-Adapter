@@ -40,12 +40,10 @@ void Touchpanel::mouseButtonDown()
     return; // backlight was off
   }
 
-  mouseButtonState = 1;
-
   if(mouseZoom)
-  {
     mouseButtonState = 0;
-  }
+  else
+    mouseButtonState = 1;
 
   if(*axes & 0x01) // invert x
     x = TOUCHMAX-mouseX;
@@ -72,7 +70,10 @@ void Touchpanel::mouseButtonDown()
     Serial.print(mouseX);
     Serial.print(" ");
     Serial.print(mouseY);
-    Serial.println(F(" down"));
+    if(mouseButtonState)
+      Serial.println(F(" down"));
+    if(mouseZoom)
+      Serial.println(F(" zoom"));
   #endif
 }
 

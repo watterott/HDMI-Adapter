@@ -198,13 +198,9 @@ void Touchpanel_FT5x06::loop()
 
         b = i2cReadByte(REG_GESTURE_ID);
         if(b == GESTURE_ZOOM_IN)
-        {
           mouseZoom = 1;
-        }
         else if(b == GESTURE_ZOOM_OUT)
-        {
           mouseZoom = -1;
-        }
         else
           mouseZoom = 0;
 
