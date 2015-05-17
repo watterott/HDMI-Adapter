@@ -25,6 +25,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
 * Wait till *Done uploading.* is shown.
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Serial Monitor (9600 baud 8N1).
 
 
 ## Connecting
@@ -32,6 +33,15 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
 * If there is not output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+
+
+## Optional Resistive Touchpanel Calibration
+* Hold down the switch and plug in the USB connector (power on).
+* Press on the left edge (x axis) about 5s till the LED blinking changes.
+* Press on the right edge (x axis) about 5s till the LED blinking changes.
+* Press on the top edge (y axis) about 5s till the LED blinking changes.
+* Press on the bottom edge (y axis) about 5s till the LED blinking changes.
+* Calibration done.
 
 
 ## Known Issues

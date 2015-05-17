@@ -14,7 +14,8 @@ If there are any problems, then the settings can be made manually:
 [ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini),
 [UDOO](http://www.elinux.org/UDOO_setup_lvds_panels)
 
-The touchpanel acts as USB HID mouse with absolute coordinates. So you do not need a special driver. An inversion/rotation of the coordinates can be done via the serial interface (command *ATS6*).
+The touchpanel acts as USB HID mouse with absolute coordinates. So you do not need a special driver.
+An inversion/rotation of the coordinates can be done via the serial interface (command *ATS6*).
 
 
 ## Which displays are compatible with HDMI to RGB Adapter board?
@@ -32,5 +33,5 @@ A small guide can be found [here](https://github.com/watterott/HDMI-Display/tree
 ## How to flash/update the EDID EEPROM?
 The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller, when the SDA+SCL jumpers are closed.
 The jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb).
-The programming can be done via the firmware or this [example](https://github.com/watterott/HDMI-Display/tree/master/src/edid-prog).
+The programming can be done via the firmware (serial interface command *ATE*) or this [example](https://github.com/watterott/HDMI-Display/tree/master/src/edid-prog).
 To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.

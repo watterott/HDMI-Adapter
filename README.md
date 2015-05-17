@@ -14,6 +14,7 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
   * [7" 800x480 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
   * [7" 1024x600 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel) *(needs hardware modification on backlight circuit)*
 
+
 ## Features
 * TI **TFP401A** HDMI to RGB Converter
 * Pixel Rates up to 165MHz, 1080p and WUXGA (1920x1200) at 60Hz
