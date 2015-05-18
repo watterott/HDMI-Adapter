@@ -25,14 +25,29 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
 * Wait till *Done uploading.* is shown.
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Serial Monitor (9600 baud 8N1).
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1).
 
 
 ## Connecting
-* Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)).
+* Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
 * If there is not output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+
+
+## Touchpanel Orientation
+* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1).
+  * ```ATS6=1``` -> invert X
+  * ```ATS6=2``` -> invert Y
+  * ```ATS6=3``` -> invert X+Y
+  * ```ATS6=4``` -> swap X+Y
+  * ```ATS6=5``` -> swap X+Y, invert X
+  * ```ATS6=6``` -> swap X+Y, invert Y
+  * ```ATS6=7``` -> swap X+Y, invert X+Y
+  * ```ATS6=8``` -> use screen coordinates
+  * ```ATS6=9``` -> invert X and use screen coordinates
+  * ```ATS6=10``` -> invert y and use screen coordinates
+  * ```...```
 
 
 ## Optional Resistive Touchpanel Calibration

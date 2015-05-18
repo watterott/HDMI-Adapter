@@ -7,31 +7,7 @@ Visit https://github.com/watterott/HDMI-Display for updates.
 
 Installation - Compiling - Uploading
 ------------------------------------
-  The firmware can be compiled with the Arduino IDE.
-  * Install the board support package to the Arduino IDE 1.6.x:
-    https://github.com/watterott/wattuino/tree/master/src/Arduino
-  * Copy the files from the patches directory in your Arduino program directory
-  * Open the Sketch HDMI-Display.ino
-  * Set the configuration for display and touchpanel in config.h
-  * Choose Tools->Board->ATmega32u4 (16 MHz)
-  * Choose respective serial port under Tools->Serial Port
-  * Press File->Upload and wait till "Done uploading." is shown
-  * Before connecting a TFT-Screen, check the jumper settings
-      Resistive Touchpanel: TP_SDA+TP_SCL+TP_INT open
-      Capacitive Touchpanel: TP_SDA+TP_SCL+TP_INT closed, SDA+SCL open, VCCIO set to 3V3
-      https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md
-  * The touchpanel orientation (register 6) can be set via the USB serial port:
-      ATS6=1 -> invert X
-      ATS6=2 -> invert Y
-      ATS6=3 -> invert X+Y
-      ATS6=4 -> swap X+Y
-      ATS6=5 -> swap X+Y, invert X
-      ATS6=6 -> swap X+Y, invert Y
-      ATS6=7 -> swap X+Y, invert X+Y
-      ATS6=8 -> use screen coordinates
-      ATS6=9 -> invert X and use screen coordinates
-      ATS6=10 -> invert y and use screen coordinates
-      ...
+  See https://github.com/watterott/HDMI-Display/blob/master/src/README.md
 
 
 License
