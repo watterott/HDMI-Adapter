@@ -27,7 +27,8 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 
 
 ## Hardware and Software
-* [Schematics + Layout](https://github.com/watterott/HDMI-Display/tree/master/pcb), [Enclosures (3D models)](https://www.thingiverse.com/search?q=watterott+display)
+* [Schematics/Layout + Guide](https://github.com/watterott/HDMI-Display/tree/master/pcb)
 * [Firmware for ATmega32U4 Microcontroller](https://github.com/watterott/HDMI-Display/tree/master/src)
 * [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)
 * [FAQ (Frequently Asked Questions)](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md)
+* [Enclosures (3D models)](https://www.thingiverse.com/search?q=watterott+display)
