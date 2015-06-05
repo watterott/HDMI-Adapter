@@ -246,6 +246,9 @@ bool WEAK HID_Setup(Setup& setup)
 //	Mouse
 
 Mouse_::Mouse_(void) : _buttons(0)
+#ifdef MOUSE_ABS_ENABLED
+, _x(0), _y(0)
+#endif
 {
 }
 
@@ -259,27 +262,43 @@ void Mouse_::end(void)
 
 #ifdef MOUSE_ABS_ENABLED
 
-void Mouse_::moveAbsolute(unsigned int x, unsigned int y, signed char wheel, unsigned char buttons)
+void Mouse_::moveAbsolute(int x, int y, signed char wheel)
 {
 	uint8_t m[6];
-	m[0] = buttons;
+
+	if (x < 0)
+		x = 0;
+	else if (x > 4095)
+		x = 4095;
+	_x = x;
+
+	if (y < 0)
+		y = 0;
+	else if (y > 4095)
+		y = 4095;
+	_y = y;
+
+	m[0] = _buttons;
 	m[1] = LSB(x);
 	m[2] = MSB(x);
 	m[3] = LSB(y);
 	m[4] = MSB(y);
 	m[5] = wheel;
-	HID_SendReport(1,m,6);
+	HID_SendReport(1, m, sizeof(m));
+}
+
+void Mouse_::moveAbsolute(int x, int y, signed char wheel, unsigned char buttons)
+{
+	_buttons = buttons;
+	moveAbsolute(x, y, wheel);
+}
+
+void Mouse_::move(signed char x, signed char y, signed char wheel)
+{
+	moveAbsolute((_x+x), (_y+y), wheel);
 }
 
 #else
-
-void Mouse_::click(uint8_t b)
-{
-	_buttons = b;
-	move(0,0,0);
-	_buttons = 0;
-	move(0,0,0);
-}
 
 void Mouse_::move(signed char x, signed char y, signed char wheel)
 {
@@ -288,7 +307,17 @@ void Mouse_::move(signed char x, signed char y, signed char wheel)
 	m[1] = x;
 	m[2] = y;
 	m[3] = wheel;
-	HID_SendReport(1,m,4);
+	HID_SendReport(1, m, sizeof(m));
+}
+
+#endif
+
+void Mouse_::click(uint8_t b)
+{
+	_buttons = b;
+	move(0,0,0);
+	_buttons = 0;
+	move(0,0,0);
 }
 
 void Mouse_::buttons(uint8_t b)
@@ -317,7 +346,6 @@ bool Mouse_::isPressed(uint8_t b)
 	return false;
 }
 
-#endif
 
 //================================================================================
 //================================================================================
@@ -337,7 +365,7 @@ void Keyboard_::end(void)
 
 void Keyboard_::sendReport(KeyReport* keys)
 {
-	HID_SendReport(2,keys,sizeof(KeyReport));
+	HID_SendReport(2, keys, sizeof(KeyReport));
 }
 
 extern
