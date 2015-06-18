@@ -32,7 +32,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
-* If there is not output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+* If there is no output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+* If the red LED is blinking then no touchpanel was found. Check your cable connections in this case.
 
 
 ## Touchpanel Orientation
@@ -52,16 +53,31 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Optional Resistive Touchpanel Calibration
 * Hold down the switch and plug in the USB connector (power on).
-* Press on the left edge (x axis) about 5s till the LED blinking changes.
-* Press on the right edge (x axis) about 5s till the LED blinking changes.
-* Press on the top edge (y axis) about 5s till the LED blinking changes.
-* Press on the bottom edge (y axis) about 5s till the LED blinking changes.
+* The LED starts blinking.
+* Press the center on the **left** edge (x axis) about 5s till the LED blinking changes.
+* Press the center on the **right** edge (x axis) about 5s till the LED blinking changes.
+* Press the center on the **top** edge (y axis) about 5s till the LED blinking changes.
+* Press the center on the **bottom** edge (y axis) about 5s till the LED blinking changes.
 * Calibration done.
 
 
 ## Known Issues
-Sometimes the USB device of the Caterina Bootloader is not recognized correctly.
-This is the case when *Done uploading.* is not shown after the upload process.
-Check if there is a new USB device (with VID 0x1D50 + PID 0x60B0) after the upload is started in the Arduino IDE.
-Or if the driver for the device is not loaded under a Windows OS (see Device Manager), then update it by hand.
-The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).
+* **Windows:**
+    Sometimes the USB device of the Caterina Bootloader is not recognized correctly.
+    This is the case when *Done uploading.* is not shown after the upload process.
+    Check if there is a new USB device (with VID 0x1D50 + PID 0x60B0) after the upload is started in the Arduino IDE and if the driver for the device is loaded (see Device Manager).
+    The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).
+
+* **Linux:**
+    The Modem Manager detects the Caterina Bootloader as a modem and therefore a blacklist rule is needed.
+    Run one of the commands - depending on your system:
+    
+    ```sudo nano /etc/udev/rules.d/77-mm-usb-device-blacklist.rules```
+    
+    ```sudo nano /lib/udev/rules.d/77-mm-usb-device-blacklist.rules```
+    
+    and add the following lines to the file:
+    ```
+    ATTRS{idVendor}=="6666", ENV{ID_MM_DEVICE_IGNORE}="1"
+    ATTRS{idVendor}=="1D50", ATTRS{idProduct}=="60B0", ENV{ID_MM_DEVICE_IGNORE}="1"
+    ```
