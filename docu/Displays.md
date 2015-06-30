@@ -26,9 +26,11 @@ Display                          | Size  | Resolution | LED
  HDA500-GH                       |  5.0" |  800 x 480 |  40mA @ 23V
 **HAOYU**                        |       |            |
  HY5-LCD-HD                      |  5.0" |  800 x 480 |  40mA @ 19V
+ HY050CTP-HD***                  |  5.0" |  800 x 480 |  40mA @ 19V or 5V
  HY7-LCD                         |  7.0" |  800 x 480 | 140mA @ 10V
  HY070CTP-A                      |  7.0" |  800 x 480 | 140mA @ 10V
- HY070CTP-HD***                  |  7.0" | 1024 x 600 | 160mA @  9V
+ HY070CTP-HD***                  |  7.0" | 1024 x 600 | 160mA @  9V or 5V
+ HY101CTP***                     | 10.1" | 1024 x 600 | 5V
 **Innolux**                      |       |            |
  AT050TN33                       |  5.0" |  480 x 272 |  40mA @ 20V
 **Universal**                    |       |            |
