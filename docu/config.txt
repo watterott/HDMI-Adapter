@@ -25,7 +25,7 @@ hdmi_mode=87
 
 # uncomment for 800x480 display (HY070CTP-A)
 #hdmi_timings=800 0 16 10 40 480 0 21 1 22 0 0 0 60 0 27300000 6
-##can also be used: hdmi_timings=800 0 16 16 34 480 0 21 1 22 0 0 0 60 0 27300000 6
+#can also be used: hdmi_timings=800 0 16 16 34 480 0 21 1 22 0 0 0 60 0 27300000 6
 # for OpenELEC, needs about 2 minutes after booting to stabilize the image
 #hdmi_timings=800 0 16 6 44 480 0 21 1 22 0 0 0 60 0 27300000 6
 
