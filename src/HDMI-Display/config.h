@@ -2,12 +2,20 @@
 #define CONFIG_H
 
 // Display Types
-#define DISPLAY_480x272         1 // 480x272 (TFT043-3)
-#define DISPLAY_800x480         2 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
-#define DISPLAY_800x480_720x480 3 // 800x480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD) with 720x480 (480p) fallback
-#define DISPLAY_800x480HY       4 // 800x480 (HY070CTP-A capacitive touchpanel)
-#define DISPLAY_800x600         5 // 800x600
-#define DISPLAY_1024x600HY      6 // 1024x600 (HY070CTP-HD capacitive touchpanel)
+#define DISPLAY_480x272          1 //  480 x  272 (TFT043-3)
+#define DISPLAY_640x480          2 //  640 x  480
+#define DISPLAY_720x480          3 //  720 x  480
+#define DISPLAY_800x480          4 //  800 x  480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
+#define DISPLAY_800x480_720x480  5 //  800 x  480 with 720x480 (480p) fallback (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
+#define DISPLAY_800x480HY        6 //  800 x  480 (HY070CTP-A capacitive touchpanel)
+#define DISPLAY_800x600          7 //  800 x  600
+#define DISPLAY_1024x600         8 // 1024 x  600
+#define DISPLAY_1024x600HY       9 // 1024 x  600 (HY070CTP-HD capacitive touchpanel)
+#define DISPLAY_1024x768        10 // 1024 x  768
+#define DISPLAY_1280x720        11 // 1280 x  720
+#define DISPLAY_1280x768        12 // 1280 x  768
+#define DISPLAY_1280x800        13 // 1280 x  800
+#define DISPLAY_1280x1024       14 // 1280 x 1024
 
 // Touchpanel Types
 #define TOUCHPANEL_NONE         1 // No Touchpanel present
@@ -34,7 +42,7 @@
 #define LOOPTIME         16 // 16 = 60 Hz polling interval
 #define TOUCHMAX      4095L // maximal touch/mouse position
 
-#define VERSION_STRING  "Version 1.08"
+#define VERSION_STRING  "Version 1.09"
 #define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
 
 // check configurations
@@ -62,21 +70,39 @@
 #if DISPLAY_TYPE == DISPLAY_480x272
 #  define SCREEN_WIDTH   480
 #  define SCREEN_HEIGHT  272
-#elif DISPLAY_TYPE == DISPLAY_800x480
-#  define SCREEN_WIDTH   800
+#elif DISPLAY_TYPE == DISPLAY_640x480
+#  define SCREEN_WIDTH   640
 #  define SCREEN_HEIGHT  480
-#elif DISPLAY_TYPE == DISPLAY_800x480_720x480
-#  define SCREEN_WIDTH   800 // 720
+#elif DISPLAY_TYPE == DISPLAY_720x480
+#  define SCREEN_WIDTH   720
 #  define SCREEN_HEIGHT  480
-#elif DISPLAY_TYPE == DISPLAY_800x480HY
+#elif DISPLAY_TYPE == DISPLAY_800x480 || \
+      DISPLAY_TYPE == DISPLAY_800x480_720x480 || \
+      DISPLAY_TYPE == DISPLAY_800x480HY
 #  define SCREEN_WIDTH   800
 #  define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_800x600
 #  define SCREEN_WIDTH   800
 #  define SCREEN_HEIGHT  600
-#elif DISPLAY_TYPE == DISPLAY_1024x600HY
+#elif DISPLAY_TYPE == DISPLAY_1024x600 || \
+      DISPLAY_TYPE == DISPLAY_1024x600HY
 #  define SCREEN_WIDTH   1024
 #  define SCREEN_HEIGHT  600
+#elif DISPLAY_TYPE == DISPLAY_1024x768
+#  define SCREEN_WIDTH   1024
+#  define SCREEN_HEIGHT  768
+#elif DISPLAY_TYPE == DISPLAY_1280x720
+#  define SCREEN_WIDTH   1280
+#  define SCREEN_HEIGHT  720
+#elif DISPLAY_TYPE == DISPLAY_1280x768
+#  define SCREEN_WIDTH   1280
+#  define SCREEN_HEIGHT  768
+#elif DISPLAY_TYPE == DISPLAY_1280x800
+#  define SCREEN_WIDTH   1280
+#  define SCREEN_HEIGHT  800
+#elif DISPLAY_TYPE == DISPLAY_1280x1024
+#  define SCREEN_WIDTH   1280
+#  define SCREEN_HEIGHT  1024
 #else
 #  error "Please select a DISPLAY_TYPE"
 #endif

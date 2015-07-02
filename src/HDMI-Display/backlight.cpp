@@ -16,15 +16,19 @@ void Backlight::setup()
   analogWrite(BACKLIGHT, power);
 }
 
-void Backlight::setLight(uint8_t light)
+void Backlight::setLight(uint16_t light)
 {
+  if(light > 255)
+    light = 255;
   power = targetPower = light;
   lastTouchTime = millis();
   analogWrite(BACKLIGHT, power);
 }
 
-void Backlight::setLightSmooth(uint8_t light, uint8_t speed)
+void Backlight::setLightSmooth(uint16_t light, uint8_t speed)
 {
+  if(light > 255)
+    light = 255;
   targetPower = light;
   fadeSpeed = speed;
 }

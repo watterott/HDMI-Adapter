@@ -4,8 +4,7 @@
 class Backlight
 {
   private:
-    int16_t power;
-    uint8_t targetPower;
+    int16_t power, targetPower;
     uint8_t fadeSpeed;
 
     unsigned long lastTouchTime;
@@ -13,8 +12,8 @@ class Backlight
   public:
     Backlight(); 
     void setup();
-    void setLight(uint8_t light);
-    void setLightSmooth(uint8_t light, uint8_t speed = 1);
+    void setLight(uint16_t light);
+    void setLightSmooth(uint16_t light, uint8_t speed = 1);
     bool isOn();
     void on(); // backlight on
     void off(); // backlight off
