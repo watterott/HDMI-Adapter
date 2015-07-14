@@ -27,7 +27,6 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
 * Wait till *Done uploading.* is shown.
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1).
 
 
 ## Connecting
@@ -53,6 +52,10 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   * ```...```
 
 
+## Optional EDID EEPROM Programming
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1).
+
+
 ## Optional Resistive Touchpanel Calibration
 * Hold down the switch and plug in the USB connector (power on).
 * The LED starts blinking.
@@ -64,6 +67,9 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Known Issues
+* **Serial Interface:**
+    When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
+
 * **Windows:**
     Sometimes the USB device of the Caterina Bootloader is not recognized correctly.
     This is the case when *Done uploading.* is not shown after the upload process.
