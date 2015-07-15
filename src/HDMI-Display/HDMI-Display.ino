@@ -9,7 +9,7 @@
   
   USB-CDC Virtual COM-Port
     Settings:
-      9600 8N1
+      9600 8N1, Newline (NL)
     Commands:
       AT     -> Version information
       ATA    -> Backlight on

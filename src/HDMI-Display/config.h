@@ -1,13 +1,37 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+//***** Select your Display and Touchpanel here ******
+#define DISPLAY_TYPE            DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600HY
+#define TOUCHPANEL_TYPE         TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
+
+/*
+  Watterott electronic display configurations:
+  5" with res. touch: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7" with res. touch: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
+  7" with cap. touch: DISPLAY_800x480HY or DISPLAY_1024x600HY + TOUCHPANEL_FT5x06
+*/
+
+// General Settings
+//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
+#define ORIENTATION       0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
+#define SCREENSAVERTIME 180 // seconds timeout (0...65535, 0=always on)
+#define BRIGHTNESS      255 // backlight brightness (0..255)
+#define LOOPTIME         16 // 16 = 60 Hz polling interval
+#define TOUCHMAX      4095L // maximal touch/mouse position
+
+#define QUOTE(name)     #name
+#define STR(macro)      QUOTE(macro)
+#define VERSION_STRING  "1.10"
+#define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nTFT: " STR(SCREEN_WIDTH) "x" STR(SCREEN_HEIGHT)"\nTouch: " STR(TOUCHPANEL_TYPE) "\nhttps://github.com/watterott/HDMI-Display"
+
 // Display Types
 #define DISPLAY_480x272          1 //  480 x  272 (TFT043-3)
 #define DISPLAY_640x480          2 //  640 x  480
 #define DISPLAY_720x480          3 //  720 x  480
 #define DISPLAY_800x480          4 //  800 x  480 (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
 #define DISPLAY_800x480_720x480  5 //  800 x  480 with 720x480 (480p) fallback (TFT050-3, HY5-LCD-HD, TFT070-4, HY7-LCD)
-#define DISPLAY_800x480HY        6 //  800 x  480 (HY070CTP-A capacitive touchpanel)
+#define DISPLAY_800x480HY        6 //  800 x  480 (HY070CTP capacitive touchpanel)
 #define DISPLAY_800x600          7 //  800 x  600
 #define DISPLAY_1024x600         8 // 1024 x  600
 #define DISPLAY_1024x600HY       9 // 1024 x  600 (HY070CTP-HD capacitive touchpanel)
@@ -20,30 +44,7 @@
 // Touchpanel Types
 #define TOUCHPANEL_NONE         1 // No Touchpanel present
 #define TOUCHPANEL_RESISTIVE    2 // Resitive
-#define TOUCHPANEL_FT5x06       3 // Capacitive FT5x06 (HY070CTP-A, HY070CTP-HD)
-
-
-//***** Select your Display and Touchpanel here ******
-#define DISPLAY_TYPE            DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600HY
-#define TOUCHPANEL_TYPE         TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
-
-/*
-  Watterott electronic display configurations:
-  5": DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-  7": DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-  7" with capacitive touch: DISPLAY_800x480HY or DISPLAY_1024x600HY + TOUCHPANEL_FT5x06
-*/
-
-
-//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
-#define ORIENTATION       0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
-#define SCREENSAVERTIME 180 // seconds timeout (0...65535, 0=always on)
-#define BRIGHTNESS      255 // backlight brightness (0..255)
-#define LOOPTIME         16 // 16 = 60 Hz polling interval
-#define TOUCHMAX      4095L // maximal touch/mouse position
-
-#define VERSION_STRING  "Version 1.09"
-#define INFO_STRING     "Watterott electronic HDMI-Display\n" VERSION_STRING "\nmore on https://github.com/watterott/HDMI-Display"
+#define TOUCHPANEL_FT5x06       3 // Capacitive FT5x06 (HY070CTP)
 
 // check configurations
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
