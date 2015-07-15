@@ -38,7 +38,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1).
+* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)).
   * ```ATS6=1``` -> invert X
   * ```ATS6=2``` -> invert Y
   * ```ATS6=3``` -> invert X+Y
@@ -53,7 +53,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1).
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)).
 
 
 ## Optional Resistive Touchpanel Calibration
