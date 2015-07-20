@@ -39,6 +39,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Touchpanel Orientation
 * The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)).
+  * ```ATS6=0``` -> normal X+Y
   * ```ATS6=1``` -> invert X
   * ```ATS6=2``` -> invert Y
   * ```ATS6=3``` -> invert X+Y
@@ -48,7 +49,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   * ```ATS6=7``` -> swap X+Y, invert X+Y
   * ```ATS6=8``` -> use screen coordinates
   * ```ATS6=9``` -> invert X and use screen coordinates
-  * ```ATS6=10``` -> invert y and use screen coordinates
+  * ```ATS6=10``` -> invert Y and use screen coordinates
+  * ```ATS6=11``` -> invert X+Y and use screen coordinates
   * ```...```
 
 
