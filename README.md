@@ -9,11 +9,16 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 * [40-Pin FFC-Extenter](http://www.watterott.com/en/40-Pin-FFC-extenter)
 * [Bundle: HDMI Adapter + 5" 800x480 Display with Touchpanel](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch)
 * [Bundle: HDMI Adapter + 7" 800x480 Display with Touchpanel](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
-* Compatible TFT-Displays *(check jumper settings before connecting the screen)*:
-  * [5" 800x480 Display with resitive Touchpanel](http://www.watterott.com/en/5-800x480-TFT-Display)
-  * [7" 800x480 Display with resitive Touchpanel](http://www.watterott.com/en/7-800x480-TFT-Display)
-  * [7" 800x480 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
-  * [7" 1024x600 Display with capacitive Touchpanel](http://www.watterott.com/en/7-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel) *(needs hardware modification on backlight circuit)*
+* Compatible TFT-Displays *(check schematics/jumper settings before connecting the screen)*:
+  * [5" 800x480 Display with resitive TP - TFT050-3](http://www.watterott.com/en/5-800x480-TFT-Display)
+  * [7" 800x480 Display with resitive TP - TFT070-4](http://www.watterott.com/en/7-800x480-TFT-Display)
+  * [5" 800x480 Display with capacitive TP - HY050CTP-HD]() ***
+  * [7" 800x480 Display with capacitive TP - HY070CTP-A](http://www.watterott.com/en/7-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
+  * [7" 800x480 Display with capacitive TP - HY070CTP]() ***
+  * [7" 1024x600 Display with capacitive TP - HY070CTP-HD](http://www.watterott.com/en/7-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel) ***
+  * [10.1" 1024x600 Display with capacitive TP - HY101CTP]() ***
+
+*** TFT needs hardware modification on backlight circuit for HDMI-Adapter v1.0
 
 
 ## Features
