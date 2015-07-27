@@ -39,15 +39,15 @@ Display                          | Size  | Resolution | LED
 **Sunbond**                      |       |            |
  LB04302                         |  4.3" |  480 x 272 |  40mA @ 21V
 
-*** needs hardware modification, see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)
+*** TFT needs hardware modification for HDMI-Adapter v1.0, see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb)
 
 
 ## Display Connector Pinout
 
 Pin    | Signal
 ------ | ------
-     1 | LED- (negative)
-     2 | LED+ (positive)
+     1 | LED- (negative) or 5V
+     2 | LED+ (positive) or 5V
      3 | Gnd
      4 | 3V3
   5-12 | R0-R7
@@ -59,9 +59,9 @@ Pin    | Signal
     32 | HSync
     33 | VSync
     34 | DE (Data Enable)
-    35 | NC (Not Connected)
+    35 | NC (Not Connected) or PWM (for LED)
     36 | Gnd
-    37 | XR/X+ (TP_SDA closed -> SDA)
-    38 | YD/Y- (TP_SCL closed -> SCL)
+    37 | XR/X+ or SDA when TP_SDA closed
+    38 | YD/Y- or SCL when TP_SCL closed
     39 | XL/X-
-    40 | YU/Y+ (TP_INT closed -> INT)
+    40 | YU/Y+ or INT when TP_INT closed

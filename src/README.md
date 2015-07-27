@@ -73,13 +73,14 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
     When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
 
 * **Windows:**
-    Sometimes the USB device of the Caterina Bootloader is not recognized correctly.
+    Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.
     This is the case when *Done uploading.* is not shown after the upload process.
-    Check if there is a new USB device (with VID 0x1D50 + PID 0x60B0) after the upload is started in the Arduino IDE and if the driver for the device is loaded (see Device Manager).
+    Check the driver state in the Device Manager, when the Bootloader is active (after the Upload is started).
+    On Windows 8 or higher the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8) has to be disabled for the driver installation.
     The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).
 
 * **Linux:**
-    The Modem Manager detects the Caterina Bootloader as a modem and therefore a blacklist rule is needed.
+    The Modem Manager detects the Serial Ports (e.g. Caterina Bootloader) as a modem and therefore a blacklist rule is needed.
     Run one of the commands - depending on your system:
     
     ```sudo nano /etc/udev/rules.d/77-mm-usb-device-blacklist.rules```
