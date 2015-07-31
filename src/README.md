@@ -75,7 +75,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * **Windows:**
     Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.
     This is the case when *Done uploading.* is not shown after the upload process.
-    Check the driver state in the Device Manager, when the Bootloader is active (after the Upload is started).
+    Check the driver state in the Device Manager, when the Bootloader is active (after the *Upload* is started).
     On Windows 8 or higher the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8) has to be disabled for the driver installation.
     The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).
 
@@ -91,4 +91,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
     ```
     ATTRS{idVendor}=="6666", ENV{ID_MM_DEVICE_IGNORE}="1"
     ATTRS{idVendor}=="1D50", ATTRS{idProduct}=="60B0", ENV{ID_MM_DEVICE_IGNORE}="1"
+    ```
+    Or you can also remove the Modem Manager from your system with
+    ```
+    sudo apt-get uninstall modemmanager
     ```

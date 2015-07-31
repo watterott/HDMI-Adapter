@@ -25,6 +25,24 @@ Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Displa
 and the jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb).
 
 
+## How to emulate a right mouse button under X-Window-System?
+Open *evdev.conf*
+```
+nano /etc/X11/xorg.conf.d/evdev.conf
+```
+and add the following section:
+```
+Section "InputClass"
+    Identifier "Touchscreen"
+    MatchProduct "ATmega32u4 USB IO Board"
+    Driver "evdev"
+    Option "EmulateThirdButton" "1"
+    Option "EmulateThirdButtonTimeout" "1000"
+    Option "EmulateThirdButtonMoveThreshold" "30"
+EndSection
+```
+
+
 ## Where can I find the Firmware for the ATmega32u4 Microcontroller und how to program it?
 A small guide can be found [here](https://github.com/watterott/HDMI-Display/tree/master/src).
 *(Note: The ATmega32u4 Microcontroller is pre-programmed with a test software without touchpanel function.)*
