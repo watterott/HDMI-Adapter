@@ -82,6 +82,10 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
     }
   }
 
+  // light sensor on analog input A4
+  //p = analogRead(A4); //0 is 0V and 1023 is 5V
+  //targetPower = map(p, 0, 1023, 0, 255); //map values to power range (0...255)
+
   // fade power
   if(p != targetPower)
   {

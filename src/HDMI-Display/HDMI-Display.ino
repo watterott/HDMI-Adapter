@@ -26,7 +26,7 @@
       3 -> Y1 touch correction
       4 -> Time for Screensaver in seconds (0...65535, 0=always on)
       5 -> Backlight (0...255)
-      6 -> Axes (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
+      6 -> Orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
   
   Resistive Touchpanel Calibration
     1. Hold down the switch and plug in the USB connector (power on).
@@ -166,7 +166,7 @@ void ATCommandsLoop()
           sendNack();
         break;
 
-      case 'S':  // Read/Write setting registers
+      case 'S':  // read/write setting registers
         Serial.setTimeout(5000); // wait 5s for data (timeout)
         reg = Serial.parseInt();
         if(reg >= 0 && reg < sizeof(settings.data)/sizeof(uint16_t))
