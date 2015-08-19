@@ -19,17 +19,17 @@ hdmi_mode=87
 # uncomment for 480x272 display (TFT043-3)
 #hdmi_timings=480 0 1 41 2 272 0 2 10 2 0 0 0 60 0 9009000 3
 
-# uncomment for 800x480 display (TFT050-3, TFT070-4)
+# uncomment for 800x480 display (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
 #hdmi_cvt=800 480 60 6 0 0 0
 #can also be used: hdmi_timings=800 0 40 48 88 480 0 13 3 32 0 0 0 60 0 31000000 6
 
-# uncomment for 800x480 display (HY070CTP-A)
+# uncomment for 800x480 display (HY070CTP, HY070CTP-A)
 #hdmi_timings=800 0 16 10 40 480 0 21 1 22 0 0 0 60 0 27300000 6
 #can also be used: hdmi_timings=800 0 16 16 34 480 0 21 1 22 0 0 0 60 0 27300000 6
 # for OSMC/OpenELEC, needs about 2 minutes after booting to stabilize the image
 #hdmi_timings=800 0 16 6 44 480 0 21 1 22 0 0 0 60 0 27300000 6
 
-# uncomment for 1024x600 display (HY070CTP-HD)
+# uncomment for 1024x600 display (HY070CTP-HD, HY101CTP)
 #hdmi_cvt=1024 600 60 3 0 0 0
 
 
