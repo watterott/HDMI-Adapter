@@ -5,7 +5,8 @@
 #define SW_1      (1<<5) //switch PD5
 #define LED_1     (5)  //first LED PC6
 #define LED_2     (13) //second LED PC7
-#define BACKLIGHT (9)  //backlight control PB5
+#define BL_1      (9)  //PWM backlight boost converter PB5
+#define BL_2      (10) //PWM display pin 35 PB6
 #define AXM       (A1) //touch X- PF6
 #define AXP       (A3) //touch X+ PF4
 #define AYM       (A2) //touch Y- PF5
@@ -31,8 +32,10 @@ void setup()
   pinMode(LED_2, OUTPUT);
   digitalWrite(LED_2, LOW); //off
   //set backlight
-  pinMode(BACKLIGHT, OUTPUT);
-  digitalWrite(BACKLIGHT, HIGH); //on
+  pinMode(BL_1, OUTPUT);
+  digitalWrite(BL_1, HIGH); //on
+  pinMode(BL_2, OUTPUT);
+  digitalWrite(BL_2, HIGH); //on
 }
 
 void loop()
@@ -42,12 +45,14 @@ void loop()
     backlight_power = 1-backlight_power; //invert value
     if(backlight_power)
     {
-      digitalWrite(BACKLIGHT, HIGH); //on
+      digitalWrite(BL_1, HIGH); //on
+      digitalWrite(BL_2, HIGH); //on
       digitalWrite(LED_1, HIGH); //on
     }
     else
     {
-      digitalWrite(BACKLIGHT, LOW); //off
+      digitalWrite(BL_1, LOW); //off
+      digitalWrite(BL_2, LOW); //off
       digitalWrite(LED_1, LOW); //off
     }
 

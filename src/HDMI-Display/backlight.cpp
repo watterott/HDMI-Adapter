@@ -12,8 +12,15 @@ void Backlight::setup()
   fadeSpeed = 1;
   lastTouchTime = millis();
 
-  pinMode(BACKLIGHT, OUTPUT);
+  pinMode(BL_1, OUTPUT);
+  digitalWrite(BL_1, LOW);
+  pinMode(BL_2, OUTPUT);
+  digitalWrite(BL_2, LOW);
+#ifdef BACKLIGHT_INV
+  analogWrite(BACKLIGHT, 255-power);
+#else
   analogWrite(BACKLIGHT, power);
+#endif
 }
 
 void Backlight::setLight(uint16_t light)
@@ -22,7 +29,12 @@ void Backlight::setLight(uint16_t light)
     light = 255;
   power = targetPower = light;
   lastTouchTime = millis();
+
+#ifdef BACKLIGHT_INV
+  analogWrite(BACKLIGHT, 255-power);
+#else
   analogWrite(BACKLIGHT, power);
+#endif
 }
 
 void Backlight::setLightSmooth(uint16_t light, uint8_t speed)
@@ -106,7 +118,11 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   if(p != power)
   {
     power = p;
+#ifdef BACKLIGHT_INV
+    analogWrite(BACKLIGHT, 255-p);
+#else
     analogWrite(BACKLIGHT, p);
+#endif
   }
 
   if(!p)
