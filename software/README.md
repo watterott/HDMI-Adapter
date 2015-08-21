@@ -3,7 +3,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
-* [Board Support Package (BSP)](https://github.com/watterott/wattuino/raw/master/src/Arduino/watterott-1.0.0.zip)
+* [Board Support Package (BSP)](https://github.com/watterott/wattuino/raw/master/software/Arduino/watterott-1.0.0.zip)
 * [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
@@ -11,7 +11,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
 * Add the following URL to the Arduino Boards Manager: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
   and install the *Watterott Boards* via the Boards Manager.
-  As an alternative you can also download the [BSP](https://github.com/watterott/wattuino/raw/master/src/Arduino/watterott-1.0.0.zip) and copy the archive content to your Arduino program directory under: ```<ARDUINO>/hardware/watterott/```.
+  As an alternative you can also download the [BSP](https://github.com/watterott/wattuino/raw/master/software/Arduino/watterott-1.0.0.zip) and copy the archive content to your Arduino program directory under: ```<ARDUINO>/hardware/watterott/```.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
   [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/software/HDMI-Display/patches/readme.png).
