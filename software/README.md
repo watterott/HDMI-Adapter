@@ -3,18 +3,18 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
-* [Board Support Package](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip)
+* [Board Support Package](https://github.com/watterott/wattuino/raw/master/software/Arduino/Arduino.zip)
 * [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Add the following URL to the Arduino Boards Manager: ```https://github.com/watterott/wattuino/raw/master/src/Arduino/package_watterott_index.json```
+* Add the following URL to the Arduino Boards Manager: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
   and install the *Watterott Boards* via the Boards Manager.
-  As an alternative you can also download the [Board Support Package](https://github.com/watterott/wattuino/raw/master/src/Arduino/Arduino.zip) and copy the directory ```hardware``` to your Arduino program directory ```<ARDUINO>/```.
+  As an alternative you can also download the [Board Support Package](https://github.com/watterott/wattuino/raw/master/software/Arduino/Arduino.zip) and copy the directory ```hardware``` to your Arduino program directory ```<ARDUINO>/```.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
-  [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/src/HDMI-Display/patches/readme.png).
+  [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/software/HDMI-Display/patches/readme.png).
 * Connect the USB Data port of the HDMI-Adapter (without display) to your computer.
 * On a Windows operating system a driver installation will be started. You can find the drivers in your Arduino program directory ```<ARDUINO>/hardware/watterott/avr/drivers/caterina/```.
 
@@ -30,7 +30,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Connecting
-* Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
+* Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
 * If there is no output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
@@ -76,8 +76,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
     Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.
     This is the case when *Done uploading.* is not shown after the upload process.
     Check the driver state in the Device Manager, when the Bootloader is active (after the *Upload* is started).
-    On Windows 8 or higher the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8) has to be disabled for the driver installation.
-    The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/src/Caterina/Caterina.inf).
+    If you cannot install the driver on Windows 8 or higher then deactivate the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8).
+    The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
 * **Linux:**
     The Modem Manager detects the Serial Ports (e.g. Caterina Bootloader) as a modem and therefore a blacklist rule is needed.

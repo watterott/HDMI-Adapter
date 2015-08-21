@@ -35,7 +35,7 @@ void setup()
   pinMode(BL_1, OUTPUT);
   digitalWrite(BL_1, HIGH); //on
   pinMode(BL_2, OUTPUT);
-  digitalWrite(BL_2, HIGH); //on
+  digitalWrite(BL_2, LOW); //off
 }
 
 void loop()
@@ -46,14 +46,12 @@ void loop()
     if(backlight_power)
     {
       digitalWrite(BL_1, HIGH); //on
-      digitalWrite(BL_2, HIGH); //on
-      digitalWrite(LED_1, HIGH); //on
+      digitalWrite(LED_2, LOW); //off
     }
     else
     {
       digitalWrite(BL_1, LOW); //off
-      digitalWrite(BL_2, LOW); //off
-      digitalWrite(LED_1, LOW); //off
+      digitalWrite(LED_2, HIGH); //on
     }
 
     delay(50); //wait 50ms

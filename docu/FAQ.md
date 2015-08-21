@@ -22,7 +22,7 @@ An inversion/rotation of the coordinates can be done via the serial interface (c
 All displays with the standard 40 pin connector (parallel RGB interface) are compatible.
 **If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.**
 Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) with further infos 
-and the jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb).
+and the jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 
 
 ## How to emulate a right mouse button under X-Window-System?
@@ -44,12 +44,12 @@ EndSection
 
 
 ## Where can I find the Firmware for the ATmega32u4 Microcontroller und how to program it?
-A small guide can be found [here](https://github.com/watterott/HDMI-Display/tree/master/src).
+A small guide can be found [here](https://github.com/watterott/HDMI-Display/tree/master/software).
 *(Note: The ATmega32u4 Microcontroller is pre-programmed with a test software without touchpanel function.)*
 
 
 ## How to flash/update the EDID EEPROM?
 The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller, when the SDA+SCL jumpers are closed.
-The jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/pcb).
+The jumper settings can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 The programming can be done via the firmware (serial interface command *ATE*) or this [example](https://github.com/watterott/HDMI-Display/tree/master/src/edid-prog).
 To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.

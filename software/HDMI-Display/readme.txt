@@ -7,10 +7,11 @@ Visit https://github.com/watterott/HDMI-Display for updates.
 
 Installation - Compiling - Uploading
 ------------------------------------
-  See https://github.com/watterott/HDMI-Display/blob/master/src/README.md
+  See README.md
+  https://github.com/watterott/HDMI-Display/blob/master/software/README.md
 
 
 License
 -------
   See license.txt
-  https://github.com/watterott/HDMI-Display/blob/master/src/HDMI-Display/license.txt
+  https://github.com/watterott/HDMI-Display/blob/master/software/HDMI-Display/license.txt
