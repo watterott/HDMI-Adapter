@@ -3,7 +3,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
-* [Board Support Package](https://github.com/watterott/wattuino/raw/master/software/Arduino/Arduino.zip)
+* [Board Support Package (BSP)](https://github.com/watterott/wattuino/raw/master/src/Arduino/watterott-1.0.0.zip)
 * [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
@@ -11,12 +11,12 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
 * Add the following URL to the Arduino Boards Manager: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
   and install the *Watterott Boards* via the Boards Manager.
-  As an alternative you can also download the [Board Support Package](https://github.com/watterott/wattuino/raw/master/software/Arduino/Arduino.zip) and copy the directory ```hardware``` to your Arduino program directory ```<ARDUINO>/```.
+  As an alternative you can also download the [BSP](https://github.com/watterott/wattuino/raw/master/src/Arduino/watterott-1.0.0.zip) and copy the archive content to your Arduino program directory under: ```<ARDUINO>/hardware/watterott/```.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
   [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/software/HDMI-Display/patches/readme.png).
 * Connect the USB Data port of the HDMI-Adapter (without display) to your computer.
-* On a Windows operating system a driver installation will be started. You can find the drivers in your Arduino program directory ```<ARDUINO>/hardware/watterott/avr/drivers/caterina/```.
+* On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
 
 ## Build and Upload
