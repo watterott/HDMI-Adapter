@@ -200,12 +200,12 @@ void ATCommandsLoop()
 
 void loop()
 {
-  static unsigned long lastT = 0;
+  static unsigned long last_t = 0;
   unsigned long t = millis();
 
-  if(t >= lastT)
+  if((t-last_t) > LOOPTIME)
   {
-    lastT = t + LOOPTIME;
+    last_t = t;
 
     if(isButtonPressed())
     {
