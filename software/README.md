@@ -15,7 +15,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
   [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/software/HDMI-Display/patches/readme.png).
-* Connect the USB Data port of the HDMI-Adapter (without display) to your computer.
+* Connect the USB Data port of the HDMI-Adapter (**without display**) to your computer.
 * On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
 
@@ -31,6 +31,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Connecting
 * Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
+  Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
 * If there is no output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).

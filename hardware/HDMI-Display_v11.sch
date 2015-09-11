@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.3.0">
+<eagle version="7.4.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -13464,7 +13464,7 @@ TFT043-3 - 4.3" 480x272 BL:20mA</text>
 <wire x1="204.47" y1="76.2" x2="201.93" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="204.47" y1="76.2" x2="227.33" y2="76.2" width="0.1524" layer="91"/>
 <junction x="204.47" y="76.2"/>
-<label x="227.33" y="76.2" size="1.778" layer="95" xref="yes"/>
+<label x="227.33" y="76.2" size="1.27" layer="95" xref="yes"/>
 <pinref part="C9" gate="C" pin="2"/>
 <wire x1="194.31" y1="57.15" x2="194.31" y2="49.53" width="0.1524" layer="91"/>
 <junction x="194.31" y="57.15"/>
@@ -13852,7 +13852,7 @@ TFT043-3 - 4.3" 480x272 BL:20mA</text>
 <segment>
 <pinref part="IC3" gate="A" pin="EN"/>
 <wire x1="158.75" y1="52.07" x2="163.83" y2="52.07" width="0.1524" layer="91"/>
-<label x="158.75" y="52.07" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="158.75" y="52.07" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="RE1" gate="R" pin="2"/>
 <wire x1="163.83" y1="52.07" x2="166.37" y2="52.07" width="0.1524" layer="91"/>
 <junction x="163.83" y="52.07"/>
