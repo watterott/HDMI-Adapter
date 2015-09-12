@@ -1,12 +1,5 @@
 # HDMI-to-RGB-Adapter Display Compatibility List
 
-**Note:**
-When using a *resistive touchpanel* on pin 37-40 the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *open* and
-for a *capacitive touchpanel* (e.g. FT5206 controller) the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *closed* and ```VCCIO``` set to 3V3.
-Also the respective firmware has to be flashed to the ATmega32u4 microcontroller to insure that the correct logic voltage (3V3) is set to the pins 37-40.
-Further infos can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware).
-
-
 Display                          | Size  | Resolution | LED
 -------------------------------- | ----- | ---------- | -----------
 **CPT / Chunghwa Picture Tubes** |       |            |
@@ -26,11 +19,11 @@ Display                          | Size  | Resolution | LED
  HDA500-GH                       |  5.0" |  800 x 480 |  40mA @ 23V
 **HAOYU**                        |       |            |
  HY5-LCD-HD                      |  5.0" |  800 x 480 |  40mA @ 19V
- HY050CTP-HD***                  |  5.0" |  800 x 480 |  40mA @ 19V or 5V
+ HY050CTP-HD***                  |  5.0" |  800 x 480 | 5V (40mA @ 19V)
  HY7-LCD                         |  7.0" |  800 x 480 | 140mA @ 10V
  HY070CTP-A                      |  7.0" |  800 x 480 | 140mA @ 10V
- HY070CTP***                     |  7.0" |  800 x 480 | 140mA @ 10V or 5V
- HY070CTP-HD***                  |  7.0" | 1024 x 600 | 160mA @  9V or 5V
+ HY070CTP***                     |  7.0" |  800 x 480 | 5V (140mA @ 10V)
+ HY070CTP-HD***                  |  7.0" | 1024 x 600 | 5V (160mA @  9V)
  HY101CTP***                     | 10.1" | 1024 x 600 | 5V
 **Innolux**                      |       |            |
  AT050TN33                       |  5.0" |  480 x 272 |  40mA @ 20V
@@ -39,7 +32,13 @@ Display                          | Size  | Resolution | LED
 **Sunbond**                      |       |            |
  LB04302                         |  4.3" |  480 x 272 |  40mA @ 21V
 
-*** HDMI-Adapter v1.0: hardware modifications on TFT needed. HDMI-Adapter v1.1 set ```LED+``` and ```LED-``` jumpers to 5V. Further infos: see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware)
+*** On-board Backlight Boost Regulator. HDMI-Adapter v1.0: hardware modifications on TFT needed. HDMI-Adapter v1.1: set ```LED+``` and ```LED-``` jumpers to 5V.
+
+**Note:**
+When using a *resistive touchpanel* on pin 37-40 the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *open* and
+for a *capacitive touchpanel* (CTP, e.g. FT5206 controller) the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *closed* and ```VCCIO``` set to 3V3.
+Also the respective firmware has to be flashed to the ATmega32u4 microcontroller to insure that the correct logic voltage (3V3) is set to the pins 37-40.
+Further infos can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 
 
 ## Display Connector Pinout

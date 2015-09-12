@@ -1,7 +1,7 @@
 # HDMI-Display / HDMI to RGB Adapter
 Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega32u4 (with Arduino Leonardo compatible Bootloader).
 
-[![HDMI-Display](https://github.com/watterott/HDMI-Display/raw/master/hardware/HDMI-Display_v10.jpg)](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
+[![HDMI-Display](https://github.com/watterott/HDMI-Display/raw/master/hardware/HDMI-Display_v11.jpg)](http://www.watterott.com/en/HDMI-RGB-adapter-with-ATmega32U4-touch-controller)
 
 
 ## Shop
