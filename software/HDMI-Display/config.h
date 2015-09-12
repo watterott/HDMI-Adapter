@@ -1,28 +1,46 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-//***** Select your Display and Touchpanel here ******
-#define DISPLAY_TYPE            DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600
-#define TOUCHPANEL_TYPE         TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
-
 /*
-  Watterott electronic display configurations:
-   5" with res. touch: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-   7" with res. touch: DISPLAY_800x480 + TOUCHPANEL_RESISTIVE
-   5" with cap. touch: DISPLAY_800x480 + TOUCHPANEL_FT5x06
-   7" with cap. touch: DISPLAY_800x480HY or DISPLAY_1024x600 + TOUCHPANEL_FT5x06
-  10" with cap. touch: DISPLAY_1024x600 + TOUCHPANEL_FT5x06
+ Watterott electronic display configurations:
+
+  5" or 7" 800x480 with res. touch
+    #define DISPLAY_TYPE    DISPLAY_800x480
+    #define TOUCHPANEL_TYPE TOUCHPANEL_RESISTIVE
+    #define BACKLIGHT       BL_1
+    #define BACKLIGHT_INV   0
+
+  5" 800x480 with cap. touch (CPT)
+    #define DISPLAY_TYPE    DISPLAY_800x480
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define BACKLIGHT       BL_2
+    #define BACKLIGHT_INV   1
+
+  7" 800x480 with cap. touch (CPT)
+    #define DISPLAY_TYPE    DISPLAY_800x480HY
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define BACKLIGHT       BL_2
+    #define BACKLIGHT_INV   1
+
+  7" or 10" 1024x600 with cap. touch (CPT)
+    #define DISPLAY_TYPE    DISPLAY_1024x600
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define BACKLIGHT       BL_2
+    #define BACKLIGHT_INV   1
 */
 
-// General Settings
-//#define DEBUG             1 // set debugg output level (0=nothing, 1=minimal...)
-#define ORIENTATION       0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
-#define SCREENSAVERTIME 180 // seconds timeout (0...65535, 0=always on)
-#define BACKLIGHT      BL_1 // backlight pin (BL_1 or BL_2), BL_2 for HYxxxCTP
-#define BACKLIGHT_INV     0 // backlight invert pwm (0 or 1), 1 for HYxxxCTP
-#define BRIGHTNESS      255 // backlight brightness (0..255)
-#define LOOPTIME         16 // 16 = 60 Hz polling interval
-#define TOUCHMAX      4095L // maximal touch/mouse position
+// --- Settings ---
+#define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600
+#define TOUCHPANEL_TYPE  TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
+
+#define ORIENTATION         0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
+#define BACKLIGHT        BL_1 // backlight pin (BL_1 or BL_2), BL_2 for HYxxxCTP
+#define BACKLIGHT_INV       0 // backlight invert pwm (0 or 1), 1 for HYxxxCTP
+#define BRIGHTNESS        255 // backlight brightness (0..255)
+#define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
+#define LOOPTIME           16 // 16 = 60 Hz polling interval
+#define TOUCHMAX        4095L // maximal touch/mouse position
+//#define DEBUG               1 // set debugg output level (0=nothing, 1=minimal...)
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
@@ -45,11 +63,11 @@
 #define DISPLAY_1280x1024       13 // 1280 x 1024
 
 // Touchpanel Types
-#define TOUCHPANEL_NONE         1 // No Touchpanel present
-#define TOUCHPANEL_RESISTIVE    2 // Resitive
-#define TOUCHPANEL_FT5x06       3 // Capacitive FT5x06 (HY070CTP)
+#define TOUCHPANEL_NONE          1 // No Touchpanel present
+#define TOUCHPANEL_RESISTIVE     2 // Resitive
+#define TOUCHPANEL_FT5x06        3 // Capacitive FT5x06 (HY070CTP)
 
-// check configurations
+// Check Configurations
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
 #  undef SCREENSAVERTIME
 #  define SCREENSAVERTIME 0
@@ -119,8 +137,8 @@
 #define LED_2          13 // second LED PC7
 #define BL_1            9 // PWM backlight boost converter PB5
 #define BL_2           10 // PWM display pin 35 PB6
-#define SW_1       (1<<5) // switch PD5
 #define INT             4 // touch interrupt PD4
+#define SW_1       (1<<5) // switch PD5
 #define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
 #define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
 
@@ -131,7 +149,7 @@
 #define AYP            A0 // touch Y+ PF7
 
 // External EDID EEPROM
-#define EEPROMSIZE 256  // size in bytes
-#define EEPROMADDR 0x50 // I2C address
+#define EEPROMSIZE    256 // size in bytes
+#define EEPROMADDR   0x50 // I2C address
 
 #endif //CONFIG_H
