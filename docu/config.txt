@@ -4,6 +4,9 @@
 # hdmi_timing=<h_active_pixels> <h_sync_polarity> <h_front_porch> <h_sync_pulse> <h_back_porch> <v_active_lines> <v_sync_polarity> <v_front_porch> <v_sync_pulse> <v_back_porch> <v_sync_offset_a> <v_sync_offset_b> <pixel_rep> <framerate> <interlaced> <pixel_freq> <aspect>
 # aspect ratio: 1=4:3, 2=14:9, 3=16:9, 4=5:4, 5=16:10, 6=15:9, 7=21:9, 8=64:27
 
+# set current over USB to 1.2A (Pi1 A+/B+ and Pi2)
+max_usb_current=1
+
 # overscan to adjust image position
 overscan_left=0
 overscan_right=0
@@ -26,7 +29,7 @@ hdmi_mode=87
 # uncomment for 800x480 display (HY070CTP, HY070CTP-A)
 #hdmi_timings=800 0 16 10 40 480 0 21 1 22 0 0 0 60 0 27300000 6
 #can also be used: hdmi_timings=800 0 16 16 34 480 0 21 1 22 0 0 0 60 0 27300000 6
-# for OSMC/OpenELEC, needs about 2 minutes after booting to stabilize the image
+# for Kodi/XBMC, needs about 2 minutes after booting to stabilize the image
 #hdmi_timings=800 0 16 6 44 480 0 21 1 22 0 0 0 60 0 27300000 6
 
 # uncomment for 1024x600 display (HY070CTP-HD, HY101CTP)
@@ -48,6 +51,3 @@ hdmi_mode=87
 
 # set HDMI signal strength 0...7 (default is 0)
 #config_hdmi_boost=4
-
-# set current over USB to 1.2A (Pi1 A+/B+ and Pi2)
-#max_usb_current=1

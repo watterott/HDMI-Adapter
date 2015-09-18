@@ -39,7 +39,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)).
+* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)) and the settings are working directly.
   * ```ATS6=0``` -> normal X+Y
   * ```ATS6=1``` -> invert X
   * ```ATS6=2``` -> invert Y

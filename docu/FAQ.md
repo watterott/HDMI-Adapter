@@ -44,6 +44,37 @@ EndSection
 ```
 
 
+## The touchpanel/mouse is not working under Kodi/XBMC?
+Kodi needs access to the input devices and this can be done by creating the following rule.
+The mouse device also has to use screen coordinates: [serial command *ATS6=8*](https://github.com/watterott/HDMI-Display/tree/master/software#touchpanel-orientation).
+Open/create *99-input.rules*
+```
+nano /etc/udev/rules.d/99-input.rules:
+```
+and add the following rules:
+```
+SUBSYSTEM=="input", GROUP="input", MODE="0660"
+KERNEL=="tty[0-9]*", GROUP="tty", MODE="0660"
+```
+
+
+## How to switch off and on the HDMI output on the Raspberry Pi?
+When using displays with onboard backlight boost regulators the backlight can be switched off when the HDMI output is deactivated.
+* HDMI off
+
+      ```
+      tvservice -o
+      ```
+
+* HDMI on
+
+    ```
+    tvservice -p
+    fbset -depth 8
+    fbset -depth 16
+    ```
+
+
 ## Where can I find the Firmware for the ATmega32u4 Microcontroller und how to program it?
 A small guide can be found [here](https://github.com/watterott/HDMI-Display/tree/master/software).
 *(Note: The ATmega32u4 Microcontroller is pre-programmed with a test software without touchpanel function.)*
