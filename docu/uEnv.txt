@@ -1,15 +1,19 @@
 # BeagleBone Settings - /boot/uEnv.txt
 # http://elinux.org/Beagleboard:BeagleBoneBlack_HDMI
 # https://eewiki.net/display/linuxonarm/BeagleBone+Black
+# https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/tree/Documentation/fb/modedb.txt
+# Paramters after resolution (e.g. 800x480):
+#   M -> VESA coordinated video timings
+#   R -> reduced blanking for digital displays
 
 # uncomment for 480x272 display
-#kms_force_mode=video=HDMI-A-1:480x272M@160
+#kms_force_mode=video=HDMI-A-1:480x272MR@160
 
 # uncomment for 800x480 display
-#kms_force_mode=video=HDMI-A-1:800x480M@60
+#kms_force_mode=video=HDMI-A-1:800x480MR@60
 
 # uncomment for 800x600 display
-#kms_force_mode=video=HDMI-A-1:800x600M@60
+#kms_force_mode=video=HDMI-A-1:800x600MR@60
 
 # uncomment for 1024x600 display
-#kms_force_mode=video=HDMI-A-1:1024x600M@60
+#kms_force_mode=video=HDMI-A-1:1024x600MR@60

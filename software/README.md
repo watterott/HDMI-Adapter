@@ -27,6 +27,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
 * Wait till *Done uploading.* is shown.
+* If on error occurs have a look in the [Known Issues](https://github.com/watterott/HDMI-Display/tree/master/software#known-issues).
 
 
 ## Connecting
@@ -34,12 +35,20 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
-* If there is no output on the display have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+* If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
 * If the red LED is blinking then no touchpanel was found. Check your cable connections in this case.
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)) and the settings are working directly.
+* The touchpanel orientation (register 6) can be set via serial commands (9600 baud 8N1, Arduino Serial Monitor) and the settings are working directly.
+  If the command is executed successfully ```OK``` will be returned.
+  Under Linux the commands can be send like this:
+
+  ```
+  stty -F /dev/ttyACM0 9600 cs8
+  echo ATS6=3 >> /dev/ttyACM0
+  ```
+
   * ```ATS6=0``` -> normal X+Y
   * ```ATS6=1``` -> invert X
   * ```ATS6=2``` -> invert Y
@@ -52,11 +61,19 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   * ```ATS6=9``` -> invert X and use screen coordinates
   * ```ATS6=10``` -> invert Y and use screen coordinates
   * ```ATS6=11``` -> invert X+Y and use screen coordinates
+  * ```ATS6=12``` -> swap X+Y and use screen coordinates
   * ```...```
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and type ```ATE``` in the Arduino Serial Monitor (9600 baud 8N1, Newline (NL)).
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and send the serial command ```ATE``` (9600 baud 8N1, Arduino Serial Monitor).
+  If the command is executed successfully ```OK``` will be returned.
+  Under Linux the command can be send like this:
+
+  ```
+  stty -F /dev/ttyACM0 9600 cs8
+  echo ATE >> /dev/ttyACM0
+  ```
 
 
 ## Optional Resistive Touchpanel Calibration

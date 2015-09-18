@@ -3,9 +3,11 @@
 
 ## How much power does the HDMI-Display need?
 Depending on the display and backlight current between 400 to 1000mA.
+For the Raspberry Pi we recommend a 5V 2A power supply.
+If you have problems like a flickering screen, then check your USB cables. Some cables have very thin wires and so there is a voltage drop >0.5V on the cable.
 
 
-## With which boards/computers is the HDMI-Display compatible?
+## What boards/computers are compatible with the HDMI-Display?
 In general all boards/computers with a HDMI output can drive the display and the respective settings are loaded from the EDID EEPROM automatically.
 If there are any problems, then the settings can be made manually. For example the Raspberry Pi ignores no standard display timings.
 Infos about setting the display timings can be found here:
@@ -19,7 +21,7 @@ The touchpanel acts as USB HID mouse with absolute coordinates. So you do not ne
 An inversion/rotation of the coordinates can be done via the serial interface (command *ATS6*).
 
 
-## Which displays are compatible with HDMI to RGB Adapter board?
+## What displays are compatible with HDMI to RGB Adapter board?
 All displays with the standard 40 pin connector (parallel RGB interface) are compatible.
 **If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.**
 Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) with further infos 
@@ -44,7 +46,7 @@ EndSection
 ```
 
 
-## The touchpanel/mouse is not working under Kodi/XBMC?
+## Why the touchpanel/mouse is not working under Kodi/XBMC?
 Kodi needs access to the input devices and this can be done by creating the following rule.
 The mouse device also has to use screen coordinates: [serial command *ATS6=8*](https://github.com/watterott/HDMI-Display/tree/master/software#touchpanel-orientation).
 Open/create *99-input.rules*
