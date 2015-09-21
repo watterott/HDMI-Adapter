@@ -5,6 +5,7 @@
 # Paramters after resolution (e.g. 800x480):
 #   M -> VESA coordinated video timings
 #   R -> reduced blanking for digital displays
+# Use kms_force_mode or optargs, depending on your system.
 
 # uncomment for 480x272 display
 #kms_force_mode=video=HDMI-A-1:480x272MR@160

@@ -58,10 +58,12 @@ and add the following rules:
 SUBSYSTEM=="input", GROUP="input", MODE="0660"
 KERNEL=="tty[0-9]*", GROUP="tty", MODE="0660"
 ```
+If there are problems with the display output, then add the line ```hdmi_drive=1``` to ```/boot/config.txt```.
 
 
 ## How to switch off and on the HDMI output on the Raspberry Pi?
 When using displays with onboard backlight boost regulators the backlight can be switched off when the HDMI output is deactivated.
+If you get a wrong image, when you power on the HDMI output then add the line ```hdmi_drive=1``` to ```/boot/config.txt```.
 * HDMI off
 
       ```
@@ -74,6 +76,7 @@ When using displays with onboard backlight boost regulators the backlight can be
     tvservice -p
     fbset -depth 8
     fbset -depth 16
+    xrefresh
     ```
 
 

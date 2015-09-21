@@ -14,6 +14,7 @@ overscan_top=0
 overscan_bottom=0
 
 # HDMI config
+hdmi_drive=1
 hdmi_ignore_edid=0xa5000080
 hdmi_group=2
 hdmi_mode=87
