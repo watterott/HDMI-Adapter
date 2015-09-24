@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "Arduino.h"
 #include "config.h"
 #include "HDMI-Display.h"
 
@@ -16,7 +16,7 @@ void Backlight::setup()
   digitalWrite(BL_1, LOW);
   pinMode(BL_2, OUTPUT);
   digitalWrite(BL_2, LOW);
-#ifdef BACKLIGHT_INV
+#if BACKLIGHT_INV > 0
   analogWrite(BACKLIGHT, 255-power);
 #else
   analogWrite(BACKLIGHT, power);
@@ -30,7 +30,7 @@ void Backlight::setLight(uint16_t light)
   power = targetPower = light;
   lastTouchTime = millis();
 
-#ifdef BACKLIGHT_INV
+#if BACKLIGHT_INV > 0
   analogWrite(BACKLIGHT, 255-power);
 #else
   analogWrite(BACKLIGHT, power);
@@ -118,7 +118,7 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   if(p != power)
   {
     power = p;
-#ifdef BACKLIGHT_INV
+#if BACKLIGHT_INV > 0
     analogWrite(BACKLIGHT, 255-p);
 #else
     analogWrite(BACKLIGHT, p);

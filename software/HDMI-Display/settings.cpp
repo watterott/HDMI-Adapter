@@ -1,5 +1,5 @@
-#include <Arduino.h>
-#include <EEPROM.h>
+#include "Arduino.h"
+#include "EEPROM.h"
 #include "config.h"
 #include "HDMI-Display.h"
 

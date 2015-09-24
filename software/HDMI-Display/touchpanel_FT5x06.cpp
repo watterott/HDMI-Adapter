@@ -1,5 +1,5 @@
-#include <Arduino.h>
-#include <Wire.h>
+#include "Arduino.h"
+#include "Wire.h"
 #include "config.h"
 #include "HDMI-Display.h"
 
