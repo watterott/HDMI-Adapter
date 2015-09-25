@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 /*
- Watterott electronic display configurations:
+ Watterott electronic Display Configurations:
 
   5" or 7" 800x480 with res. touch
     #define DISPLAY_TYPE    DISPLAY_800x480
@@ -27,6 +27,12 @@
     #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
+
+  HDMI-Adapter v1.0:
+    Hardware modifications on TFTs with on-board Backlight Regulator needed.
+    BACKLIGHT always BL_1 and BACKLIGHT_INV always 0
+  HDMI-Adapter v1.1:
+    Set Jumpers LED+ and LED- to 5V on TFTs with on-board Backlight Regulator.
 */
 
 // --- Settings ---
