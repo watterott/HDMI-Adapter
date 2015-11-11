@@ -49,6 +49,3 @@ hdmi_mode=87
 #display_rotate=0x10000
 # vertical flip
 #display_rotate=0x20000
-
-# set HDMI signal strength 0...7 (default is 0)
-#config_hdmi_boost=4

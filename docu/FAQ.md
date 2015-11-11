@@ -18,7 +18,7 @@ Infos about setting the display timings can be found here:
 [UDOO](http://www.elinux.org/UDOO_setup_lvds_panels)
 
 The touchpanel acts as USB HID mouse with absolute coordinates. So you do not need a special driver.
-An inversion/rotation of the coordinates can be done via the serial interface (command *ATS6*).
+An inversion/rotation of the coordinates can be done via the [serial interface command *ATS6*](https://github.com/watterott/HDMI-Display/tree/master/software#touchpanel-orientation).
 
 
 ## What displays are compatible with HDMI to RGB Adapter board?
