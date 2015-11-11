@@ -3,7 +3,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
-* [Board Support Package (BSP)](https://github.com/watterott/wattuino/raw/master/software/Arduino/watterott.zip)
+* [Board Support Package (BSP)](https://github.com/watterott/wattuino/tree/master/software/Arduino#watterott-board-support-package)
 * [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
@@ -13,8 +13,6 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   and install the *Watterott Boards* via the Boards Manager.
   As an alternative you can also download the [BSP](https://github.com/watterott/wattuino/raw/master/software/Arduino/watterott.zip) and copy the archive content to your Arduino program directory under: ```<ARDUINO>/hardware/watterott/```.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
-* Copy the patched files ```HID.cpp``` and ```USBAPI.h``` from ```/HDMI-Display/patches/``` to your Arduino program directory ```<ARDUINO>/hardware/arduino/avr/cores/arduino/```.
-  [Path structure info](https://github.com/watterott/HDMI-Display/raw/master/software/HDMI-Display/patches/readme.png).
 * Connect the USB Data port of the HDMI-Adapter (**without display**) to your computer.
 * On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
@@ -75,6 +73,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   echo ATE >> /dev/ttyACM0
   ```
 
+  *Note: If you are using a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming.*
+
 
 ## Optional Resistive Touchpanel Calibration
 * Hold down the switch and plug in the USB connector (power on).
@@ -89,6 +89,11 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 ## Known Issues
 * **Serial Interface:**
     When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
+
+* **EDID Data:**
+    On a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
+    Because the display timings are not standard timings some operating systems are ignoring the settings. In this case the HDMI display settings have to be set by hand.
+    See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md) for further infos.
 
 * **Windows:**
     Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.

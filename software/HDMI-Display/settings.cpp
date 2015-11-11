@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "EEPROM.h"
-#include "config.h"
 #include "HDMI-Display.h"
 
 const PROGMEM Settings::Data Settings::defaults =

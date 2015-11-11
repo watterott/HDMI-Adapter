@@ -37,13 +37,16 @@
     6. Calibration done.
  */
 
-#include <EEPROM.h>
-#include <Wire.h>
-#include "config.h"
+#include "Arduino.h"
+#include "EEPROM.h"
+#include "Wire.h"
+#include "HID.h"
 #include "HDMI-Display.h"
 
 Settings settings;
 Backlight backlight;
+EDID edid;
+Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
@@ -51,7 +54,7 @@ Backlight backlight;
 #else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
   Touchpanel_None touchpanel;
 #endif
-EDID edid;
+
 
 bool isButtonPressed()
 {
@@ -83,7 +86,7 @@ void setup()
 
   Serial.begin(9600);
   Serial.setTimeout(10); // wait 10ms for data (timeout)
-  #if DEBUG > 0
+  #if DEBUG > 3
     for(uint8_t port=0; !Serial.available() && !isButtonPressed();) // wait for serial data or button press
     {
       if(Serial && port == 0)

@@ -46,7 +46,7 @@
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
 #define LOOPTIME           16 // 16 = 60 Hz polling interval
 #define TOUCHMAX        4095L // maximal touch/mouse position
-#define DEBUG               0 // set debugg output level (0=nothing, 1=minimal...4)
+#define DEBUG               0 // set debug output level (0=nothing, 1=minimal...4)
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
@@ -132,6 +132,10 @@
 #  define SCREEN_HEIGHT  1024
 #else
 #  error "Please select a DISPLAY_TYPE"
+#endif
+
+#if ARDUINO < 10606
+#error "Arduino IDE 1.6.6 or greater required. Please update your IDE."
 #endif
 
 #ifndef SWAP

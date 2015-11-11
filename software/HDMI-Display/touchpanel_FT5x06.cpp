@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "Wire.h"
-#include "config.h"
 #include "HDMI-Display.h"
 
 Touchpanel_FT5x06::Touchpanel_FT5x06()

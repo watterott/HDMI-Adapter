@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "Wire.h"
-#include "config.h"
 #include "HDMI-Display.h"
 
 const uint8_t PROGMEM EDID::eepromdata[128] =
@@ -164,8 +163,10 @@ bool EDID::writeEDID()
   return writeData((uint8_t*)eepromdata, sizeof(eepromdata), true);
 }
 
-/*bool EDID::writeFromRam() // test
+/*
+bool EDID::writeFromRam() // test
 {
   char test[] = "0123456789";
   return writeData((uint8_t*)test, sizeof(test), false);
-}*/
+}
+*/

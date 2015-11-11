@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include "config.h"
 #include "HDMI-Display.h"
 
 Touchpanel_Resistive::Touchpanel_Resistive()

@@ -1,9 +1,11 @@
 #ifndef HDMI_DISPLAY_H
 #define HDMI_DISPLAY_H
 
+#include "config.h"
+#include "settings.h"
 #include "backlight.h"
 #include "edid.h"
-#include "settings.h"
+#include "mouse.h"
 #include "touchpanel.h"
 #include "touchpanel_none.h"
 #include "touchpanel_resistive.h"
@@ -12,6 +14,8 @@
 // classes
 extern Settings settings;
 extern Backlight backlight;
+extern EDID edid;
+extern Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   extern Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
@@ -19,7 +23,6 @@ extern Backlight backlight;
 #else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
   extern Touchpanel_None touchpanel;
 #endif
-extern EDID edid;
 
 // functions
 bool isButtonPressed();
