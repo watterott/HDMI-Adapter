@@ -45,7 +45,7 @@
 #define BRIGHTNESS        255 // backlight brightness (0..255)
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
 #define LOOPTIME           16 // 16 = 60 Hz polling interval
-#define TOUCHMAX        4095L // maximal touch/mouse position
+#define TOUCHMAX        32767 // maximal touch/mouse position
 #define DEBUG               0 // set debug output level (0=nothing, 1=minimal...4)
 
 #define QUOTE(name)     #name

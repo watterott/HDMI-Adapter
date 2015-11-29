@@ -46,7 +46,6 @@
 Settings settings;
 Backlight backlight;
 EDID edid;
-Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
@@ -104,7 +103,7 @@ void setup()
 
   Wire.begin();
   Wire.setClock(100000); // 100 kHz
-  Mouse.begin();
+  SingleAbsoluteMouse.begin();
 
   settings.setup();
   backlight.setup();
