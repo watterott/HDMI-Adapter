@@ -82,7 +82,7 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   if(settings.data.screensaverTime != 0 && isOn())
   {    
     unsigned long t = millis();
-    int dt = (t - lastTouchTime) / 1000;
+    auto dt = (t - lastTouchTime) / 1000;
       
     if(dt >= settings.data.screensaverTime)
     {

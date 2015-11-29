@@ -129,8 +129,6 @@ void sendNack()
 
 void ATCommandsLoop()
 {
-  int reg;
-
   if(Serial.find("AT"))
   {
     byte b = Serial.read();
@@ -171,7 +169,7 @@ void ATCommandsLoop()
 
       case 'S':  // read/write setting registers
         Serial.setTimeout(5000); // wait 5s for data (timeout)
-        reg = Serial.parseInt();
+        auto reg = Serial.parseInt();
         if(reg >= 0 && reg < sizeof(settings.data)/sizeof(uint16_t))
         {
           uint16_t *p = (uint16_t *)&settings.data;

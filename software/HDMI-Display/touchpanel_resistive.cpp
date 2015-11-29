@@ -93,7 +93,6 @@ int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)
   
 int Touchpanel_Resistive::readX()
 { 
-  uint8_t i;
   int x;
     
   pinMode(AYM, INPUT);
@@ -117,7 +116,6 @@ int Touchpanel_Resistive::readX()
     
 int Touchpanel_Resistive::readY()
 {
-  uint8_t i;
   int y;
     
   pinMode(AXM, INPUT);
