@@ -85,82 +85,82 @@ void Mouse_::end(void)
 
 void Mouse_::click(uint8_t b)
 {
-	_buttons = b;
-	move(0,0,0);
-	_buttons = 0;
-	move(0,0,0);
+  _buttons = b;
+  move(0,0,0);
+  _buttons = 0;
+  move(0,0,0);
 }
 
 void Mouse_::moveAbsolute(int x, int y, signed char wheel)
 {
-	uint8_t m[6];
+  uint8_t m[6];
 
-	if (x < 0)
-		x = 0;
-	else if (x > TOUCHMAX)
-		x = TOUCHMAX;
-	_x = x;
+  if(x < 0)
+    x = 0;
+  else if(x > TOUCHMAX)
+    x = TOUCHMAX;
+  _x = x;
 
-	if (y < 0)
-		y = 0;
-	else if (y > TOUCHMAX)
-		y = TOUCHMAX;
-	_y = y;
+  if(y < 0)
+    y = 0;
+  else if(y > TOUCHMAX)
+    y = TOUCHMAX;
+  _y = y;
 
-	m[0] = _buttons;
-	m[1] = (x & 0xFF); //LSB
-	m[2] = ((x>>8) & 0xFF); //MSB
-	m[3] = (y & 0xFF); //LSB
-	m[4] = ((y>>8) & 0xFF); //MSB
-	m[5] = wheel;
-	HID().SendReport(1, m, sizeof(m));
+  m[0] = _buttons;
+  m[1] = (x & 0xFF); //LSB
+  m[2] = ((x>>8) & 0xFF); //MSB
+  m[3] = (y & 0xFF); //LSB
+  m[4] = ((y>>8) & 0xFF); //MSB
+  m[5] = wheel;
+  HID().SendReport(1, m, sizeof(m));
 }
 
 void Mouse_::moveAbsolute(int x, int y, signed char wheel, unsigned char buttons)
 {
-	_buttons = buttons;
-	moveAbsolute(x, y, wheel);
+  _buttons = buttons;
+  moveAbsolute(x, y, wheel);
 }
 
 void Mouse_::move(signed char x, signed char y, signed char wheel)
 {
-	moveAbsolute((_x+x), (_y+y), wheel);
+  moveAbsolute((_x+x), (_y+y), wheel);
 }
 
 /*
 void Mouse_::move(signed char x, signed char y, signed char wheel)
 {
-	uint8_t m[4];
-	m[0] = _buttons;
-	m[1] = x;
-	m[2] = y;
-	m[3] = wheel;
-	HID().SendReport(1, m, sizeof(m));
+  uint8_t m[4];
+  m[0] = _buttons;
+  m[1] = x;
+  m[2] = y;
+  m[3] = wheel;
+  HID().SendReport(1, m, sizeof(m));
 }
 */
 
 void Mouse_::buttons(uint8_t b)
 {
-	if (b != _buttons)
-	{
-		_buttons = b;
-		move(0,0,0);
-	}
+  if(b != _buttons)
+  {
+    _buttons = b;
+    move(0,0,0);
+  }
 }
 
 void Mouse_::press(uint8_t b) 
 {
-	buttons(_buttons | b);
+  buttons(_buttons | b);
 }
 
 void Mouse_::release(uint8_t b)
 {
-	buttons(_buttons & ~b);
+  buttons(_buttons & ~b);
 }
 
 bool Mouse_::isPressed(uint8_t b)
 {
-	if ((b & _buttons) > 0) 
-		return true;
-	return false;
+  if((b & _buttons) > 0)
+    return true;
+  return false;
 }

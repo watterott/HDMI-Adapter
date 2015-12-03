@@ -117,7 +117,6 @@ int Touchpanel_Resistive::readX()
     
 int Touchpanel_Resistive::readY()
 {
-  uint8_t i;
   int y;
     
   pinMode(AXM, INPUT);
@@ -129,7 +128,7 @@ int Touchpanel_Resistive::readY()
   digitalWrite(AYP, HIGH);
         
   y = SAMPLES / 2;  // rounding
-  for(int i = 0; i < SAMPLES; i++)
+  for(uint8_t i=0; i < SAMPLES; i++)
     y += analogRead(AXM);
   y /= SAMPLES;
 
@@ -291,6 +290,10 @@ void Touchpanel_Resistive::loop()
       mouseY  = calcPoint(y, &ay);      
 
       mouseButtonDown();
+    }
+    else
+    {
+      mouseButtonUp();
     }
   }
   else
