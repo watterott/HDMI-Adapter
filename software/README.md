@@ -33,7 +33,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
-* If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md).
+* If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md). Or if you are using a Raspberry Pi then the display resolution has to be set in the [config.txt](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt).
 * If the red LED is blinking then no touchpanel was found. Check your cable connections in this case.
 
 
