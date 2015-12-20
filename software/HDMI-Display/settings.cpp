@@ -37,16 +37,18 @@ bool Settings::load() // load data from internal EEPROM, if checksum is correct
 {
   Data tmp;
   uint8_t *p = (uint8_t *)&tmp;
-  
+
   for(uint16_t addr = 0; addr < sizeof(tmp); addr++)
+  {
     *p++ = EEPROM.read(addr);
+  }
 
   if(calcChecksum(&tmp) == tmp.checksum) // setting valid
   {
     memcpy(&data, &tmp, sizeof(data));
     return true;
   }
-  
+
   return false;
 }
 
@@ -56,5 +58,7 @@ void Settings::save() // save data to internal EEPROM
 
   data.checksum = calcChecksum(&data);
   for(uint16_t addr = 0; addr < sizeof(data); addr++)
+  {
     EEPROM.write(addr, *p++);
+  }
 }

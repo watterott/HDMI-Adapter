@@ -4,21 +4,23 @@
 Backlight::Backlight()
 {
 }
-  
+
 void Backlight::setup()
 {
-  power = targetPower = settings.data.brightness;
-  fadeSpeed = 1;
+  power = 0;
+  targetPower = settings.data.brightness;
+  fadeSpeed = 4;
   lastTouchTime = millis();
 
-  pinMode(BL_1, OUTPUT);
+  pinMode(BL_1, OUTPUT); // PWM backlight boost converter
   digitalWrite(BL_1, LOW);
-  pinMode(BL_2, OUTPUT);
+  pinMode(BL_2, OUTPUT); // PWM display pin 35
   digitalWrite(BL_2, LOW);
+
 #if BACKLIGHT_INV > 0
-  analogWrite(BACKLIGHT, 255-power);
+  digitalWrite(BACKLIGHT, HIGH);
 #else
-  analogWrite(BACKLIGHT, power);
+  digitalWrite(BACKLIGHT, LOW);
 #endif
 }
 
@@ -27,8 +29,6 @@ void Backlight::setLight(uint16_t light)
   if(light > 255)
     light = 255;
   power = targetPower = light;
-  lastTouchTime = millis();
-
 #if BACKLIGHT_INV > 0
   analogWrite(BACKLIGHT, 255-power);
 #else
@@ -46,17 +46,19 @@ void Backlight::setLightSmooth(uint16_t light, uint8_t speed)
 
 bool Backlight::isOn()
 {
-  return (power != 0);
+  return (power != 0)?true:false;
 }
 
 void Backlight::on()
 {
   setLight(settings.data.brightness);
+  digitalWrite(LED_2, LOW);
 }
 
 void Backlight::off()
 {
   setLight(0);
+  digitalWrite(LED_2, HIGH);
 }
 
 void Backlight::onOff() // toggle backlight
@@ -69,8 +71,12 @@ void Backlight::onOff() // toggle backlight
 
 bool Backlight::screensaverNotify() // touch event
 {
-  bool off = (!power)?1:0;
-  setLight(settings.data.brightness);
+  bool off = (power == 0)?true:false;
+  lastTouchTime = millis();
+
+  if(off || (power != targetPower))
+    setLight(settings.data.brightness);
+
   return off;
 }
 
@@ -79,16 +85,16 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   int16_t p = power;
 
   // screensaver
-  if(settings.data.screensaverTime != 0 && isOn())
+  if((settings.data.screensaverTime != 0) && isOn())
   {    
     unsigned long t = millis();
-    int dt = (t - lastTouchTime) / 1000;
-      
+    uint16_t dt = (uint16_t)((t - lastTouchTime) / 1000UL);
+
     if(dt >= settings.data.screensaverTime)
     {
       setLightSmooth(0, 2);
       #if DEBUG > 0
-        Serial.print(F("\nStart Screensaver"));
+        Serial.println(F("BL: start screensaver"));
       #endif
     }
   }

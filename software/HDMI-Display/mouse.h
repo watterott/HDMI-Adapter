@@ -25,17 +25,19 @@
 
 #include "HID.h"
 
-#define MOUSE_LEFT 1
-#define MOUSE_RIGHT 2
+#define MOUSE_LEFT   1
+#define MOUSE_RIGHT  2
 #define MOUSE_MIDDLE 4
-#define MOUSE_ALL (MOUSE_LEFT | MOUSE_RIGHT | MOUSE_MIDDLE)
+#define MOUSE_ALL    (MOUSE_LEFT | MOUSE_RIGHT | MOUSE_MIDDLE)
 
 class Mouse_
 {
   private:
     uint8_t _buttons;
     int _x, _y;
+
     void buttons(uint8_t b);
+
   public:
     Mouse_(void);
     void begin(void);

@@ -162,5 +162,6 @@ bool Mouse_::isPressed(uint8_t b)
 {
   if((b & _buttons) > 0)
     return true;
+
   return false;
 }

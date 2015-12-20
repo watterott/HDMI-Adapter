@@ -50,7 +50,7 @@
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "1.50"
+#define VERSION_STRING  "2.00"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nTFT: " STR(SCREEN_WIDTH) "x" STR(SCREEN_HEIGHT)"\nTouch: " STR(TOUCHPANEL_TYPE) "\nhttps://github.com/watterott/HDMI-Display"
 
 // Display Types
@@ -151,6 +151,12 @@
 #define SW_1       (1<<5) // switch PD5
 #define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
 #define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
+#ifndef SDA
+#define SDA             2 // I2C SDA PD1
+#endif
+#ifndef SCL
+#define SCL             3 // I2C SCL PD0
+#endif
 
 // Touchpanel analog inputs 
 #define AXM            A1 // touch X- PF6
@@ -159,7 +165,7 @@
 #define AYP            A0 // touch Y+ PF7
 
 // External EDID EEPROM
-#define EEPROMSIZE    256 // size in bytes
-#define EEPROMADDR   0x50 // I2C address
+#define EEPROM_SIZE   256 // size in bytes
+#define EEPROM_ADDR  0x50 // I2C address
 
 #endif //CONFIG_H

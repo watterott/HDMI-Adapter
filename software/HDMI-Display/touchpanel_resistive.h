@@ -1,10 +1,10 @@
 #ifndef TOUCHPANEL_RESISTIVE_H
 #define TOUCHPANEL_RESISTIVE_H
 
-#define SAMPLES                16 
+#define SAMPLES                16
 #define JITTER_THRESHOLD        2
 #define TOUCH_DETECTION_LEVEL 200
-  
+
 class Touchpanel_Resistive : public Touchpanel
 {
   private:
@@ -13,10 +13,8 @@ class Touchpanel_Resistive : public Touchpanel
       int16_t *point;          // points to the two calibrations values in settings.data
       int     firstTouch;      // point, where the first touch happens
     } ax, ay;
-
     uint16_t zFilter;
 
-  private:
     int calcPoint(int value, struct Axis *axis);
     int readX();
     int readY();

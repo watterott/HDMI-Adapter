@@ -1,9 +1,11 @@
 #ifndef HDMI_DISPLAY_H
 #define HDMI_DISPLAY_H
 
+// includes
 #include "config.h"
 #include "settings.h"
 #include "backlight.h"
+#include "twi.h"
 #include "edid.h"
 #include "mouse.h"
 #include "touchpanel.h"
@@ -14,6 +16,7 @@
 // classes
 extern Settings settings;
 extern Backlight backlight;
+extern TWI twi;
 extern EDID edid;
 extern Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE

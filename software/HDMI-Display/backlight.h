@@ -6,7 +6,6 @@ class Backlight
   private:
     int16_t power, targetPower;
     uint8_t fadeSpeed;
-
     unsigned long lastTouchTime;
 
   public:

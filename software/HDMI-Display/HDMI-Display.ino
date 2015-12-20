@@ -38,34 +38,35 @@
  */
 
 #include "Arduino.h"
-#include "EEPROM.h"
-#include "Wire.h"
 #include "HID.h"
 #include "HDMI-Display.h"
 
 Settings settings;
 Backlight backlight;
+TWI twi;
 EDID edid;
 Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
-  Touchpanel_Resistive touchpanel;
+Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-  Touchpanel_FT5x06 touchpanel;
+Touchpanel_FT5x06 touchpanel;
 #else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
-  Touchpanel_None touchpanel;
+Touchpanel_None touchpanel;
 #endif
 
 
 bool isButtonPressed()
 {
+  bool rc;
+
 #if ARDUINO < 150
   cli();
   SW_1_SETUP(); // switch pin to input, because USB serial uses it as output (txled)
   __asm__("nop\n\t");
-  bool rc = SW_1_PRESSED();
+  rc = SW_1_PRESSED();
   sei();
 #else
-  bool rc = SW_1_PRESSED();
+  rc = SW_1_PRESSED();
 #endif
   return rc;
 }
@@ -73,7 +74,9 @@ bool isButtonPressed()
 void waitButtonReleased()
 {
   while(isButtonPressed())
-    ;  
+  {
+    //do nothing
+  }
 }
 
 void setup()
@@ -84,7 +87,7 @@ void setup()
   pinMode(LED_2, OUTPUT);
   digitalWrite(LED_2, LOW);
 
-  Serial.begin(9600);
+  Serial.begin(9600); //set baudrate
   Serial.setTimeout(10); // wait 10ms for data (timeout)
   #if DEBUG > 3
     for(uint8_t port=0; !Serial.available() && !isButtonPressed();) // wait for serial data or button press
@@ -92,26 +95,29 @@ void setup()
       if(Serial && port == 0)
       {
         port = 1;
-        Serial.println(F("DEBUG BUILD"));
-        Serial.println(F("Hit any key to start"));
+        Serial.println(F("--- DEBUG BUILD ---"));
+        Serial.println(F("Hit any key to start."));
       }
       digitalWrite(LED_2, LOW);
-      delay(250);
+      delay(100);
       digitalWrite(LED_2, HIGH);
-      delay(250);
+      delay(100);
     }
+    Serial.println(F("Starting..."));
+    Serial.flush();
   #endif
 
-  Wire.begin();
-  Wire.setClock(100000); // 100 kHz
-  Mouse.begin();
+  twi.begin(); // init I2C (default speed: 100 kHz)
+  Mouse.begin(); // init USB mouse
 
-  settings.setup();
-  backlight.setup();
-  touchpanel.setup();
+  settings.setup(); // load settings
+  backlight.setup(); // init backlight
+  touchpanel.setup(); // init touchpanel/touchcontroller
 
   if(isButtonPressed())
-    touchpanel.calibration();
+  {
+    touchpanel.calibration(); //resistive touchpanel calibration
+  }
 
   digitalWrite(LED_1, HIGH);
   digitalWrite(LED_2, LOW);
@@ -131,9 +137,11 @@ void ATCommandsLoop()
 {
   int reg;
 
-  if(Serial.find("AT"))
+  if(Serial.find((char*)"AT"))
   {
-    byte b = Serial.read();
+    digitalWrite(LED_2, HIGH);
+
+    uint8_t b = (uint8_t)Serial.read();
     switch(b)
     {
       case '\n':  // Info
@@ -170,12 +178,13 @@ void ATCommandsLoop()
         break;
 
       case 'S':  // read/write setting registers
-        Serial.setTimeout(5000); // wait 5s for data (timeout)
+        Serial.setTimeout(2000); // wait 2s for data (timeout)
         reg = Serial.parseInt();
-        if(reg >= 0 && reg < sizeof(settings.data)/sizeof(uint16_t))
+        if((reg >= 0) && (reg < (int)(sizeof(settings.data)/sizeof(uint16_t))))
         {
           uint16_t *p = (uint16_t *)&settings.data;
-          b = Serial.read();
+          while(!Serial.available()); //wait for serial data
+          b = (uint8_t)Serial.read();
           if(b == '?')      // read register
           {
             Serial.println(p[reg]);
@@ -189,7 +198,9 @@ void ATCommandsLoop()
             sendAck();
           }
           else
+          {
             sendNack();
+          }
         }
         else
         {
@@ -198,7 +209,9 @@ void ATCommandsLoop()
         Serial.setTimeout(10); // wait 10ms for data (timeout)
         break;
     }
-  }  
+
+    digitalWrite(LED_2, LOW);
+  }
 }
 
 void loop()
@@ -206,7 +219,7 @@ void loop()
   static unsigned long last_t = 0;
   unsigned long t = millis();
 
-  if((t-last_t) > LOOPTIME)
+  if((t-last_t) > LOOPTIME) // 60 Hz polling interval
   {
     last_t = t;
 
@@ -221,5 +234,8 @@ void loop()
     touchpanel.loop();
   }
 
-  ATCommandsLoop();
+  if(Serial.available())
+  {
+    ATCommandsLoop();
+  }
 }

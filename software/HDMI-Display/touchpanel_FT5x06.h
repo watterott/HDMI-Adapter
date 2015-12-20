@@ -60,7 +60,6 @@ class Touchpanel_FT5x06 : public Touchpanel
     uint8_t    nrPoints;
     TouchPoint touch[5];
 
-  private:
     uint8_t i2cReadByte(uint8_t addr);
     void i2cWriteByte(uint8_t addr, uint8_t data);
     void readTouchPoint(uint8_t addr, TouchPoint *tp);

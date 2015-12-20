@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include "Wire.h"
 #include "HDMI-Display.h"
 
 const uint8_t PROGMEM EDID::eepromdata[128] =
@@ -71,29 +70,34 @@ EDID::EDID()
 {
 }
 
-uint8_t EDID::readByte(uint16_t addr)
+uint8_t EDID::readByte(uint8_t addr)
 {
-  uint8_t data;
-  
-  Wire.beginTransmission(EEPROMADDR);
-  Wire.write(addr);
-  Wire.endTransmission();
-  Wire.requestFrom(EEPROMADDR, 1);
-  for(unsigned long ms = millis(); !Wire.available();)
+  uint8_t data = 0xFF;
+
+  if(twi.beginTransmission(EEPROM_ADDR) == false)
   {
-    if((millis()-ms) >= 1000) //1 seconds timeout
-      break;
+    twi.write(addr);
+    twi.endTransmission();
+    twi.requestFrom(EEPROM_ADDR, 1);
+    for(unsigned long ms = millis(); !twi.available();)
+    {
+      if((millis()-ms) >= 500) // 500ms timeout
+        break;
+    }
+    data = twi.read();
   }
-  data = Wire.read();
+
   return data;
 }
 
-void EDID::writeByte(uint16_t addr, uint8_t data)
+void EDID::writeByte(uint8_t addr, uint8_t data)
 {
-  Wire.beginTransmission(EEPROMADDR);
-  Wire.write((uint8_t)addr);
-  Wire.write((uint8_t)data);
-  Wire.endTransmission();
+  if(twi.beginTransmission(EEPROM_ADDR) == false)
+  {
+    twi.write(addr);
+    twi.write(data);
+    twi.endTransmission();
+  }
 }
 
 bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
@@ -102,11 +106,11 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
 
   digitalWrite(LED_2, HIGH);
   #if DEBUG > 0
-    Serial.println(F("Writing..."));
+    Serial.println(F("EDID: writing..."));
   #endif
-  for(uint16_t addr = 0; addr < EEPROMSIZE; addr++)
+  for(uint16_t addr = 0; addr < EEPROM_SIZE; addr++)
   {
-    byte b;
+    uint8_t b;
 
     if(addr < length)
     {
@@ -116,20 +120,21 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
         b = eepromdata[addr];
     }
     else
+    {
       b = 0xFF;
+    }
 
-    writeByte(addr, b);
+    writeByte((uint8_t)addr, b);
     delay(5);
   }
   #if DEBUG > 0
-    Serial.println(F("Done."));
-    Serial.println(F("Verifying..."));
+    Serial.println(F("EDID: verifying..."));
   #endif
-  for(uint16_t addr = 0; addr < EEPROMSIZE; addr++)
+  for(uint16_t addr = 0; addr < EEPROM_SIZE; addr++)
   {
-    byte b, d;
-    
-    if (addr < length)
+    uint8_t b, d;
+
+    if(addr < length)
     {
       if(fromProgMem)
         b = pgm_read_byte(eepromdata + addr);
@@ -137,24 +142,24 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
         b = eepromdata[addr];
     }
     else
+    {
       b = 0xFF;
- 
-    d = readByte(addr);
-    
-    if (b != d)
+    }
+
+    d = readByte((uint8_t)addr);
+
+    if(b != d)
     {
       #if DEBUG > 0
-        Serial.print(F("Verification failed at 0x"));
+        Serial.print(F("EDID: verification failed at 0x"));
         Serial.println(addr, HEX);
       #endif
       err = false;
       break;
     }
   }
-  #if DEBUG > 0
-    Serial.println(F("Done."));
-  #endif
   digitalWrite(LED_2, LOW);
+
   return err;
 }
 

@@ -31,7 +31,7 @@ void Touchpanel::calibration()
 void Touchpanel::mouseButtonDown()
 {
   uint16_t x, y;
-  
+
   digitalWrite(LED_2, HIGH);
 
   if(backlight.screensaverNotify()) // reset screensaver on touch
@@ -66,13 +66,14 @@ void Touchpanel::mouseButtonDown()
   Mouse.moveAbsolute(x, y, mouseZoom, mouseButtonState);
 
   #if DEBUG > 0
+    Serial.print("M: ");
     Serial.print(mouseX);
     Serial.print(" ");
     Serial.print(mouseY);
-    if(mouseButtonState)
-      Serial.println(F(" down"));
     if(mouseZoom)
       Serial.println(F(" zoom"));
+    else //if(mouseButtonState)
+      Serial.println(F(" down"));
   #endif
 }
 
@@ -111,6 +112,7 @@ void Touchpanel::mouseButtonUp()
   Mouse.moveAbsolute(x, y, 0, 0);
 
   #if DEBUG > 0
+    Serial.print("M: ");
     Serial.print(mouseX);
     Serial.print(" ");
     Serial.print(mouseY);
