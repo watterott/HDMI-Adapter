@@ -179,7 +179,7 @@ void Touchpanel_FT5x06::loop()
   if(!power)
     return;
 
-  if(digitalRead(INT)) // no interrupt -> no new data
+  if(digitalRead(INT) && (mouseButtonState == 0)) // no interrupt -> no new data
     return;
 
   b = i2cReadByte(REG_STATE);
@@ -190,7 +190,7 @@ void Touchpanel_FT5x06::loop()
   if(b == STATE_WORK)
   {
     b = i2cReadByte(REG_TD_STATUS);
-    if(b != 0 && b != 255) // no touch points on 0 and 255
+    if((b != 0) && (b != 255)) // no touch points on 0 and 255
     {
       nrPoints = b & 0x07;
       readTouchPoint(REG_TOUCH_1, &touch[0]);
