@@ -15,17 +15,17 @@ class Settings
   };
 
   private:
-    static const PROGMEM Data defaults;    // default values
+    static const PROGMEM Data defaults; // default values
 
     uint8_t calcChecksum(Data *d);
-    bool    load();                  // load data from internal EEPROM, if checksum is correct
 
   public:
     Data data;
 
     Settings();
     void setup();
-    void save();                     // save data to internal EEPROM
+    bool load(); // load data from internal EEPROM, if checksum is correct
+    void save(); // save data to internal EEPROM
 };
 
 #endif //SETTINGS_H

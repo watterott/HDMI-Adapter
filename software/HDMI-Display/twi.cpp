@@ -17,12 +17,13 @@ void TWI::begin(uint32_t freq)
 
   if(errors > 3)
   {
-    #if DEBUG > 0
-      Serial.println(F("TWI: error -> restart"));
-    #endif
     errors = 0;
-    if(frequency > 20000)
+    if(frequency > 25000UL)
       frequency = frequency/2;
+    #if DEBUG > 0
+      Serial.print(F("TWI: restart f="));
+      Serial.println(frequency, DEC);
+    #endif
   }
 
   pinMode(SDA, INPUT);
@@ -56,7 +57,7 @@ bool TWI::beginTransmission(uint8_t addr)
   if(start(TW_WRITE))
   {
     errors++;
-    return true; //error
+    return true; // error
   }
 
   return false;
@@ -69,8 +70,12 @@ void TWI::endTransmission(void)
 
 bool TWI::start(uint8_t rw)
 {
-  for(uint8_t t = 0; t < 3; t++) // try 3 times
+  for(uint8_t t = 0; t < 5; t++) // try 5 times
   {
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
     // send start condition
     TWCR = (1<<TWEN) | (1<<TWINT) /*| (1<<TWEA)*/ | (1<<TWSTA);
 
@@ -91,7 +96,7 @@ bool TWI::start(uint8_t rw)
       // wail until transmission completed
       for(unsigned long ms = millis(); !(TWCR & (1<<TWINT));)
       {
-        if ((millis() - ms) >= TWI_TIMEOUT) // timeout
+        if ((millis()-ms) >= TWI_TIMEOUT) // timeout
           break;
       }
   
@@ -105,7 +110,7 @@ bool TWI::start(uint8_t rw)
         stop();
       }
     }
-    delay(50);
+    delay(20);
   }
 
   return true; // error
@@ -163,6 +168,10 @@ uint8_t TWI::requestFrom(uint8_t addr, uint8_t size)
 
   for(s = 0; s < size; s++)
   {
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
     if(s == (size-1))
     {
       TWCR = (1<<TWEN) | (1<<TWINT);

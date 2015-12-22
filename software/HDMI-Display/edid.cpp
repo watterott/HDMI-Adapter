@@ -104,13 +104,18 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
 {
   bool err = true;
 
-  digitalWrite(LED_2, HIGH);
+  digitalWrite(LED_RED, HIGH);
+
   #if DEBUG > 0
     Serial.println(F("EDID: writing..."));
   #endif
   for(uint16_t addr = 0; addr < EEPROM_SIZE; addr++)
   {
     uint8_t b;
+
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
 
     if(addr < length)
     {
@@ -133,6 +138,10 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
   for(uint16_t addr = 0; addr < EEPROM_SIZE; addr++)
   {
     uint8_t b, d;
+
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
 
     if(addr < length)
     {
@@ -158,7 +167,8 @@ bool EDID::writeData(uint8_t *eepromdata, uint8_t length, bool fromProgMem)
       break;
     }
   }
-  digitalWrite(LED_2, LOW);
+
+  digitalWrite(LED_RED, LOW);
 
   return err;
 }

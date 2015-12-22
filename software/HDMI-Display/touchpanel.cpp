@@ -32,7 +32,7 @@ void Touchpanel::mouseButtonDown()
 {
   uint16_t x, y;
 
-  digitalWrite(LED_2, HIGH);
+  digitalWrite(LED_RED, HIGH);
 
   if(backlight.screensaverNotify()) // reset screensaver on touch
   {
@@ -81,7 +81,7 @@ void Touchpanel::mouseButtonUp()
 {
   uint16_t x, y;
 
-  digitalWrite(LED_2, LOW);
+  digitalWrite(LED_RED, LOW);
 
   if(mouseButtonState == 0)
   {

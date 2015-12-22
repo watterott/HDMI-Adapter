@@ -20,8 +20,9 @@
 #define REG_THDIFF         0x85      // Touch difference threshold
 #define REG_CTRL           0x86      // Power Control Mode
 #define REG_ENTERMONITOR   0x87      // Delay to enter 'Monitor' status (s)
-#define REG_PERIODACTIVE   0x88      // Period of 'Active' status (ms)
-#define REG_PERIODMONITOR  0x89      // Timer to enter ‘idle’ when in 'Monitor' (ms)
+#define REG_PERIODACTIVE   0x88      // Period of 'Active' status (ms) 3-14
+#define REG_PERIODMONITOR  0x89      // Timer to enter idle when in 'Monitor' (ms) 3-14
+#define REG_AUTO_CLB_MODE  0xA0      // Auto calibration mode
 #define REG_LIB_VERSION_H  0xA1      // Firmware Library Version H byte
 #define REG_LIB_VERSION_L  0xA2      // Firmware Library Version L byte
 #define REG_CIPHER         0xA3      // Chip vendor ID
@@ -37,8 +38,17 @@
 
 // Gestures
 #define GESTURE_NONE       0x00
+#define GESTURE_MOVE_UP    0x10
+#define GESTURE_MOVE_LEFT  0x14
+#define GESTURE_MOVE_DOWN  0x18
+#define GESTURE_MOVE_RIGHT 0x1C
 #define GESTURE_ZOOM_IN    0x48
 #define GESTURE_ZOOM_OUT   0x49
+
+// Power Modes
+#define PMODE_ACTIVE       0x00
+#define PMODE_MONITOR      0x01
+#define PMODE_HIBERNATE    0x03
 
 // States
 #define STATE_CONFIGURE    0x00

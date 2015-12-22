@@ -20,8 +20,6 @@ Touchpanel_Resistive::Touchpanel_Resistive()
 
 void Touchpanel_Resistive::setup()
 {
-  int x;
-
   power = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
@@ -35,38 +33,55 @@ void Touchpanel_Resistive::setup()
   pinMode(AXP, INPUT);
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
+  // set interrupt pin to input
   pinMode(INT, INPUT);
 
-  // check touchpanel connection
-  for(;;)
+  // check calibration data
+  if(((ax.point[0] == 0) && (ax.point[1] == 0)) ||
+     ((ay.point[0] == 0) && (ay.point[1] == 0)))
   {
+    ax.point[0] = TPC_X0;
+    ax.point[0] = TPC_X1;
+    ay.point[0] = TPC_Y0;
+    ay.point[1] = TPC_Y1;
+  }
+
+  // check touchpanel connection
+  for(uint8_t i=0; i < 10; i++)
+  {
+    int x;
+
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
     pinMode(AYM, INPUT);    // Y- input
-    pinMode(AYP, OUTPUT);
+    pinMode(AYP, OUTPUT);   // Y+ output
     digitalWrite(AYP, LOW); // Y+ low
-    pinMode(AXM, OUTPUT);
+    pinMode(AXM, OUTPUT);   // X- output
     digitalWrite(AXM, LOW); // X- low
-    pinMode(AXP, OUTPUT);
+    pinMode(AXP, OUTPUT);   // X+ output
     digitalWrite(AXP, LOW); // X+ low
-    x = analogRead(AYM);
-    pinMode(AYP, INPUT);
-    pinMode(AXM, INPUT);
-    pinMode(AXP, INPUT);
+    x = analogRead(AYM);    // read Y-
+    pinMode(AYP, INPUT);    // Y+ input
+    pinMode(AXM, INPUT);    // X- input
+    pinMode(AXP, INPUT);    // X+ input
 
     #if DEBUG > 0
       Serial.print(F("TP: check "));
       Serial.println(x, DEC);
     #endif
 
-    if(x < 100) // touchpanel found
+    if((x >= 0) && (x < 100)) // touchpanel found
     {
       on();
       break;
     }
-    else
+    else // error
     {
-      digitalWrite(LED_2, HIGH);
+      digitalWrite(LED_RED, HIGH);
       delay(250);
-      digitalWrite(LED_2, LOW);
+      digitalWrite(LED_RED, LOW);
       delay(250);
     }
   }
@@ -169,23 +184,30 @@ void Touchpanel_Resistive::calibration()
   uint8_t count0, count1, led = 0;
   unsigned long x0, x1, y0, y1;
 
-  digitalWrite(LED_1, LOW);
-  digitalWrite(LED_2, LOW);
-
-  waitButtonReleased();
+  // wait for button and touch release
+  while(isButtonPressed() || readZ())
+  {
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+  }
 
   // step 1: collecting data for the x-axis
   x0 = x1 = 128; // rounding
   count0 = count1 = 255;
   do
   {
-    digitalWrite(LED_2, LOW);
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
+    digitalWrite(LED_RED, LOW);
     if(readZ())
     {
       int x = readX();
       if(readZ()) // check if touch was stable
       {
-        digitalWrite(LED_2, HIGH);
+        digitalWrite(LED_RED, HIGH);
         if((x < 200) && count0)
         {
           x0 += x;  
@@ -201,9 +223,9 @@ void Touchpanel_Resistive::calibration()
 
     led++;
     if((count0 == 0) || (count1 == 0))
-      digitalWrite(LED_1, led & 16);
+      digitalWrite(LED_GREEN, led & 16);
     else
-      digitalWrite(LED_1, led & 4);
+      digitalWrite(LED_GREEN, led & 4);
 
     if(isButtonPressed())
       return;
@@ -222,13 +244,17 @@ void Touchpanel_Resistive::calibration()
   count0 = count1 = 255;
   do
   {
-    digitalWrite(LED_1, LOW);
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
+    digitalWrite(LED_GREEN, LOW);
     if(readZ())
     {
       int y = readY();
       if(readZ()) // check if touch was stable
       {
-        digitalWrite(LED_1, HIGH);
+        digitalWrite(LED_GREEN, HIGH);
         if((y > 700) && count0)
         {
           y0 += y;
@@ -244,9 +270,9 @@ void Touchpanel_Resistive::calibration()
 
     led++;
     if((count0 == 0) || (count1 == 0))
-      digitalWrite(LED_2, led & 16);
+      digitalWrite(LED_RED, led & 16);
     else
-      digitalWrite(LED_2, led & 4);
+      digitalWrite(LED_RED, led & 4);
 
     if(isButtonPressed())
       return;
@@ -260,13 +286,18 @@ void Touchpanel_Resistive::calibration()
   Serial.print(" Y1: ");
   Serial.println(y1);  
 
-  while(readZ()) // wait for touch release
+  // wait for button and touch release
+  while(isButtonPressed() || readZ())
   {
-    digitalWrite(LED_1, HIGH);
-    digitalWrite(LED_2, HIGH);
+    #if USE_WATCHDOG > 0
+      wdt_reset();
+    #endif
+
+    digitalWrite(LED_GREEN, HIGH);
+    digitalWrite(LED_RED, HIGH);
     delay(100);
-    digitalWrite(LED_1, LOW);
-    digitalWrite(LED_2, LOW);
+    digitalWrite(LED_GREEN, LOW);
+    digitalWrite(LED_RED, LOW);
     delay(100);
   }
 
@@ -288,8 +319,8 @@ void Touchpanel_Resistive::loop()
     int y = readY();
     if(readZ()) // check if the touch was stable
     {
-      mouseX  = calcPoint(x, &ax);
-      mouseY  = calcPoint(y, &ay);      
+      mouseX = calcPoint(x, &ax);
+      mouseY = calcPoint(y, &ay);
       mouseButtonDown();
     }
     else
