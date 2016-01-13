@@ -66,6 +66,11 @@ void Touchpanel::mouseButtonDown()
     x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
   }
+  else
+  {
+    x = map(x, 0, TOUCHMAX, -32768, 32767);
+    y = map(y, 0, TOUCHMAX, -32768, 32767);
+  }
 
   SingleAbsoluteMouse.moveTo(x, y, mouseZoom);
 
@@ -110,6 +115,11 @@ void Touchpanel::mouseButtonUp()
   {
     x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
+  }
+  else
+  {
+    x = map(x, 0, TOUCHMAX, -32768, 32767);
+    y = map(y, 0, TOUCHMAX, -32768, 32767);
   }
 
   SingleAbsoluteMouse.moveTo(x, y, 0);
