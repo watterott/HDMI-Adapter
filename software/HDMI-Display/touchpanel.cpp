@@ -39,11 +39,6 @@ void Touchpanel::mouseButtonDown()
     return; // backlight was off
   }
 
-  if(mouseZoom)
-    mouseButtonState = 0;
-  else
-    mouseButtonState = 1;
-
   if(*axes & 0x01) // invert x
     x = TOUCHMAX-mouseX;
   else
@@ -62,8 +57,22 @@ void Touchpanel::mouseButtonDown()
     x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
   }
+  else
+  {
+    x = map(x, 0, TOUCHMAX, -32768, 32767);
+    y = map(y, 0, TOUCHMAX, -32768, 32767);
+  }
 
-  Mouse.moveAbsolute(x, y, mouseZoom, mouseButtonState);
+  SingleAbsoluteMouse.moveTo(x, y, mouseZoom);
+
+  if(mouseZoom){
+    mouseButtonState = 0;
+    SingleAbsoluteMouse.release();
+  }
+  else{
+    mouseButtonState = 1;
+    SingleAbsoluteMouse.press();
+  }
 
   #if DEBUG > 0
     Serial.print("M: ");
@@ -108,8 +117,14 @@ void Touchpanel::mouseButtonUp()
     x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
     y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
   }
+  else
+  {
+    x = map(x, 0, TOUCHMAX, -32768, 32767);
+    y = map(y, 0, TOUCHMAX, -32768, 32767);
+  }
 
-  Mouse.moveAbsolute(x, y, 0, 0);
+  SingleAbsoluteMouse.moveTo(x, y, 0);
+  SingleAbsoluteMouse.release();
 
   #if DEBUG > 0
     Serial.print("M: ");

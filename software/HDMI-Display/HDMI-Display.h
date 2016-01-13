@@ -7,7 +7,7 @@
 #include "backlight.h"
 #include "twi.h"
 #include "edid.h"
-#include "mouse.h"
+#include "HID-Project.h"
 #include "touchpanel.h"
 #include "touchpanel_none.h"
 #include "touchpanel_resistive.h"
@@ -18,7 +18,6 @@ extern Settings settings;
 extern Backlight backlight;
 extern TWI twi;
 extern EDID edid;
-extern Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   extern Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06

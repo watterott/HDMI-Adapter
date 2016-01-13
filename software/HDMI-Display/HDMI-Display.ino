@@ -49,7 +49,6 @@ Settings settings;
 Backlight backlight;
 TWI twi;
 EDID edid;
-Mouse_ Mouse;
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
 Touchpanel_Resistive touchpanel;
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
@@ -126,7 +125,7 @@ void setup()
   #endif
 
   twi.begin(); // init I2C (default speed: 100 kHz)
-  Mouse.begin(); // init USB mouse
+  SingleAbsoluteMouse.begin(); // init USB mouse
 
   settings.setup(); // set default settings
   settings.load(); // load settings
