@@ -35,6 +35,10 @@
     Set Jumpers LED+ and LED- to 5V on TFTs with on-board Backlight Regulator.
 */
 
+// You may remove those errors after editing the settings
+//#error "Please edit config.h for your display before you upload the sketch."
+//#error "Otherwise it might not work or the touch function might be disabled."
+
 // --- Settings ---
 #define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600
 #define TOUCHPANEL_TYPE  TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
