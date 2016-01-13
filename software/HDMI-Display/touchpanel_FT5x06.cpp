@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include "Wire.h"
 #include "HDMI-Display.h"
 
 Touchpanel_FT5x06::Touchpanel_FT5x06()
@@ -13,31 +12,38 @@ Touchpanel_FT5x06::Touchpanel_FT5x06()
 
 uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
 {
-  Wire.beginTransmission(FT5x06_ADDR);
-  Wire.write(addr);
-  Wire.endTransmission();
-  Wire.requestFrom(FT5x06_ADDR, 1);
-  for(unsigned long ms = millis(); !Wire.available();)
+  uint8_t data = 0xFF;
+
+  if(twi.beginTransmission(FT5x06_ADDR) == false)
   {
-    if((millis()-ms) >= 500) // 500ms timeout
-      break;
+    twi.write(addr);
+    twi.endTransmission();
+    twi.requestFrom(FT5x06_ADDR, 1);
+    for(unsigned long ms = millis(); !twi.available();)
+    {
+      if((millis()-ms) >= 500) // 500ms timeout
+        break;
+    }
+    data = twi.read();
   }
-  return Wire.read();
+
+  return data;
 }
 
 void Touchpanel_FT5x06::i2cWriteByte(uint8_t addr, uint8_t data)
 {
-  Wire.beginTransmission(FT5x06_ADDR);
-  Wire.write((uint8_t)addr);
-  Wire.write(data);
-  Wire.endTransmission();
+  if(twi.beginTransmission(FT5x06_ADDR) == false)
+  {
+    twi.write(addr);
+    twi.write(data);
+    twi.endTransmission();
+  }
 }
 
 void Touchpanel_FT5x06::setup()
 {
   uint8_t b, i;
 
-  // load settings
   power = 0;
   mouseX = mouseY = 0;
   mouseButtonState = 0;
@@ -48,110 +54,109 @@ void Touchpanel_FT5x06::setup()
   pinMode(AXP, INPUT);
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
+  // set interrupt pin to input
   pinMode(INT, INPUT);
+  digitalWrite(INT, HIGH); // pull-up on
 
-  // wait for startup
+  // wait for startup (check chip vendor id)
+  #if DEBUG > 0
+    Serial.println(F("TP: init chip..."));
+  #endif
   for(i=0; i < 10; i++)
   {
-    delay(500);
     b = i2cReadByte(REG_CIPHER);
     if(b == CHIP_VENDOR_ID)
-      break;
-  }
-
-  // chip vendor wrong
-  if(b != CHIP_VENDOR_ID)
-  {
-    #if DEBUG > 0
-      Serial.print(F("TP Chip Vendor wrong: 0x"));
-      Serial.println(b, HEX);
-    #endif
-    off();
-    for(;;)
     {
-      digitalWrite(LED_2, LOW);
+      break;
+    }
+    else
+    {
+      #if DEBUG > 0
+        Serial.print(F("TP: Chip Vendor wrong 0x"));
+        Serial.println(b, HEX);
+      #endif
+      #if USE_WATCHDOG > 0
+        wdt_reset();
+      #endif
+      digitalWrite(LED_RED, HIGH);
       delay(250);
-      digitalWrite(LED_2, HIGH);
+      digitalWrite(LED_RED, LOW);
       delay(250);
     }
   }
 
-  // check error register
-  for(i=0; i < 10; i++)
-  {
-    b = i2cReadByte(REG_ERR);
-    if(b == 0)
-      break;
-  }
-
-  // error
-  if(b != 0)
-  {
-    #if DEBUG > 0
-      Serial.print(F("TP Error: 0x"));
-      Serial.println(b, HEX);
-    #endif
-    off();
-    for(;;)
-    {
-      digitalWrite(LED_2, LOW);
-      delay(250);
-      digitalWrite(LED_2, HIGH);
-      delay(250);
-    }
-  }
-  else
-  {
-    on();
-  }
-
+  // read settings
   #if DEBUG > 0
     b = i2cReadByte(REG_CIPHER);
-    Serial.print(F("\nTP Chip Vendor: 0x"));
+    Serial.print(F("TP: Chip Vendor 0x"));
     Serial.println(b, HEX);
     b = i2cReadByte(REG_FIRMID);
-    Serial.print(F("TP Firmware: 0x"));
+    Serial.print(F("TP: Firmware 0x"));
     Serial.println(b, HEX);
     b = i2cReadByte(REG_FT5201ID);
-    Serial.print(F("TP CTPM Vendor: 0x"));
+    Serial.print(F("TP: CTPM Vendor 0x"));
     Serial.println(b, HEX);
     b = i2cReadByte(REG_DEVICE_MODE);
-    Serial.print(F("TP Device Mode: 0x"));
+    Serial.print(F("TP: Device Mode 0x"));
     Serial.println(b, HEX);
+    Serial.println(F("TP: Reg 0x80...0xA9"));
+    for(i = 0x80; i <= 0xA9; i++)
+    {
+      Serial.print(i, HEX);
+      Serial.print("  ");
+      Serial.println(i2cReadByte(i));
+    }
   #endif
 
+  // write settings
+  i2cWriteByte(REG_MODE, 1);                 // Interrupt status to host
   i2cWriteByte(REG_THGROUP, 35);             // Valid touching detect threshold
-  /*i2cWriteByte(REG_THPEAK, 60);              // Valid touching peak detect threshold
+  i2cWriteByte(REG_ENTERMONITOR, 120);       // Delay to enter 'Monitor' status (s)
+
+  /*
+  i2cWriteByte(REG_THPEAK, 60);              // Valid touching peak detect threshold
   i2cWriteByte(REG_THCAL, 140);              // Touch focus threshold
   i2cWriteByte(REG_THWATER, 211);            // Threshold when there is surface water
   i2cWriteByte(REG_THTEMP, 235);             // Threshold of temperature compensation
   i2cWriteByte(REG_THDIFF, 160);             // Touch difference threshold
   i2cWriteByte(REG_CTRL, 1);                 // Power Control Mode
   i2cWriteByte(REG_ENTERMONITOR, 200);       // Delay to enter 'Monitor' status (s)
-  i2cWriteByte(REG_PERIODACTIVE, 6);         // Period of 'Active' status (ms)
-  i2cWriteByte(REG_PERIODMONITOR, 40);*/       // Timer to enter ‘idle’ when in 'Monitor' (ms)
+  i2cWriteByte(REG_PERIODACTIVE, 6);         // Period of 'Active' status (ms) 3-14
+  i2cWriteByte(REG_PERIODMONITOR, 40);       // Timer to enter ‘idle’ when in 'Monitor' (ms) 3-14
+  */
 
-  /*for(i = 0x80; i <= 0x89; i++)
+  // check error register
+  for(i=0; i < 10; i++)
   {
-    Serial.print(i, HEX);
-    Serial.print("  ");
-    Serial.println(i2cReadByte(i));
-  }*/
+    b = i2cReadByte(REG_ERR);
+    if(b == 0) // okay
+    {
+      on();
+      break;
+    }
+    else // error
+    {
+      #if DEBUG > 0
+        Serial.print(F("TP: error 0x"));
+        Serial.println(b, HEX);
+      #endif
+    }
+  }
 }
 
 void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)
 {
   uint8_t b;
-  
+
   b = i2cReadByte(addr++);
   tp->event = b >> 6;
-  b &= 0x0f;
+  b &= 0x0F;
   tp->x = ((uint16_t)b) << 8;
   tp->x |= i2cReadByte(addr++);
-  
+
   b = i2cReadByte(addr++);
   tp->id = b >> 4;
-  b &= 0x0f;
+  b &= 0x0F;
   tp->y = ((uint16_t)b) << 8;
   tp->y |= i2cReadByte(addr);
 }
@@ -163,15 +168,18 @@ void Touchpanel_FT5x06::loop()
   if(!power)
     return;
 
+  if(digitalRead(INT) && (mouseButtonState == 0)) // no interrupt -> no new data
+    return;
+
   b = i2cReadByte(REG_STATE);
   #if DEBUG > 2
-    Serial.print(F("TP State: 0x"));
+    Serial.print(F("TP: state 0x"));
     Serial.println(b, HEX);
   #endif
   if(b == STATE_WORK)
   {
     b = i2cReadByte(REG_TD_STATUS);
-    if(b != 0 && b != 255) // no touch points on 0 and 255
+    if((b != 0) && (b != 255)) // no touch points on 0 and 255
     {
       nrPoints = b & 0x07;
       readTouchPoint(REG_TOUCH_1, &touch[0]);
@@ -182,20 +190,20 @@ void Touchpanel_FT5x06::loop()
       //readTouchPoint(REG_TOUCH_5, &touch[4]);
 
       #if DEBUG > 1
-        Serial.print(F("TP Points: 0x"));
+        Serial.print(F("TP: Points 0x"));
         Serial.print(nrPoints, HEX);
-        Serial.print(F(" ID: 0x"));
+        Serial.print(F(" ID 0x"));
         Serial.print(touch[0].id, HEX);
-        Serial.print(F(" Event: 0x"));
+        Serial.print(F(" Event 0x"));
         Serial.println(touch[0].event, HEX);
       #endif
 
       if(nrPoints >= 1 && touch[0].id == 0 && (touch[0].event == 0 || touch[0].event == 2)) // put down or contact
       {
-        mouseX  = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
-        mouseY  = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
+        mouseX = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
+        mouseY = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
 
-        b = i2cReadByte(REG_GESTURE_ID);
+        b = i2cReadByte(REG_GESTURE_ID); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
         if(b == GESTURE_ZOOM_IN)
           mouseZoom = 1;
         else if(b == GESTURE_ZOOM_OUT)
@@ -206,9 +214,13 @@ void Touchpanel_FT5x06::loop()
         mouseButtonDown();
       }
       else
+      {
         mouseButtonUp();
+      }
     }
     else
+    {
       mouseButtonUp();
+    }
   }
 }

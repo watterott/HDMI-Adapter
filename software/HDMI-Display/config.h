@@ -50,11 +50,12 @@
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
 #define LOOPTIME           16 // 16 = 60 Hz polling interval
 #define TOUCHMAX        4095L // maximal touch/mouse position
+#define USE_WATCHDOG        0 // use watchdog timer
 #define DEBUG               0 // set debug output level (0=nothing, 1=minimal...4)
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "1.50"
+#define VERSION_STRING  "2.01"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nTFT: " STR(SCREEN_WIDTH) "x" STR(SCREEN_HEIGHT)"\nTouch: " STR(TOUCHPANEL_TYPE) "\nhttps://github.com/watterott/HDMI-Display"
 
 // Display Types
@@ -146,15 +147,25 @@
 #define SWAP(x,y) do{ (x)=(x)^(y); (y)=(x)^(y); (x)=(x)^(y); }while(0)
 #endif
 
+#ifndef wdt_reset
+#define wdt_reset() __asm__ __volatile__ ("wdr")
+#endif
+
 // IO ports
-#define LED_1           5 // first LED PC6
-#define LED_2          13 // second LED PC7
+#define LED_GREEN       5 // green LED_1 PC6
+#define LED_RED        13 // red LED_2 PC7
 #define BL_1            9 // PWM backlight boost converter PB5
 #define BL_2           10 // PWM display pin 35 PB6
 #define INT             4 // touch interrupt PD4
 #define SW_1       (1<<5) // switch PD5
 #define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
 #define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
+#ifndef SDA
+#define SDA             2 // I2C SDA PD1
+#endif
+#ifndef SCL
+#define SCL             3 // I2C SCL PD0
+#endif
 
 // Touchpanel analog inputs 
 #define AXM            A1 // touch X- PF6
@@ -163,7 +174,7 @@
 #define AYP            A0 // touch Y+ PF7
 
 // External EDID EEPROM
-#define EEPROMSIZE    256 // size in bytes
-#define EEPROMADDR   0x50 // I2C address
+#define EEPROM_SIZE   256 // size in bytes
+#define EEPROM_ADDR  0x50 // I2C address
 
 #endif //CONFIG_H
