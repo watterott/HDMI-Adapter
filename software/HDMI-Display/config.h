@@ -39,19 +39,21 @@
 #define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600
 #define TOUCHPANEL_TYPE  TOUCHPANEL_NONE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
 
-#define ORIENTATION         0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
 #define BACKLIGHT        BL_1 // backlight pin (BL_1 or BL_2), BL_2 for HYxxxCTP
 #define BACKLIGHT_INV       0 // backlight invert pwm (0 or 1), 1 for HYxxxCTP
+
 #define BRIGHTNESS        255 // backlight brightness (0..255)
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
+#define ORIENTATION         0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
 #define LOOPTIME           16 // 16 = 60 Hz polling interval
 #define TOUCHMAX        4095L // maximal touch/mouse position
+#define USE_HIDPROJECT      0 // use github.com/NicoHood/HID (0=no, 1=yes)
 #define USE_WATCHDOG        0 // use watchdog timer
 #define DEBUG               0 // set debug output level (0=nothing, 1=minimal...4)
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "2.01"
+#define VERSION_STRING  "2.02"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nTFT: " STR(SCREEN_WIDTH) "x" STR(SCREEN_HEIGHT)"\nTouch: " STR(TOUCHPANEL_TYPE) "\nhttps://github.com/watterott/HDMI-Display"
 
 // Display Types
@@ -59,7 +61,7 @@
 #define DISPLAY_640x480          2 //  640 x  480
 #define DISPLAY_720x480          3 //  720 x  480
 #define DISPLAY_800x480          4 //  800 x  480 (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
-#define DISPLAY_800x480_720x480  5 //  800 x  480 with 720x480 (480p) fallback (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
+#define DISPLAY_800x480_720x480  5 //  800 x  480 with 720x480 fallback (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
 #define DISPLAY_800x480HY        6 //  800 x  480 (HY070CTP, HY070CTP-A)
 #define DISPLAY_800x600          7 //  800 x  600
 #define DISPLAY_1024x600         8 // 1024 x  600 (HY070CTP-HD, HY101CTP)
@@ -76,75 +78,75 @@
 
 // Check Configurations
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
-#  undef SCREENSAVERTIME
-#  define SCREENSAVERTIME 0
-#  define TPC_X0 0    // not needed - touchpanel calibration x0
-#  define TPC_X1 0    // not needed - touchpanel calibration x1
-#  define TPC_Y0 0    // not needed - touchpanel calibration y0
-#  define TPC_Y1 0    // not needed - touchpanel calibration y1
+  #undef SCREENSAVERTIME
+  #define SCREENSAVERTIME 0
+  #define TPC_X0 0    // not needed - touchpanel calibration x0
+  #define TPC_X1 0    // not needed - touchpanel calibration x1
+  #define TPC_Y0 0    // not needed - touchpanel calibration y0
+  #define TPC_Y1 0    // not needed - touchpanel calibration y1
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
-#  define TPC_X0 80   // touchpanel calibration x0
-#  define TPC_X1 930  // touchpanel calibration x1
-#  define TPC_Y0 825  // touchpanel calibration y0
-#  define TPC_Y1 160  // touchpanel calibration y1
+  #define TPC_X0 80   // touchpanel calibration x0
+  #define TPC_X1 930  // touchpanel calibration x1
+  #define TPC_Y0 825  // touchpanel calibration y0
+  #define TPC_Y1 160  // touchpanel calibration y1
 #elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-#  define TPC_X0 0    // not needed - touchpanel calibration x0
-#  define TPC_X1 0    // not needed - touchpanel calibration x1
-#  define TPC_Y0 0    // not needed - touchpanel calibration y0
-#  define TPC_Y1 0    // not needed - touchpanel calibration y1
+  #define TPC_X0 0    // not needed - touchpanel calibration x0
+  #define TPC_X1 0    // not needed - touchpanel calibration x1
+  #define TPC_Y0 0    // not needed - touchpanel calibration y0
+  #define TPC_Y1 0    // not needed - touchpanel calibration y1
 #else
-#  error "Please select a TOUCHPANEL_TYPE"
+  #error "Please select a TOUCHPANEL_TYPE"
 #endif
 
 #if DISPLAY_TYPE == DISPLAY_480x272
-#  define SCREEN_WIDTH   480
-#  define SCREEN_HEIGHT  272
+  #define SCREEN_WIDTH   480
+  #define SCREEN_HEIGHT  272
 #elif DISPLAY_TYPE == DISPLAY_640x480
-#  define SCREEN_WIDTH   640
-#  define SCREEN_HEIGHT  480
+  #define SCREEN_WIDTH   640
+  #define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_720x480
-#  define SCREEN_WIDTH   720
-#  define SCREEN_HEIGHT  480
+  #define SCREEN_WIDTH   720
+  #define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_800x480 || \
       DISPLAY_TYPE == DISPLAY_800x480_720x480 || \
       DISPLAY_TYPE == DISPLAY_800x480HY
-#  define SCREEN_WIDTH   800
-#  define SCREEN_HEIGHT  480
+  #define SCREEN_WIDTH   800
+  #define SCREEN_HEIGHT  480
 #elif DISPLAY_TYPE == DISPLAY_800x600
-#  define SCREEN_WIDTH   800
-#  define SCREEN_HEIGHT  600
+  #define SCREEN_WIDTH   800
+  #define SCREEN_HEIGHT  600
 #elif DISPLAY_TYPE == DISPLAY_1024x600
-#  define SCREEN_WIDTH   1024
-#  define SCREEN_HEIGHT  600
+  #define SCREEN_WIDTH   1024
+  #define SCREEN_HEIGHT  600
 #elif DISPLAY_TYPE == DISPLAY_1024x768
-#  define SCREEN_WIDTH   1024
-#  define SCREEN_HEIGHT  768
+  #define SCREEN_WIDTH   1024
+  #define SCREEN_HEIGHT  768
 #elif DISPLAY_TYPE == DISPLAY_1280x720
-#  define SCREEN_WIDTH   1280
-#  define SCREEN_HEIGHT  720
+  #define SCREEN_WIDTH   1280
+  #define SCREEN_HEIGHT  720
 #elif DISPLAY_TYPE == DISPLAY_1280x768
-#  define SCREEN_WIDTH   1280
-#  define SCREEN_HEIGHT  768
+  #define SCREEN_WIDTH   1280
+  #define SCREEN_HEIGHT  768
 #elif DISPLAY_TYPE == DISPLAY_1280x800
-#  define SCREEN_WIDTH   1280
-#  define SCREEN_HEIGHT  800
+  #define SCREEN_WIDTH   1280
+  #define SCREEN_HEIGHT  800
 #elif DISPLAY_TYPE == DISPLAY_1280x1024
-#  define SCREEN_WIDTH   1280
-#  define SCREEN_HEIGHT  1024
+  #define SCREEN_WIDTH   1280
+  #define SCREEN_HEIGHT  1024
 #else
-#  error "Please select a DISPLAY_TYPE"
+  #error "Please select a DISPLAY_TYPE"
 #endif
 
 #if ARDUINO < 10606
-#error "Arduino IDE 1.6.6 or greater required. Please update your IDE."
+  #error "Arduino IDE 1.6.6 or greater required. Please update your IDE."
 #endif
 
 #ifndef SWAP
-#define SWAP(x,y) do{ (x)=(x)^(y); (y)=(x)^(y); (x)=(x)^(y); }while(0)
+  #define SWAP(x,y) do{ (x)=(x)^(y); (y)=(x)^(y); (x)=(x)^(y); }while(0)
 #endif
 
 #ifndef wdt_reset
-#define wdt_reset() __asm__ __volatile__ ("wdr")
+  #define wdt_reset() __asm__ __volatile__ ("wdr")
 #endif
 
 // IO ports
@@ -157,10 +159,10 @@
 #define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
 #define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
 #ifndef SDA
-#define SDA             2 // I2C SDA PD1
+  #define SDA           2 // I2C SDA PD1
 #endif
 #ifndef SCL
-#define SCL             3 // I2C SCL PD0
+  #define SCL           3 // I2C SCL PD0
 #endif
 
 // Touchpanel analog inputs 

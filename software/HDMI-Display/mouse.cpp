@@ -21,8 +21,11 @@
 */
 
 #include "Arduino.h"
-#include "HID.h"
 #include "HDMI-Display.h"
+
+#if USE_HIDPROJECT == 0 || !defined(USE_HIDPROJECT)
+
+#include "HID.h"
 
 static const uint8_t _hidReportDescriptor[] PROGMEM =
 {
@@ -165,3 +168,5 @@ bool Mouse_::isPressed(uint8_t b)
 
   return false;
 }
+
+#endif //USE_HIDPROJECT == 0 || !defined(USE_HIDPROJECT)

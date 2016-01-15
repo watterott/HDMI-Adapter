@@ -49,15 +49,18 @@ Settings settings;
 Backlight backlight;
 TWI twi;
 EDID edid;
-Mouse_ Mouse;
-#if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
-Touchpanel_Resistive touchpanel;
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-Touchpanel_FT5x06 touchpanel;
-#else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
-Touchpanel_None touchpanel;
+#if USE_HIDPROJECT > 0
+  //SingleAbsoluteMouse
+#else
+  Mouse_ Mouse;
 #endif
-
+#if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
+  Touchpanel_Resistive touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
+  Touchpanel_FT5x06 touchpanel;
+#else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
+  Touchpanel_None touchpanel;
+#endif
 
 bool isButtonPressed()
 {
@@ -126,7 +129,12 @@ void setup()
   #endif
 
   twi.begin(); // init I2C (default speed: 100 kHz)
-  Mouse.begin(); // init USB mouse
+
+  #if USE_HIDPROJECT > 0
+    SingleAbsoluteMouse.begin(); // init USB mouse (from HID-Project)
+  #else
+    Mouse.begin(); // init USB mouse
+  #endif
 
   settings.setup(); // set default settings
   settings.load(); // load settings

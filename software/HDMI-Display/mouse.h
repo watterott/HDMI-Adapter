@@ -20,6 +20,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#if USE_HIDPROJECT == 0 || !defined(USE_HIDPROJECT)
+
 #ifndef MOUSE_H
 #define MOUSE_H
 
@@ -52,3 +54,5 @@ class Mouse_
 };
 
 #endif //MOUSE_H
+
+#endif //USE_HIDPROJECT == 0 || !defined(USE_HIDPROJECT)
