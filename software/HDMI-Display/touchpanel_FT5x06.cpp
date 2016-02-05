@@ -62,7 +62,7 @@ void Touchpanel_FT5x06::setup()
   #if DEBUG > 0
     Serial.println(F("TP: init chip..."));
   #endif
-  for(i=0; i < 10; i++)
+  for(i=0; i < 5; i++)
   {
     b = i2cReadByte(REG_CIPHER);
     if(b == CHIP_VENDOR_ID)
@@ -200,8 +200,8 @@ void Touchpanel_FT5x06::loop()
 
       if(nrPoints >= 1 && touch[0].id == 0 && (touch[0].event == 0 || touch[0].event == 2)) // put down or contact
       {
-        mouseX = touch[0].x * TOUCHMAX / (SCREEN_WIDTH - 1);
-        mouseY = touch[0].y * TOUCHMAX / (SCREEN_HEIGHT - 1);
+        mouseX = touch[0].x * TOUCHMAX / (settings.data.screenWidth - 1);
+        mouseY = touch[0].y * TOUCHMAX / (settings.data.screenHeight - 1);
 
         b = i2cReadByte(REG_GESTURE_ID); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
         if(b == GESTURE_ZOOM_IN)

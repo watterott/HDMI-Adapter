@@ -19,6 +19,7 @@
       ATT    -> Touchpanel on
       ATU    -> Touchpanel off
       ATE    -> Write EDID to EEPROM (SDA+SCL closed)
+      ATF    -> Write custom EDID to EEPROM (SDA+SCL closed)
       ATD    -> Load default settings
       ATSx?  -> Read register x
       ATSx=y -> Write register x (value y)
@@ -30,7 +31,9 @@
       4 -> Time for Screensaver in seconds (0...65535, 0=always on)
       5 -> Backlight (0...255)
       6 -> Orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
-  
+      7 -> Screen width
+      8 -> Screen height
+
   Resistive Touchpanel Calibration
     1. Hold down the switch and plug in the USB connector (power on).
     2. Press on the left edge (x axis) about 5s till the LED blinking changes.
@@ -181,6 +184,11 @@ void ATCommandsLoop()
       case '\n': // info
       case '\r':
         Serial.println(F(INFO_STRING));
+        Serial.println(F("Touch: " STR(TOUCHPANEL_TYPE)));
+        Serial.print(F("TFT: "));
+        Serial.print(settings.data.screenWidth);
+        Serial.print("x");
+        Serial.println(settings.data.screenHeight);
         sendAck();
         break;
 
@@ -215,7 +223,14 @@ void ATCommandsLoop()
         break;
 
       case 'E': // write EDID to external EEPROM
-        if(edid.writeEDID())
+        if(edid.writeEDID(DISPLAY_TYPE))
+          sendAck();
+        else
+          sendNack();
+        break;
+
+      case 'F': // write custom EDID to external EEPROM
+        if(edid.writeEDID(0))
           sendAck();
         else
           sendNack();

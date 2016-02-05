@@ -54,8 +54,8 @@ void Touchpanel::mouseButtonDown()
 
   if(*axes & 0x08) // map to screen coordinates
   {
-    x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
-    y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
+    x = map(x, 0, TOUCHMAX, 0, settings.data.screenWidth);
+    y = map(y, 0, TOUCHMAX, 0, settings.data.screenHeight);
   }
   #if USE_HIDPROJECT > 0
     else
@@ -129,8 +129,8 @@ void Touchpanel::mouseButtonUp()
 
   if(*axes & 0x08) // map to screen coordinates
   {
-    x = map(x, 0, TOUCHMAX, 0, SCREEN_WIDTH);
-    y = map(y, 0, TOUCHMAX, 0, SCREEN_HEIGHT);
+    x = map(x, 0, TOUCHMAX, 0, settings.data.screenWidth);
+    y = map(y, 0, TOUCHMAX, 0, settings.data.screenHeight);
   }
   #if USE_HIDPROJECT > 0
     else

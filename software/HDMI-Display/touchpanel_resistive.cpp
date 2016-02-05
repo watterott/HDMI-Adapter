@@ -47,7 +47,7 @@ void Touchpanel_Resistive::setup()
   }
 
   // check touchpanel connection
-  for(uint8_t i=0; i < 10; i++)
+  for(uint8_t i=0; i < 5; i++)
   {
     int x;
 
@@ -88,7 +88,7 @@ void Touchpanel_Resistive::setup()
 }
 
 int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)
-{   
+{
   int delta = axis->firstTouch - value;
   if(delta < 0)
     delta = -delta; 
@@ -105,7 +105,7 @@ int Touchpanel_Resistive::calcPoint(int value, struct Axis *axis)
 }
   
 int Touchpanel_Resistive::readX()
-{ 
+{
   int x;
 
   pinMode(AYM, INPUT);

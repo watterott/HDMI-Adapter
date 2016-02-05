@@ -9,6 +9,9 @@ const PROGMEM Settings::Data Settings::defaults =
   SCREENSAVERTIME,  // default seconds timeout, 0 = always on
   BRIGHTNESS,       // default backlight brightness (0..255)
   ORIENTATION,      // default orientation
+  SCREEN_WIDTH,     // default screen width
+  SCREEN_HEIGHT,    // default screen height
+  //----------------
   0                 // checksum
 };
 
