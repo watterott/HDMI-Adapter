@@ -27,6 +27,15 @@ Display                          | Size  | Resolution | LED
  HY101CTP***                     | 10.1" | 1024 x 600 | 5V
 **Innolux**                      |       |            |
  AT050TN33                       |  5.0" |  480 x 272 |  40mA @ 20V
+**Multi-Inno**                   |       |            |
+ MI0500PT-5                      |  5.0" |  800 x 480 |
+ MI0500PT-6                      |  5.0" |  800 x 480 |
+ MI0500YT-1                      |  5.0" |  800 x 480 |
+ MI0600BT                        |  6.0" |  800 x 480 |
+**Newhaven Display**             |       |            |
+ NHD-5.0-800480TF-ATXL#-T        |  5.0" |  800 x 480 |  60mA @ 19V
+ NHD-7.0-800480EF-ATXL#-T        |  7.0" |  800 x 480 |  60mA @ 16V
+ NHD-7.0-800480EF-ATXV#-T        |  7.0" |  800 x 480 | 160mA @  9V
 **Universal**                    |       |            |
  KD50G21-40NT                    |  5.0" |  800 x 480 |  40mA @ 19V
 **Sunbond**                      |       |            |
