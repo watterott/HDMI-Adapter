@@ -36,6 +36,8 @@ Display                          | Size  | Resolution | LED
  NHD-5.0-800480TF-ATXL#-T        |  5.0" |  800 x 480 |  60mA @ 19V
  NHD-7.0-800480EF-ATXL#-T        |  7.0" |  800 x 480 |  60mA @ 16V
  NHD-7.0-800480EF-ATXV#-T        |  7.0" |  800 x 480 | 160mA @  9V
+**Riverdi**                      |       |            |
+ RVT50UQTNWR0x                   |  5.0" |  800 x 480 |  40mA @ 18V
 **Universal**                    |       |            |
  KD50G21-40NT                    |  5.0" |  800 x 480 |  40mA @ 19V
 **Sunbond**                      |       |            |
