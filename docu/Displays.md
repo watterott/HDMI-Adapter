@@ -25,6 +25,8 @@ Display                          | Size  | Resolution | LED
  HY070CTP***                     |  7.0" |  800 x 480 | 5V (140mA @ 10V)
  HY070CTP-HD***                  |  7.0" | 1024 x 600 | 5V (160mA @  9V)
  HY101CTP***                     | 10.1" | 1024 x 600 | 5V
+**HTdisplay**                    |       |            |
+ HT800050G                       |  5.0" |  800 x 480 |  40mA @ 20V
 **Innolux**                      |       |            |
  AT050TN33                       |  5.0" |  480 x 272 |  40mA @ 20V
 **Multi-Inno**                   |       |            |
