@@ -9,8 +9,9 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Add the following URL to the Arduino Boards Manager (*File->Preferences*) and install the *Watterott Boards* via the Boards Manager:
-  ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
+* Add the following URL to the Arduino Boards Manager (*File->Preferences*):
+  ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json``` 
+  and install the *Watterott Boards* via the Boards Manager.
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Connect the USB Data port of the HDMI-Adapter (**without display**) to the computer.
 * On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
