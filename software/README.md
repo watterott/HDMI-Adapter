@@ -1,26 +1,25 @@
-# ATmega32u4 Firmware
+# HDMI-Display Firmware
 The programs can be compiled and uploaded using the Arduino IDE with our board support package.
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
 * [Board Support Package (BSP)](https://github.com/watterott/wattuino/tree/master/software/Arduino#watterott-board-support-package)
-* [ATmega32u4 Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip)
+* [HDMI-Display Firmware for ATmega32u4](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Add the following URL to the Arduino Boards Manager: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
-  and install the *Watterott Boards* via the Boards Manager.
-  As an alternative you can also download the [BSP](https://github.com/watterott/wattuino/raw/master/software/Arduino/watterott.zip) and copy the archive content to your Arduino program directory under: ```<ARDUINO>/hardware/watterott/```.
+* Add the following URL to the Arduino Boards Manager (*File->Preferences*) and install the *Watterott Boards* via the Boards Manager:
+  ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
 * Download the [Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
-* Connect the USB Data port of the HDMI-Adapter (**without display**) to your computer.
+* Connect the USB Data port of the HDMI-Adapter (**without display**) to the computer.
 * On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
 
 ## Build and Upload
-* Start the Arduino IDE with connected HDMI-Adapter (without display).
+* Start the Arduino IDE with connected HDMI-Adapter (**without display**).
 * Open the Arduino Sketch ```HDMI-Display.ino```.
-* Set configurations (display and touch panel) in ```config.h```
+* Set configurations (display and touch panel) in the file ```config.h```
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
@@ -29,7 +28,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Connecting
-* Disconnect the HDMI-Adapter and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
+* Disconnect the HDMI-Adapter from the computer and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
   Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
@@ -38,7 +37,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via serial commands (9600 baud 8N1, Arduino Serial Monitor) and the settings are working directly.
+* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud 8N1**, Arduino Serial Monitor) and the settings are working directly.
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the commands can be send like this:
 
@@ -64,7 +63,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and send the serial command ```ATE``` (9600 baud 8N1, Arduino Serial Monitor).
+* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and send the serial command ```ATE``` (**9600 baud 8N1**, Arduino Serial Monitor).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
 
