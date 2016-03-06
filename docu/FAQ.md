@@ -53,6 +53,7 @@ The Qt plugin *evdevtouch* is not working with the touchpanel, please use *tslib
 ## Why is the touchpanel/mouse not working under Kodi/XBMC?
 Kodi needs access to the input devices and this can be done by creating the following rule.
 The mouse device also has to use screen coordinates: [serial command *ATS6=8*](https://github.com/watterott/HDMI-Display/tree/master/software#touchpanel-orientation).
+
 Open/create *99-input.rules*
 ```
 nano /etc/udev/rules.d/99-input.rules:

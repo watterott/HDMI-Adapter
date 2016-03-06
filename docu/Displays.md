@@ -11,6 +11,7 @@ Display                          | Size  | Resolution | LED
  800320A-TMH-PW-N                |  4.6" |  800 x 320 |  60mA @ 19V
  800480D-TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 23V
  800480E-TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 23V
+ 800480Q TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 20V
 **ER**                           |       |            |
  TFT043-3                        |  4.3" |  480 x 272 |  15mA @ 25V
  TFT050-3                        |  5.0" |  800 x 480 |  40mA @ 19V
@@ -24,6 +25,8 @@ Display                          | Size  | Resolution | LED
  HY070CTP-A                      |  7.0" |  800 x 480 | 140mA @ 10V
  HY070CTP***                     |  7.0" |  800 x 480 | 5V (140mA @ 10V)
  HY070CTP-HD***                  |  7.0" | 1024 x 600 | 5V (160mA @  9V)
+ HY070CTP-HD-RGB***              |  7.0" | 1024 x 600 | 5V
+ HY070CTP-HD-RGB IPS***          |  7.0" | 1024 x 600 | 5V
  HY101CTP***                     | 10.1" | 1024 x 600 | 5V
 **HTdisplay**                    |       |            |
  HT800050G                       |  5.0" |  800 x 480 |  40mA @ 20V
@@ -75,5 +78,5 @@ Pin    | Signal
     36 | Gnd
     37 | XR/X+ or SDA when TP_SDA closed
     38 | YD/Y- or SCL when TP_SCL closed
-    39 | XL/X-
+    39 | XL/X- or RST
     40 | YU/Y+ or INT when TP_INT closed
