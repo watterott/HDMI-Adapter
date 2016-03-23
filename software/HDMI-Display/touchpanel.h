@@ -11,6 +11,7 @@ class Touchpanel
     int8_t   mouseZoom;        // mouse zoom  (-127...+127)
 
     Touchpanel();
+    bool isOn();
     void on();
     void off();
     void setup();

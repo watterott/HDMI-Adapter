@@ -10,6 +10,11 @@ Touchpanel::Touchpanel()
   mouseZoom = 0;
 }
 
+bool Touchpanel::isOn()
+{
+  return (power != 0)?true:false;
+}
+
 void Touchpanel::on()
 {
   power = 1;

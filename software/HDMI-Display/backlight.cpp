@@ -99,7 +99,7 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   int16_t p = power;
 
   // screensaver
-  if((settings.data.screensaverTime != 0) && power && targetPower)
+  if((settings.data.screensaverTime != 0) && power && targetPower && touchpanel.isOn())
   {
     unsigned long t = millis();
     uint16_t dt = (uint16_t)((t - lastTouchTime) / 1000UL);

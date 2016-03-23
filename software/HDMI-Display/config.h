@@ -6,25 +6,25 @@
 
   5" or 7" 800x480 with res. touch
     #define DISPLAY_TYPE    DISPLAY_800x480
-    #define TOUCHPANEL_TYPE TOUCHPANEL_RESISTIVE
+    #define TOUCHPANEL_TYPE TOUCHPANEL_RESISTIVE //open jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_1
     #define BACKLIGHT_INV   0
 
   5" 800x480 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_800x480
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
   7" 800x480 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_800x480HY
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
   7" or 10" 1024x600 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_1024x600
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
@@ -36,11 +36,10 @@
 */
 
 // --- Settings ---
-#define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 DISPLAY_800x480HY DISPLAY_1024x600
-#define TOUCHPANEL_TYPE  TOUCHPANEL_RESISTIVE // TOUCHPANEL_NONE TOUCHPANEL_RESISTIVE TOUCHPANEL_FT5x06
-
+#define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 or DISPLAY_800x480HY or DISPLAY_1024x600
+#define TOUCHPANEL_TYPE  TOUCHPANEL_RESISTIVE // TOUCHPANEL_NONE or TOUCHPANEL_RESISTIVE or TOUCHPANEL_FT5x06
 #define BACKLIGHT        BL_1 // backlight pin (BL_1 or BL_2), BL_2 for HYxxxCTP
-#define BACKLIGHT_INV       0 // backlight invert pwm (0 or 1), 1 for HYxxxCTP
+#define BACKLIGHT_INV    0    // backlight invert pwm (0 or 1), 1 for HYxxxCTP
 
 #define BRIGHTNESS        255 // backlight brightness (0..255)
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
@@ -53,7 +52,7 @@
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "2.03"
+#define VERSION_STRING  "2.04"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nInfo: https://github.com/watterott/HDMI-Display"
 
 // Display Types
