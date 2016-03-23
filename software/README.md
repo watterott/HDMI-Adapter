@@ -9,7 +9,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Add the following URL to the Arduino Boards Manager (*File->Preferences*) and install the *Watterott Boards* via the Boards Manager. ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
+* Add the following URL to the Boards Manager. **File->Preferences->Additional Boards Manager URLs**: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
+* Install the *Watterott AVR Boards* via the Boards Manager. **Tools->Board->Boards Manager...**.
 * Download the [HDMI-Display Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Connect the USB Data port of the HDMI-Adapter (**without display**) to the computer.
 * On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
@@ -17,8 +18,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Build and Upload
 * Start the Arduino IDE with connected HDMI-Adapter (**without display**).
-* Open the Arduino Sketch ```HDMI-Display.ino```.
-* Set configurations (display and touch panel) in the file ```config.h```
+* Open the Arduino Sketch ```HDMI-Display.ino``` from the firmware ZIP archive.
+* Set the display and touch panel configurations in the file ```config.h```
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
 * Choose the respective serial port under **Tools->Serial Port**.
 * Start build and upload: **File->Upload**.
@@ -27,12 +28,15 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Connecting
-* Disconnect the HDMI-Adapter from the computer and check the jumper settings (see [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware) and [displays compatibility list](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md)).
+* Disconnect the HDMI-Adapter from the computer and check the jumper settings (see [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware)).
+  When using a *resistive touchpanel* the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *open* and
+  for a *capacitive touchpanel (CTP)* the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *closed* and ```VCCIO``` set to 3V3.
+  If the display has an on-board backlight boost regulator then the jumpers ```LED+``` and ```LED-``` have to be set to 5V.
   Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
 * If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md). Or if you are using a Raspberry Pi then the display resolution has to be set in the [config.txt](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt).
-* If the red LED is blinking then no touchpanel was found. Check your cable connections in this case.
+* If the red LED is blinking then no touchpanel was found. Check your cable connections and the firmware configuration in this case.
 
 
 ## Touchpanel Orientation
@@ -62,7 +66,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers SDA+SCL and send the serial command ```ATE``` (**9600 baud 8N1**, Arduino Serial Monitor).
+* To program the EDID data into the EEPROM, close the jumpers *SDA+SCL* and send the serial command ```ATE``` (**9600 baud 8N1**, Arduino Serial Monitor).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
 
@@ -72,6 +76,8 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
   ```
 
   *Note: If you are using a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming.*
+
+* After the EEPROM programming a computer can automatically detect the display via HDMI.
 
 
 ## Optional Resistive Touchpanel Calibration
@@ -89,7 +95,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
     When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
 
 * **EDID Data:**
-    On a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
+    On a display with capacitive touchpanel the jumpers *SDA+SCL* have to be opened after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
     Because the display timings are not standard timings some operating systems are ignoring the settings. In this case the HDMI display settings have to be set by hand.
     See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md) for further infos.
 

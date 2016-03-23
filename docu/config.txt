@@ -1,4 +1,5 @@
 # Raspberry Pi Settings - /boot/config.txt
+# http://www.raspberrypi.org/documentation/configuration/config-txt.md
 # http://elinux.org/RPiconfig
 # hdmi_cvt=<width> <height> <framerate> <aspect> <margins> <interlaced> <reduced_blanking>
 # hdmi_timing=<h_active_pixels> <h_sync_polarity> <h_front_porch> <h_sync_pulse> <h_back_porch> <v_active_lines> <v_sync_polarity> <v_front_porch> <v_sync_pulse> <v_back_porch> <v_sync_offset_a> <v_sync_offset_b> <pixel_rep> <framerate> <interlaced> <pixel_freq> <aspect>
@@ -19,7 +20,6 @@ hdmi_ignore_edid=0xa5000080
 hdmi_group=2
 hdmi_mode=87
 
-
 # uncomment for 480x272 display (TFT043-3)
 #hdmi_timings=480 0 1 41 2 272 0 2 10 2 0 0 0 60 0 9009000 3
 
@@ -35,7 +35,6 @@ hdmi_mode=87
 
 # uncomment for 1024x600 display (HY070CTP-HD, HY101CTP)
 #hdmi_cvt=1024 600 60 3 0 0 0
-
 
 # 0 degrees - normal
 #display_rotate=0

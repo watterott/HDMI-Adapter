@@ -12,6 +12,7 @@ Display                          | Size  | Resolution | LED
  800480D-TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 23V
  800480E-TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 23V
  800480Q TMH-PW-N                |  5.0" |  800 x 480 |  40mA @ 20V
+ 800480S TMH-PW-N                |  5.0" |  800 x 480 | 120mA @ 13V
 **ER**                           |       |            |
  TFT043-3                        |  4.3" |  480 x 272 |  15mA @ 25V
  TFT050-3                        |  5.0" |  800 x 480 |  40mA @ 19V
@@ -53,8 +54,8 @@ Display                          | Size  | Resolution | LED
 **Note:**
 When using a *resistive touchpanel* on pin 37-40 the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *open* and
 for a *capacitive touchpanel* (CTP, e.g. FT5206 controller) the jumpers ```TP_SDA+TP_SCL+TP_INT``` have to be *closed* and ```VCCIO``` set to 3V3.
-Also the respective firmware has to be flashed to the ATmega32u4 microcontroller to insure that the correct logic voltage (3V3) is set to the pins 37-40.
-Further infos can be found in the [schematics](https://github.com/watterott/HDMI-Display/tree/master/hardware).
+Also the respective firmware has to be flashed to the ATmega32u4 microcontroller.
+Further infos can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 
 
 ## Display Connector Pinout
