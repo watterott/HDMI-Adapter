@@ -1,5 +1,5 @@
 # HDMI-Display Firmware
-The programs can be compiled and uploaded using the Arduino IDE with our board support package.
+The firmware can be compiled and uploaded using the Arduino IDE with our board support package (BSP).
 
 ## Files
 * [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
@@ -22,7 +22,7 @@ The programs can be compiled and uploaded using the Arduino IDE with our board s
 * Set the display and touch panel configurations in the file ```config.h```
 * Select **ATmega32u4 (16 MHz)** under **Tools->Board**.
 * Choose the respective serial port under **Tools->Serial Port**.
-* Start build and upload: **File->Upload**.
+* Start build and upload: **Sketch->Upload**.
 * Wait till *Done uploading.* is shown.
 * If on error occurs have a look in the [Known Issues](https://github.com/watterott/HDMI-Display/tree/master/software#known-issues).
 
