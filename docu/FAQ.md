@@ -29,22 +29,29 @@ and the jumper settings can be found in the [schematics PDF file](https://github
 
 
 ## How to emulate a right mouse button under X-Window-System?
-Open *evdev.conf*
-```
-nano /etc/X11/xorg.conf.d/evdev.conf
-```
-and add the following section:
-```
-Section "InputClass"
-    Identifier "Touchscreen"
-    MatchProduct "ATmega32u4 USB IO Board"
-    Driver "evdev"
-    Option "EmulateThirdButton" "1"
-    Option "EmulateThirdButtonTimeout" "1000"
-    Option "EmulateThirdButtonMoveThreshold" "30"
-EndSection
-```
+* **Debian Wheezy**
 
+    Open *evdev.conf*
+    ```
+    nano /etc/X11/xorg.conf.d/evdev.conf
+    ```
+    and add the following section:
+    ```
+    Section "InputClass"
+        Identifier "Touchscreen"
+        MatchProduct "ATmega32u4 USB IO Board"
+        Driver "evdev"
+        Option "EmulateThirdButton" "1"
+        Option "EmulateThirdButtonButton" "3"
+        Option "EmulateThirdButtonTimeout" "1000"
+        Option "EmulateThirdButtonMoveThreshold" "30"
+    EndSection
+    ```
+
+* **Debian Jessie**
+
+    The *EmulateThirdButton* option has be removed from Jessie and as workaround [twofing](http://plippo.de/p/twofing) can be used:
+    [Installation Guide](https://www.raspberrypi.org/forums/viewtopic.php?t=138575), [Source Code](https://github.com/Plippo/twofing)
 
 ## Does Qt evdevtouch is working with the touchpanel/mouse?
 The Qt plugin *evdevtouch* is not working with the touchpanel, please use *tslib*.
