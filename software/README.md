@@ -48,6 +48,8 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
   stty -F /dev/ttyACM0 9600 cs8
   echo ATS6=3 >> /dev/ttyACM0
   ```
+  * ```ATS0=0``` -> X offset for capacitive touchpanels
+  * ```ATS3=0``` -> Y offset for capacitive touchpanels
 
   * ```ATS6=0``` -> normal X+Y
   * ```ATS6=1``` -> invert X
@@ -102,7 +104,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 * **Windows:**
     Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.
     This is the case when *Done uploading.* is not shown after the upload process.
-    Check the driver state in the Device Manager, when the Bootloader is active (after the *Upload* is started).
+    Check the driver state in the [Device Manager](https://github.com/watterott/wattuino/raw/master/software/Caterina/usb-devices.png), when the Bootloader is active (after the *Upload* is started).
     If you cannot install the driver on Windows 8 or higher then deactivate the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8).
     The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
 
