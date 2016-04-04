@@ -203,6 +203,17 @@ void Touchpanel_FT5x06::loop()
         mouseX = touch[0].x * TOUCHMAX / (settings.data.screenWidth - 1);
         mouseY = touch[0].y * TOUCHMAX / (settings.data.screenHeight - 1);
 
+        if(settings.data.x0 != 0) // add x correction
+        {
+          int16_t x = settings.data.x0 + mouseX;
+          mouseX = x;
+        }
+        if(settings.data.y0 != 0) // add y correction
+        {
+          int16_t y = settings.data.y0 + mouseY;
+          mouseY = y;
+        }
+
         b = i2cReadByte(REG_GESTURE_ID); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
         if(b == GESTURE_ZOOM_IN)
           mouseZoom = 1;
