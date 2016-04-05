@@ -40,7 +40,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud 8N1**, Arduino Serial Monitor) and the settings are working directly.
+* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud, 8N1, Newline (NL)**, Arduino Serial Monitor) and the settings are working directly.
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the commands can be send like this:
 
@@ -68,7 +68,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers *SDA+SCL* and send the serial command ```ATE``` (**9600 baud 8N1**, Arduino Serial Monitor).
+* To program the EDID data into the EEPROM, close the jumpers *SDA+SCL* and send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, Arduino Serial Monitor).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
 
