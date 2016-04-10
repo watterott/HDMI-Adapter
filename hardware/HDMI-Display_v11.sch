@@ -12988,10 +12988,11 @@ red, green, blue -&gt; 0603</description>
 <plain>
 <text x="224.79" y="57.15" size="1.778" layer="96" rot="R90">I = 0.3V / RS</text>
 <text x="179.07" y="71.755" size="1.27" layer="96" align="center">Digikey 490-5340-6-ND</text>
-<text x="162.56" y="21.59" size="1.27" layer="95">Released under the Creative Commons Attribution Share-Alike License</text>
-<text x="162.56" y="19.05" size="1.27" layer="95">http://creativecommons.org/licenses/by-sa/4.0/</text>
-<text x="162.56" y="15.24" size="1.27" layer="95">Designed by Andreas Watterott (Watterott electronic)</text>
-<text x="162.56" y="12.7" size="1.27" layer="95">Based on the work of Hubert Kahlert (HK-Datentechnik)</text>
+<text x="162.56" y="22.86" size="1.27" layer="95" align="top-left">Released under the Creative Commons Attribution Share-Alike 
+License. http://creativecommons.org/licenses/by-sa/4.0/
+
+Designed by Andreas Watterott (Watterott electronic)
+Based on the work of Hubert Kahlert (HK-Datentechnik)</text>
 <text x="184.15" y="88.9" size="1.778" layer="97" rot="R90">TFT070-4 - 7" 800x480 BL:40mA
 TFT050-3 - 5" 800x480 BL:40mA
 TFT043-3 - 4.3" 480x272 BL:20mA</text>
