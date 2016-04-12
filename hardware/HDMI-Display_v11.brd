@@ -107,11 +107,13 @@
 <text x="6.6675" y="17.30375" size="0.5588" layer="21" font="vector" ratio="15" align="bottom-center">5V</text>
 <text x="25.7175" y="22.5425" size="0.6096" layer="21" font="vector" ratio="15" rot="R90" align="center">RST</text>
 <text x="38.25875" y="38.4175" size="0.6096" layer="21" font="vector" ratio="15" rot="R180" align="center">watterott.com</text>
-<text x="4.7625" y="21.2725" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">1</text>
-<text x="10.00125" y="21.2725" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">1</text>
-<text x="10.00125" y="40.3225" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">40</text>
-<text x="4.7625" y="40.3225" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">40</text>
+<text x="4.7625" y="21.43125" size="1.27" layer="21" font="vector" ratio="15" rot="R90" align="center">1</text>
+<text x="10.00125" y="21.43125" size="1.27" layer="21" font="vector" ratio="15" rot="R90" align="center">1</text>
+<text x="10.00125" y="40.16375" size="1.27" layer="21" font="vector" ratio="15" rot="R90" align="center">40</text>
+<text x="4.7625" y="40.16375" size="1.27" layer="21" font="vector" ratio="15" rot="R90" align="center">40</text>
 <text x="1.74625" y="10.95375" size="0.6096" layer="21" font="vector" ratio="15" rot="R270" align="center">LED Boost Converter</text>
+<text x="10.00125" y="24.13" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">(LED)</text>
+<text x="4.7625" y="24.13" size="1.016" layer="21" font="vector" ratio="15" rot="R90" align="center">(LED)</text>
 </plain>
 <libraries>
 <library name="we-chip">
