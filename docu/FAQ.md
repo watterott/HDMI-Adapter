@@ -1,6 +1,5 @@
 # Frequently Asked Questions
 
-
 ## How much power does the HDMI-Display need?
 Depending on the display and backlight current between 400 to 1000mA.
 For the Raspberry Pi we recommend a 5V 2A power supply.
@@ -28,12 +27,26 @@ Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Displa
 and the jumper settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 
 
+## How to change the console font?
+Install *kbd* and change the font with *console-setup*.
+```
+$ sudo apt-get install kbd
+$ sudo dpkg-reconfigure console-setup
+```
+```
+Encoding to use on the console: <UTF-8>
+Character set to support: <Guess optimal character set>
+Font for the console: Terminus (default is VGA)
+Font size: 6x12 (framebuffer only)
+```
+
+
 ## How to emulate a right mouse button under X-Window-System?
 * **Debian Wheezy**
 
     Open *evdev.conf*
     ```
-    nano /etc/X11/xorg.conf.d/evdev.conf
+    $ nano /etc/X11/xorg.conf.d/evdev.conf
     ```
     and add the following section:
     ```
@@ -53,6 +66,7 @@ and the jumper settings can be found in the [schematics PDF file](https://github
     The *EmulateThirdButton* option has be removed from Jessie and as workaround [twofing](http://plippo.de/p/twofing) can be used:
     [Installation Guide](https://www.raspberrypi.org/forums/viewtopic.php?t=138575), [Source Code](https://github.com/Plippo/twofing)
 
+
 ## Does Qt evdevtouch is working with the touchpanel/mouse?
 The Qt plugin *evdevtouch* is not working with the touchpanel, please use *tslib*.
 
@@ -63,7 +77,7 @@ The mouse device also has to use screen coordinates: [serial command *ATS6=8*](h
 
 Open/create *99-input.rules*
 ```
-nano /etc/udev/rules.d/99-input.rules:
+$ nano /etc/udev/rules.d/99-input.rules:
 ```
 and add the following rules:
 ```
@@ -79,16 +93,16 @@ If you get a wrong image, when you power on the HDMI output then add the line ``
 * HDMI off
 
       ```
-      tvservice -o
+      $ tvservice -o
       ```
 
 * HDMI on
 
     ```
-    tvservice -p
-    fbset -depth 8
-    fbset -depth 16
-    xrefresh
+    $ tvservice -p
+    $ fbset -depth 8
+    $ fbset -depth 16
+    $ xrefresh
     ```
 
 
