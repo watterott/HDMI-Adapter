@@ -68,7 +68,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Optional EDID EEPROM Programming
-* To program the EDID data into the EEPROM, close the jumpers *SDA+SCL* and send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, Arduino Serial Monitor).
+* To program the EDID data into the EEPROM, close the jumpers *SDA+SCL* and send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
 
@@ -79,7 +79,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
   *Note: If you are using a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming.*
 
-* After the EEPROM programming a computer can automatically detect the display via HDMI.
+* After the EEPROM programming a computer can automatically detect the adatper with display via HDMI.
 
 
 ## Optional Resistive Touchpanel Calibration
@@ -98,7 +98,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 * **EDID Data:**
     On a display with capacitive touchpanel the jumpers *SDA+SCL* have to be opened after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
-    Because the display timings are not standard timings some operating systems are ignoring the settings. In this case the HDMI display settings have to be set by hand.
+    Because the display timings are not standard timings some operating systems ignore the settings. In this case the HDMI display settings have to be set by hand.
     See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md) for further infos.
 
 * **Windows:**

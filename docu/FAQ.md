@@ -28,9 +28,8 @@ and the jumper settings can be found in the [schematics PDF file](https://github
 
 
 ## How to change the console font?
-Install *kbd* and change the font with *console-setup*.
+The font can be changed with *console-setup* or edit the file ```/etc/default/console-setup```.
 ```
-$ sudo apt-get install kbd
 $ sudo dpkg-reconfigure console-setup
 ```
 ```
@@ -114,5 +113,5 @@ A installation guide can be found [here](https://github.com/watterott/HDMI-Displ
 ## How to flash/update the EDID EEPROM?
 The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller, when the *SDA+SCL* jumpers are closed.
 The jumper settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
-The programming can be done via the firmware (serial interface command *ATE*) or this [example](https://github.com/watterott/HDMI-Display/tree/master/software/EDID-Prog).
+The programming can be done via the firmware (serial interface command [*ATE*](https://github.com/watterott/HDMI-Display/tree/master/software#optional-edid-eeprom-programming)) or this [example](https://github.com/watterott/HDMI-Display/tree/master/software/EDID-Prog).
 To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.
