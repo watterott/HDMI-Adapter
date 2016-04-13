@@ -92,6 +92,24 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 * Calibration done.
 
 
+## Serial Commands
+* ```AT```     -> Version and conig information
+* ```ATA```    -> Backlight on
+* ```ATH```    -> Backlight off
+* ```ATC```    -> Start Touchpanel calibration
+* ```ATR```    -> Reset/Restart Touchpanel
+* ```ATT```    -> Touchpanel on
+* ```ATU```    -> Touchpanel off
+* ```ATE```    -> Write EDID to EEPROM
+* ```ATF```    -> Write custom EDID to EEPROM
+* ```ATD```    -> Load default settings
+* ```ATS4=x``` -> Time for Screensaver in seconds (0...65535, 0=always on)
+* ```ATS5=x``` -> Backlight Power (0...255)
+* ```ATS6=x``` -> Touchpanel Orientation
+* ```ATS7=x``` -> Screen Width
+* ```ATS8=x``` -> Screen Height
+
+
 ## Known Issues
 * **Serial Interface:**
     When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
