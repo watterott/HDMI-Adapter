@@ -40,7 +40,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud, 8N1, Newline (NL)**, Arduino Serial Monitor) and the settings are working directly.
+* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)) and the settings are working directly.
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the commands can be send like this:
 
@@ -93,21 +93,22 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 
 ## Serial Commands
-* ```AT```     -> Version and conig information
-* ```ATA```    -> Backlight on
-* ```ATH```    -> Backlight off
-* ```ATC```    -> Start Touchpanel calibration
-* ```ATR```    -> Reset/Restart Touchpanel
-* ```ATT```    -> Touchpanel on
-* ```ATU```    -> Touchpanel off
-* ```ATE```    -> Write EDID to EEPROM
-* ```ATF```    -> Write custom EDID to EEPROM
-* ```ATD```    -> Load default settings
-* ```ATS4=x``` -> Time for Screensaver in seconds (0...65535, 0=always on)
-* ```ATS5=x``` -> Backlight Power (0...255)
-* ```ATS6=x``` -> Touchpanel Orientation
-* ```ATS7=x``` -> Screen Width
-* ```ATS8=x``` -> Screen Height
+* Here is a list of all serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)):
+  * ```AT```     -> Version and conig information
+  * ```ATA```    -> Backlight on
+  * ```ATH```    -> Backlight off
+  * ```ATC```    -> Start Touchpanel calibration
+  * ```ATR```    -> Reset/Restart Touchpanel
+  * ```ATT```    -> Touchpanel on
+  * ```ATU```    -> Touchpanel off
+  * ```ATE```    -> Write EDID to EEPROM
+  * ```ATF```    -> Write custom EDID to EEPROM
+  * ```ATD```    -> Load default settings
+  * ```ATS4=x``` -> Time for Screensaver in seconds (0...65535, 0=always on)
+  * ```ATS5=x``` -> Backlight Power (0...255)
+  * ```ATS6=x``` -> Touchpanel Orientation
+  * ```ATS7=x``` -> Screen Width
+  * ```ATS8=x``` -> Screen Height
 
 
 ## Known Issues
