@@ -22,9 +22,13 @@ An inversion/rotation of the coordinates can be done via the [serial interface c
 
 ## What displays are compatible with HDMI to RGB Adapter board?
 All displays with the standard 40 pin connector (parallel RGB interface) are compatible.
-**If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.**
+If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.
 Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) with further infos 
 and the jumper settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
+
+
+## Hints about Displays
+Further infos (e.g. ghost images) about displays can be found [here](https://github.com/watterott/KnowledgeBase/wiki/Displays#hints-about-displays).
 
 
 ## How to change the console font?
