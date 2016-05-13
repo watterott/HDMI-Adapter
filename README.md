@@ -18,6 +18,7 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
   * [5" 800x480 TFT with CTP - HY050CTP-HD](http://www.watterott.com/en/5-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
   * [7" 800x480 TFT with CTP - HY070CTP](http://www.watterott.com/en/7-inch-800x480-TFT-LCD-Display-with-capacitive-touchscreen)
   * [7" 1024x600 TFT with CTP - HY070CTP-HD](http://www.watterott.com/en/7-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel)
+  * [7" 1024x600 TFT with CTP - HY070CTP-HD-RGB IPS](http://www.watterott.com/en/7-inch-1024x600-IPS-LCD-Display-with-capacitive-touch-Type-C)
   * [10.1" 1024x600 TFT with CTP - HY101CTP](http://www.watterott.com/en/10-inch-1024x600-TFT-LCD-Display-with-capacitive-touch-panel)
 
 *RTP = Resitive Touch Panel, CTP = Capacitive Touch Panel (FT5x06)*
