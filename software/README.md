@@ -2,7 +2,7 @@
 The firmware can be compiled and uploaded using the Arduino IDE with our board support package (BSP).
 
 ## Files
-* [Arduino IDE 1.6](http://arduino.cc/en/Main/Software)
+* [Arduino IDE](http://arduino.cc/en/Main/Software)
 * [Board Support Package (BSP)](https://github.com/watterott/wattuino/tree/master/software/Arduino#watterott-board-support-package)
 * [HDMI-Display Firmware for ATmega32u4](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
@@ -101,8 +101,8 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
   * ```ATR```    -> Reset/Restart Touchpanel
   * ```ATT```    -> Touchpanel on
   * ```ATU```    -> Touchpanel off
-  * ```ATE```    -> Write EDID to EEPROM
-  * ```ATF```    -> Write custom EDID to EEPROM
+  * ```ATE```    -> Write default EDID to EEPROM
+  * ```ATF```    -> Write custom EDID (based on width+height) to EEPROM
   * ```ATD```    -> Load default settings
   * ```ATS4=x``` -> Time for Screensaver in seconds (0...65535, 0=always on)
   * ```ATS5=x``` -> Backlight Power (0...255)
