@@ -114,6 +114,7 @@ void Touchpanel_FT5x06::setup()
   i2cWriteByte(REG_ENTERMONITOR, 120);       // Delay to enter 'Monitor' status (s)
 
   /*
+  i2cWriteByte(REG_THGROUP, 35);             // Valid touching detect threshold
   i2cWriteByte(REG_THPEAK, 60);              // Valid touching peak detect threshold
   i2cWriteByte(REG_THCAL, 140);              // Touch focus threshold
   i2cWriteByte(REG_THWATER, 211);            // Threshold when there is surface water
