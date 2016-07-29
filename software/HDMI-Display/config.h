@@ -52,7 +52,7 @@
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "2.05"
+#define VERSION_STRING  "2.06"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nInfo: https://github.com/watterott/HDMI-Display"
 
 // Display Types

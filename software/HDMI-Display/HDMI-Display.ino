@@ -144,12 +144,25 @@ void setup()
   backlight.setup(); // init backlight
   touchpanel.setup(); // init touchpanel/touchcontroller
 
-  // touchpanel calibration
+  // touchpanel calibration and EDID programming
   if(isButtonPressed())
   {
+    // resistive touchpanel calibration
     digitalWrite(LED_GREEN, HIGH);
     digitalWrite(LED_RED, HIGH);
-    touchpanel.calibration(); // resistive touchpanel calibration
+    touchpanel.calibration();
+    // write EDID to external EEPROM
+    if(!edid.writeEDID(DISPLAY_TYPE))
+    {
+      //error blinking
+      #if USE_WATCHDOG > 0
+        wdt_reset();
+      #endif
+      digitalWrite(LED_RED, LOW);
+      delay(250);
+      digitalWrite(LED_RED, HIGH);
+      delay(250);
+    }
   }
 
   digitalWrite(LED_GREEN, HIGH);
@@ -258,7 +271,10 @@ void ATCommandsLoop()
             uint16_t value = Serial.parseInt();
             p[reg] = value;
             settings.save();
-            backlight.screensaverNotify(); // refresh backlight and screensaver time
+            if(backlight.screensaverNotify() == 0) // refresh backlight and screensaver time
+            {
+              backlight.setLight(settings.data.brightness); // set backlight brightness
+            }
             sendAck();
           }
           else
