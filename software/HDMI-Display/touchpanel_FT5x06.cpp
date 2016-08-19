@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "HDMI-Display.h"
 
-Touchpanel_FT5x06::Touchpanel_FT5x06()
+Touchpanel_FT5X06::Touchpanel_FT5X06()
 {
   power = 0;
   axes = &settings.data.orientation;
@@ -10,15 +10,15 @@ Touchpanel_FT5x06::Touchpanel_FT5x06()
   mouseZoom = 0;
 }
 
-uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
+uint8_t Touchpanel_FT5X06::i2cReadByte(uint8_t addr)
 {
   uint8_t data = 0xFF;
 
-  if(twi.beginTransmission(FT5x06_ADDR) == false)
+  if(twi.beginTransmission(FT5X06_ADDR) == false)
   {
     twi.write(addr);
     twi.endTransmission();
-    twi.requestFrom(FT5x06_ADDR, 1);
+    twi.requestFrom(FT5X06_ADDR, 1);
     for(unsigned long ms = millis(); !twi.available();)
     {
       if((millis()-ms) >= 500) // 500ms timeout
@@ -30,9 +30,9 @@ uint8_t Touchpanel_FT5x06::i2cReadByte(uint8_t addr)
   return data;
 }
 
-void Touchpanel_FT5x06::i2cWriteByte(uint8_t addr, uint8_t data)
+void Touchpanel_FT5X06::i2cWriteByte(uint8_t addr, uint8_t data)
 {
-  if(twi.beginTransmission(FT5x06_ADDR) == false)
+  if(twi.beginTransmission(FT5X06_ADDR) == false)
   {
     twi.write(addr);
     twi.write(data);
@@ -40,7 +40,7 @@ void Touchpanel_FT5x06::i2cWriteByte(uint8_t addr, uint8_t data)
   }
 }
 
-void Touchpanel_FT5x06::setup()
+void Touchpanel_FT5X06::setup()
 {
   uint8_t b, i;
 
@@ -90,17 +90,17 @@ void Touchpanel_FT5x06::setup()
     b = i2cReadByte(REG_CIPHER);
     Serial.print(F("TP: Chip Vendor 0x"));
     Serial.println(b, HEX);
-    b = i2cReadByte(REG_FIRMID);
-    Serial.print(F("TP: Firmware 0x"));
+    b = i2cReadByte(REG_FWID);
+    Serial.print(F("TP: FW 0x"));
     Serial.println(b, HEX);
-    b = i2cReadByte(REG_FT5201ID);
-    Serial.print(F("TP: CTPM Vendor 0x"));
+    b = i2cReadByte(REG_FTCHIPID);
+    Serial.print(F("TP: Chip ID 0x"));
     Serial.println(b, HEX);
     b = i2cReadByte(REG_DEVICE_MODE);
     Serial.print(F("TP: Device Mode 0x"));
     Serial.println(b, HEX);
-    Serial.println(F("TP: Reg 0x80...0xA9"));
-    for(i = 0x80; i <= 0xA9; i++)
+    Serial.println(F("TP: Reg 0x80...0xFF"));
+    for(i = 0x80; i <= 0xE0; i++)
     {
       Serial.print(i, HEX);
       Serial.print("  ");
@@ -145,7 +145,7 @@ void Touchpanel_FT5x06::setup()
   }
 }
 
-void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)
+void Touchpanel_FT5X06::readTouchPoint(uint8_t addr, TouchPoint *tp)
 {
   uint8_t b;
 
@@ -162,13 +162,14 @@ void Touchpanel_FT5x06::readTouchPoint(uint8_t addr, TouchPoint *tp)
   tp->y |= i2cReadByte(addr);
 }
 
-void Touchpanel_FT5x06::loop()
+void Touchpanel_FT5X06::loop()
 {
   uint8_t b;
 
   if(!power)
     return;
 
+  // check INT pin of touch controller
   if(digitalRead(INT) && (mouseButtonState == 0)) // no interrupt -> no new data
     return;
 
@@ -215,7 +216,7 @@ void Touchpanel_FT5x06::loop()
           mouseY = y;
         }
 
-        b = i2cReadByte(REG_GESTURE_ID); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
+        b = i2cReadByte(REG_GESTURE); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
         if(b == GESTURE_ZOOM_IN)
           mouseZoom = 1;
         else if(b == GESTURE_ZOOM_OUT)

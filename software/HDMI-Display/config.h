@@ -12,19 +12,19 @@
 
   5" 800x480 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_800x480
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5X06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
   7" 800x480 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_800x480HY
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5X06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
   7" or 10" 1024x600 with cap. touch (CPT)
     #define DISPLAY_TYPE    DISPLAY_1024x600
-    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5x06 //close jumpers TP_SDA, TP_SCL, TP_INT
+    #define TOUCHPANEL_TYPE TOUCHPANEL_FT5X06 //close jumpers TP_SDA, TP_SCL, TP_INT
     #define BACKLIGHT       BL_2
     #define BACKLIGHT_INV   1
 
@@ -37,7 +37,7 @@
 
 // --- Settings ---
 #define DISPLAY_TYPE     DISPLAY_800x480 // DISPLAY_800x480 or DISPLAY_800x480HY or DISPLAY_1024x600
-#define TOUCHPANEL_TYPE  TOUCHPANEL_RESISTIVE // TOUCHPANEL_NONE or TOUCHPANEL_RESISTIVE or TOUCHPANEL_FT5x06
+#define TOUCHPANEL_TYPE  TOUCHPANEL_RESISTIVE // TOUCHPANEL_NONE or TOUCHPANEL_RESISTIVE or TOUCHPANEL_FT5X06 or TOUCHPANEL_HY461X
 #define BACKLIGHT        BL_1 // backlight pin (BL_1 or BL_2), BL_2 for HYxxxCTP
 #define BACKLIGHT_INV    0    // backlight invert pwm (0 or 1), 1 for HYxxxCTP
 
@@ -52,28 +52,30 @@
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "2.06"
+#define VERSION_STRING  "2.07"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nInfo: https://github.com/watterott/HDMI-Display"
 
 // Display Types
 #define DISPLAY_480x272          1 //  480 x  272 (TFT043-3)
 #define DISPLAY_640x480          2 //  640 x  480
 #define DISPLAY_720x480          3 //  720 x  480
-#define DISPLAY_800x480          4 //  800 x  480 (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
-#define DISPLAY_800x480_720x480  5 //  800 x  480 with 720x480 fallback
-#define DISPLAY_800x480HY        6 //  800 x  480 (HY070CTP, HY070CTP-A)
-#define DISPLAY_800x600          7 //  800 x  600
-#define DISPLAY_1024x600         8 // 1024 x  600 (HY070CTP-HD, HY101CTP)
-#define DISPLAY_1024x768         9 // 1024 x  768
-#define DISPLAY_1280x720        10 // 1280 x  720
-#define DISPLAY_1280x768        11 // 1280 x  768
-#define DISPLAY_1280x800        12 // 1280 x  800
-#define DISPLAY_1280x1024       13 // 1280 x 1024
+#define DISPLAY_800x320          4 //  800 x  320
+#define DISPLAY_800x480          5 //  800 x  480 (TFT050-3, HY5-LCD-HD, HY050CTP-HD, TFT070-4, HY7-LCD)
+#define DISPLAY_800x480_720x480  6 //  800 x  480 with 720x480 fallback
+#define DISPLAY_800x480HY        7 //  800 x  480 (HY070CTP, HY070CTP-A)
+#define DISPLAY_800x600          8 //  800 x  600
+#define DISPLAY_1024x600         9 // 1024 x  600 (HY070CTP-HD, HY101CTP)
+#define DISPLAY_1024x768        10 // 1024 x  768
+#define DISPLAY_1280x720        11 // 1280 x  720
+#define DISPLAY_1280x768        12 // 1280 x  768
+#define DISPLAY_1280x800        13 // 1280 x  800
+#define DISPLAY_1280x1024       14 // 1280 x 1024
 
 // Touchpanel Types
 #define TOUCHPANEL_NONE          1 // No Touchpanel present
 #define TOUCHPANEL_RESISTIVE     2 // Resitive
-#define TOUCHPANEL_FT5x06        3 // Capacitive FT5x06 (HYxxxCTP)
+#define TOUCHPANEL_FT5X06        3 // Capacitive FocalTech FT5X06
+#define TOUCHPANEL_HY461X        4 // Capacitive Hycon HY461X
 
 // Check Configurations
 #if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
@@ -88,7 +90,12 @@
   #define TPC_X1 930  // touchpanel calibration x1
   #define TPC_Y0 825  // touchpanel calibration y0
   #define TPC_Y1 160  // touchpanel calibration y1
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5X06
+  #define TPC_X0 0    // not needed - touchpanel calibration x0
+  #define TPC_X1 0    // not needed - touchpanel calibration x1
+  #define TPC_Y0 0    // not needed - touchpanel calibration y0
+  #define TPC_Y1 0    // not needed - touchpanel calibration y1
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_HY461X
   #define TPC_X0 0    // not needed - touchpanel calibration x0
   #define TPC_X1 0    // not needed - touchpanel calibration x1
   #define TPC_Y0 0    // not needed - touchpanel calibration y0
@@ -106,6 +113,9 @@
 #elif DISPLAY_TYPE == DISPLAY_720x480
   #define SCREEN_WIDTH   720
   #define SCREEN_HEIGHT  480
+#elif DISPLAY_TYPE == DISPLAY_800x320
+  #define SCREEN_WIDTH   800
+  #define SCREEN_HEIGHT  320
 #elif DISPLAY_TYPE == DISPLAY_800x480 || \
       DISPLAY_TYPE == DISPLAY_800x480_720x480 || \
       DISPLAY_TYPE == DISPLAY_800x480HY

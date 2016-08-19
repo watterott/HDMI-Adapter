@@ -59,8 +59,10 @@ EDID edid;
 #endif
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   Touchpanel_Resistive touchpanel;
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-  Touchpanel_FT5x06 touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5X06
+  Touchpanel_FT5X06 touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_HY461X
+  Touchpanel_HY461X touchpanel;
 #else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
   Touchpanel_None touchpanel;
 #endif

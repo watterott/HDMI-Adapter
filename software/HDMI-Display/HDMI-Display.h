@@ -15,7 +15,8 @@
 #include "touchpanel.h"
 #include "touchpanel_none.h"
 #include "touchpanel_resistive.h"
-#include "touchpanel_FT5x06.h"
+#include "touchpanel_FT5X06.h"
+#include "touchpanel_HY461X.h"
 
 // classes
 extern Settings settings;
@@ -29,8 +30,10 @@ extern EDID edid;
 #endif
 #if TOUCHPANEL_TYPE == TOUCHPANEL_RESISTIVE
   extern Touchpanel_Resistive touchpanel;
-#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5x06
-  extern Touchpanel_FT5x06 touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_FT5X06
+  extern Touchpanel_FT5X06 touchpanel;
+#elif TOUCHPANEL_TYPE == TOUCHPANEL_HY461X
+  extern Touchpanel_HY461X touchpanel;
 #else //if TOUCHPANEL_TYPE == TOUCHPANEL_NONE
   extern Touchpanel_None touchpanel;
 #endif
