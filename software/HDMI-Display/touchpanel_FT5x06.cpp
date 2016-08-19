@@ -217,6 +217,10 @@ void Touchpanel_FT5X06::loop()
         }
 
         b = i2cReadByte(REG_GESTURE); // GESTURE_MOVE_UP GESTURE_MOVE_LEFT GESTURE_MOVE_DOWN GESTURE_MOVE_RIGHT GESTURE_ZOOM_IN GESTURE_ZOOM_OUT
+        #if DEBUG > 1
+          Serial.print(F("TP: Gesture 0x"));
+          Serial.println(b, HEX);
+        #endif
         if(b == GESTURE_ZOOM_IN)
           mouseZoom = 1;
         else if(b == GESTURE_ZOOM_OUT)
