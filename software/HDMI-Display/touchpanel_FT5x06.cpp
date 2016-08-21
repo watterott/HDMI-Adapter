@@ -22,7 +22,12 @@ uint8_t Touchpanel_FT5X06::i2cReadByte(uint8_t addr)
     for(unsigned long ms = millis(); !twi.available();)
     {
       if((millis()-ms) >= 500) // 500ms timeout
+      {
+        #if DEBUG > 2
+          Serial.println(F("TP: I2C read timeout"));
+        #endif
         break;
+      }
     }
     data = twi.read();
   }
@@ -55,8 +60,8 @@ void Touchpanel_FT5X06::setup()
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
   // set interrupt pin to input
-  pinMode(INT, INPUT);
-  digitalWrite(INT, HIGH); // pull-up on
+  pinMode(INT_PIN, INPUT);
+  digitalWrite(INT_PIN, HIGH); // pull-up on
 
   // wait for startup (check chip vendor id)
   #if DEBUG > 0
@@ -99,7 +104,7 @@ void Touchpanel_FT5X06::setup()
     b = i2cReadByte(REG_DEVICE_MODE);
     Serial.print(F("TP: Device Mode 0x"));
     Serial.println(b, HEX);
-    Serial.println(F("TP: Reg 0x80...0xFF"));
+    Serial.println(F("TP: Reg 0x80...0xE0"));
     for(i = 0x80; i <= 0xE0; i++)
     {
       Serial.print(i, HEX);
@@ -109,7 +114,8 @@ void Touchpanel_FT5X06::setup()
   #endif
 
   // write settings
-  i2cWriteByte(REG_MODE, 1);                 // Interrupt status to host
+  i2cWriteByte(REG_DEVICE_MODE, 0);          // Device Mode, 0x00 = normal operating, 0x40 = test
+  i2cWriteByte(REG_MODE, 0);                 // Interrupt status to host, 0 = polling, 1 = trigger
   i2cWriteByte(REG_THGROUP, 35);             // Valid touching detect threshold
   i2cWriteByte(REG_ENTERMONITOR, 120);       // Delay to enter 'Monitor' status (s)
 
@@ -132,7 +138,7 @@ void Touchpanel_FT5X06::setup()
     b = i2cReadByte(REG_ERR);
     if(b == 0) // okay
     {
-      on();
+      on(); // touchpanel on
       break;
     }
     else // error
@@ -165,25 +171,36 @@ void Touchpanel_FT5X06::readTouchPoint(uint8_t addr, TouchPoint *tp)
 void Touchpanel_FT5X06::loop()
 {
   uint8_t b;
+  static uint8_t slowdown = 0;
 
   if(!power)
     return;
 
-  // check INT pin of touch controller
-  if(digitalRead(INT) && (mouseButtonState == 0)) // no interrupt -> no new data
-    return;
+  // check INT pin of touch controller, when no touch press is active/detected
+  if(mouseButtonState == 0)
+  {
+    slowdown++;
+    if((slowdown > 8) || (digitalRead(INT_PIN) == 0)) // INT low -> new data
+    {
+      slowdown = 0;
+    }
+    else // INT high -> no new data
+    {
+      return;
+    }
+  }
 
   b = i2cReadByte(REG_STATE);
-  #if DEBUG > 2
-    Serial.print(F("TP: state 0x"));
-    Serial.println(b, HEX);
-  #endif
+  //#if DEBUG > 2
+  //  Serial.print(F("TP: state 0x"));
+  //  Serial.println(b, HEX);
+  //#endif
   if(b == STATE_WORK)
   {
     b = i2cReadByte(REG_TD_STATUS);
     if((b != 0) && (b != 255)) // no touch points on 0 and 255
     {
-      nrPoints = b & 0x07;
+      nrPoints = b & 0x0F; //Bit3:0
       readTouchPoint(REG_TOUCH_1, &touch[0]);
       // no multi touch support at the moment
       //readTouchPoint(REG_TOUCH_2, &touch[1]);

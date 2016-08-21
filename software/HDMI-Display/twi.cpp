@@ -21,8 +21,7 @@ void TWI::begin(uint32_t freq)
     if(frequency > 25000UL)
       frequency = frequency/2;
     #if DEBUG > 0
-      Serial.print(F("TWI: restart f="));
-      Serial.println(frequency, DEC);
+      Serial.println(F("TWI: restart"));
     #endif
   }
 
@@ -34,6 +33,11 @@ void TWI::begin(uint32_t freq)
   TWSR = 0; // no prescaler
   TWBR = ((F_CPU / frequency) - 16UL) / 2UL; // set frequency
   TWCR = (1<<TWINT); // clear flags and disable twi
+
+  #if DEBUG > 0
+    Serial.print(F("TWI: frequency (Hz): "));
+    Serial.println(frequency, DEC);
+  #endif
 }
 
 void TWI::begin(void)

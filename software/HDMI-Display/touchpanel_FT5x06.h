@@ -4,8 +4,8 @@
 #define FT5X06_ADDR        0x38      // I2C address
 
 // Registers
-#define REG_DEVICE_MODE    0x00      // Device Mode, 0x00 = Normal Operating
-#define REG_GESTURE        0x01      // Touch Gesture, 0x48 Zoom In, 0x49 Zoom Out, 0x00 No Gesture
+#define REG_DEVICE_MODE    0x00      // Device Mode, 0x00 = normal operating, 0x40 = test
+#define REG_GESTURE        0x01      // Touch Gesture, 0x48 zoom in, 0x49 zoom out, 0x00 no gesture
 #define REG_TD_STATUS      0x02      // Touch Points
 #define REG_TOUCH_1        0x03      // Touch Point 1
 #define REG_TOUCH_2        0x09      // Touch Point 2
@@ -26,7 +26,7 @@
 #define REG_LIBVER_H       0xA1      // Firmware Library Version H byte
 #define REG_LIBVER_L       0xA2      // Firmware Library Version L byte
 #define REG_CIPHER         0xA3      // Chip vendor ID
-#define REG_MODE           0xA4      // Interrupt status to host
+#define REG_MODE           0xA4      // Interrupt status to host, 0 = polling, 1 = trigger
 #define REG_PMODE          0xA5      // Power Consume Mode
 #define REG_FWID           0xA6      // Firmware ID
 #define REG_STATE          0xA7      // Running State

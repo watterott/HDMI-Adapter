@@ -305,7 +305,7 @@ void loop()
     wdt_reset();
   #endif
 
-  if((t-last_t) > LOOPTIME) // 60 Hz polling interval
+  if((t-last_t) > LOOPTIME) // polling (60 Hz interval)
   {
     last_t = t;
 

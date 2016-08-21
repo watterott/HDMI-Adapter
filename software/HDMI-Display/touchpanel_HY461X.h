@@ -4,8 +4,8 @@
 #define HY461X_ADDR        0x38      // I2C address
 
 // Registers
-#define REG_DEVICE_MODE    0x00      // Device Mode, 0x00 = Normal Operating, 0xC0 = Test
-#define REG_GESTURE        0x01      // Touch Gesture, 0x48 Zoom In, 0x49 Zoom Out, 0x00 No Gesture
+#define REG_DEVICE_MODE    0x00      // Device Mode, 0x00 = normal operating, 0xC0 = test
+#define REG_GESTURE        0x01      // Touch Gesture, 0x48 zoom in, 0x49 zoom out, 0x00 no gesture
 #define REG_TD_STATUS      0x02      // Touch Points
 #define REG_TOUCH_1        0x03      // Touch Point 1
 #define REG_TOUCH_2        0x09      // Touch Point 2
@@ -18,6 +18,7 @@
 #define REG_REPORT_SPEED   0x88      // Report speed (0x64 = 100Hz)
 #define REG_GAIN           0x92      // Sensitivity setting, range: 0 - 5
 #define REG_EDGE_OFFSET    0x93      // Margin parameter setting, range: 0 - 16
+#define REG_MODE           0xA4      // Interrupt status to host (unknown if register available)
 #define REG_PMODE          0xA5      // Power Consume Mode
 #define REG_FWID           0xA6      // Firmware ID
 #define REG_LIBID          0xA7      // Library ID

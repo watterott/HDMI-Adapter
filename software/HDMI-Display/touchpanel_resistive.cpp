@@ -34,7 +34,7 @@ void Touchpanel_Resistive::setup()
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
   // set interrupt pin to input
-  pinMode(INT, INPUT);
+  pinMode(INT_PIN, INPUT);
 
   // check calibration data
   if(((ax.point[0] == 0) && (ax.point[1] == 0)) ||

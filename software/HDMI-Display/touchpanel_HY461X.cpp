@@ -22,7 +22,12 @@ uint8_t Touchpanel_HY461X::i2cReadByte(uint8_t addr)
     for(unsigned long ms = millis(); !twi.available();)
     {
       if((millis()-ms) >= 500) // 500ms timeout
+      {
+        #if DEBUG > 2
+          Serial.println(F("TP: I2C read timeout"));
+        #endif
         break;
+      }
     }
     data = twi.read();
   }
@@ -55,8 +60,8 @@ void Touchpanel_HY461X::setup()
   pinMode(AYM, INPUT);
   pinMode(AYP, INPUT);
   // set interrupt pin to input
-  pinMode(INT, INPUT);
-  digitalWrite(INT, HIGH); // pull-up on
+  pinMode(INT_PIN, INPUT);
+  digitalWrite(INT_PIN, HIGH); // pull-up on
 
   // wait for startup (check chip vendor id)
   #if DEBUG > 0
@@ -67,6 +72,7 @@ void Touchpanel_HY461X::setup()
     b = i2cReadByte(REG_DEVICE_MODE);
     if(b == 0x00) //0 = Normal Operating Mode
     {
+      on(); // touchpanel on
       break;
     }
     else
@@ -99,7 +105,7 @@ void Touchpanel_HY461X::setup()
     b = i2cReadByte(REG_DEVICE_MODE);
     Serial.print(F("TP: Device Mode 0x"));
     Serial.println(b, HEX);
-    Serial.println(F("TP: Reg 0x80...0xFF"));
+    Serial.println(F("TP: Reg 0x80...0xE0"));
     for(i = 0x80; i <= 0xE0; i++)
     {
       Serial.print(i, HEX);
@@ -109,6 +115,8 @@ void Touchpanel_HY461X::setup()
   #endif
 
   // write settings
+  i2cWriteByte(REG_DEVICE_MODE, 0);          // Device Mode, 0x00 = normal operating, 0xC0 = test
+  //i2cWriteByte(REG_MODE, 0);               // Interrupt status to host (unknown if register available)
   i2cWriteByte(REG_THGROUP, 30);             // Valid touching detect threshold
 
   /*
@@ -139,18 +147,29 @@ void Touchpanel_HY461X::readTouchPoint(uint8_t addr, TouchPoint *tp)
 void Touchpanel_HY461X::loop()
 {
   uint8_t b;
+  static uint8_t slowdown = 0;
 
   if(!power)
     return;
 
-  // check INT pin of touch controller - commented for HY461X
-  //if(digitalRead(INT) && (mouseButtonState == 0)) // no interrupt -> no new data
-  //  return;
+  // check INT pin of touch controller, when no touch press is active/detected
+  if(mouseButtonState == 0)
+  {
+    slowdown++;
+    if((slowdown > 8) || (digitalRead(INT_PIN) == 0)) // INT low -> new data
+    {
+      slowdown = 0;
+    }
+    else // INT high -> no new data
+    {
+      return;
+    }
+  }
 
   b = i2cReadByte(REG_TD_STATUS);
   if((b != 0) && (b != 255)) // no touch points on 0 and 255
   {
-    nrPoints = b & 0x07;
+    nrPoints = b & 0x0F; //Bit3:0
     readTouchPoint(REG_TOUCH_1, &touch[0]);
     // no multi touch support at the moment
     //readTouchPoint(REG_TOUCH_2, &touch[1]);

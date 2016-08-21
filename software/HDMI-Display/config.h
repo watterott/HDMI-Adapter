@@ -44,7 +44,7 @@
 #define BRIGHTNESS        255 // backlight brightness (0..255)
 #define SCREENSAVERTIME   180 // seconds timeout (0...65535, 0=always on)
 #define ORIENTATION         0 // orientation (0x1=invert x, 0x2=invert y, 0x4=swap axes, 0x8=map to screen coordinates)
-#define LOOPTIME           16 // 16 = 60 Hz polling interval
+#define LOOPTIME           16 // 16 ms = 60 Hz polling interval
 #define TOUCHMAX        4095L // maximal touch/mouse position
 #define USE_HIDPROJECT      0 // use HID-Project github.com/NicoHood/HID (0=no, 1=yes)
 #define USE_WATCHDOG        0 // use watchdog timer
@@ -52,7 +52,7 @@
 
 #define QUOTE(name)     #name
 #define STR(macro)      QUOTE(macro)
-#define VERSION_STRING  "2.07"
+#define VERSION_STRING  "2.08"
 #define INFO_STRING     "HDMI-Display\nVersion: " VERSION_STRING " (" __DATE__ ")\nInfo: https://github.com/watterott/HDMI-Display"
 
 // Display Types
@@ -163,7 +163,7 @@
 #define LED_RED        13 // red LED_2 PC7
 #define BL_1            9 // PWM backlight boost converter PB5
 #define BL_2           10 // PWM display pin 35 PB6
-#define INT             4 // touch interrupt PD4
+#define INT_PIN         4 // touch interrupt PD4
 #define SW_1       (1<<5) // switch PD5
 #define SW_1_SETUP() PORTD |= SW_1; DDRD &= ~SW_1 // set input
 #define SW_1_PRESSED() (!(PIND & SW_1)) // switch pressed?
