@@ -37,12 +37,12 @@ void Touchpanel::mouseButtonDown()
 {
   uint16_t x, y;
 
-  digitalWrite(LED_RED, HIGH);
-
   if(backlight.screensaverNotify()) // reset screensaver on touch
   {
     return; // backlight was off
   }
+
+  digitalWrite(LED_RED, HIGH); // LED on
 
   if(*axes & 0x01) // invert x
     x = TOUCHMAX-mouseX;
@@ -110,14 +110,14 @@ void Touchpanel::mouseButtonUp()
 {
   uint16_t x, y;
 
-  digitalWrite(LED_RED, LOW);
-
   if(mouseButtonState == 0)
   {
     return;
   }
 
   mouseButtonState = 0;
+
+  digitalWrite(LED_RED, LOW); // LED off
 
   if(*axes & 0x01) // invert x
     x = TOUCHMAX-mouseX;

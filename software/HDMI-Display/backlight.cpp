@@ -52,13 +52,13 @@ bool Backlight::isOn()
 void Backlight::on()
 {
   setLight(settings.data.brightness);
-  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_RED, LOW); // LED off
 }
 
 void Backlight::off()
 {
   setLight(0);
-  digitalWrite(LED_RED, HIGH);
+  digitalWrite(LED_RED, HIGH); // LED on
 }
 
 void Backlight::onOff() // toggle backlight
@@ -80,8 +80,8 @@ bool Backlight::screensaverNotify() // touch event
       Serial.println(F("BL: stop screensaver"));
     #endif
     digitalWrite(LED_RED, LOW);
-    setLightSmooth(settings.data.brightness, 4);
-    for(int i = (1000/LOOPTIME/2); i != 0; i--) // 500ms delay
+    setLightSmooth(settings.data.brightness, 5);
+    for(int i = (1000/LOOPTIME/3); i != 0; i--) // 333ms delay
     {
       #if USE_WATCHDOG > 0
         wdt_reset();
@@ -145,5 +145,5 @@ void Backlight::loop()  // backlight statemachine - call it from loop()
   }
 
   if(!p)
-    digitalWrite(LED_RED, HIGH);
+    digitalWrite(LED_RED, HIGH); // LED on
 }
