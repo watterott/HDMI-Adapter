@@ -1,9 +1,10 @@
 #ifndef TWI_H
 #define TWI_H
 
-#define TWI_FREQUENCY 100000UL // 100 kHz
-#define TWI_TIMEOUT   250 // 250 ms
-#define TWI_RXBUF     8 // 8 bytes
+#define TWI_FREQ      100000UL // 100 kHz (default)
+#define TWI_FREQ_MIN  10000UL  // 10 kHz (minimum frequency after an error)
+#define TWI_TIMEOUT   250      // 250 ms
+#define TWI_RXBUF     8        // 8 bytes
 
 class TWI
 {

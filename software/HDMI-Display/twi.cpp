@@ -5,7 +5,7 @@
 TWI::TWI()
 {
   txAddress = 0;
-  frequency = TWI_FREQUENCY;
+  frequency = TWI_FREQ;
   errors = 0;
   rxHead = rxTail = 0;
 }
@@ -17,9 +17,15 @@ void TWI::begin(uint32_t freq)
 
   if(errors > 3)
   {
-    errors = 0;
-    if(frequency > 25000UL)
-      frequency = frequency/2;
+    errors = 0; // clear error counter
+
+    rxHead = rxTail = 0; // clear rx buffer
+
+     // slow down frequency
+    frequency = frequency/2;
+    if(frequency < TWI_FREQ_MIN)
+      frequency = TWI_FREQ_MIN;
+
     #if DEBUG > 0
       Serial.println(F("TWI: restart"));
     #endif
