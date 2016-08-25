@@ -36,8 +36,16 @@ void TWI::begin(uint32_t freq)
   pinMode(SCL, INPUT);
   digitalWrite(SCL, HIGH);
 
-  TWSR = 0; // no prescaler
-  TWBR = ((F_CPU / frequency) - 16UL) / 2UL; // set frequency
+  if((F_CPU/frequency) <= (510+16))
+  {
+    TWSR = (0<<TWPS1) | (0<<TWPS0); // prescaler = 1
+    TWBR = ((F_CPU / frequency) - 16UL) / 2UL; // set frequency
+  }
+  else
+  {
+    TWSR = (0<<TWPS1) | (1<<TWPS0); // prescaler = 4
+    TWBR = ((F_CPU / 4UL / frequency) - 16UL) / 2UL; // set frequency
+  }
   TWCR = (1<<TWINT); // clear flags and disable twi
 
   #if DEBUG > 0
