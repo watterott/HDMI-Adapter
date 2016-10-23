@@ -150,7 +150,7 @@ void setup()
   if(isButtonPressed())
   {
     // resistive touchpanel calibration
-    digitalWrite(LED_GREEN, HIGH);
+    digitalWrite(LED_GREEN, LOW);
     digitalWrite(LED_RED, HIGH);
     touchpanel.calibration();
     // write EDID to external EEPROM
