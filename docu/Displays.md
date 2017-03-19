@@ -62,22 +62,22 @@ Further infos can be found in the [schematics PDF file](https://github.com/watte
 
 Pin    | Signal
 ------ | ------
-     1 | LED- (negative) or 5V
-     2 | LED+ (positive) or 5V
-     3 | Gnd
-     4 | 3V3
+  1    | LED- (negative) or 5V
+  2    | LED+ (positive) or 5V
+  3    | Gnd
+  4    | 3V3
   5-12 | R0-R7
  13-20 | G0-G7
  21-28 | B0-B7
-    29 | Gnd
-    30 | Clk
-    31 | Disp (low=off, high=on)
-    32 | HSync
-    33 | VSync
-    34 | DE (Data Enable)
-    35 | NC (Not Connected) or PWM (for LED)
-    36 | Gnd
-    37 | XR/X+ or SDA when TP_SDA closed
-    38 | YD/Y- or SCL when TP_SCL closed
-    39 | XL/X- or RST
-    40 | YU/Y+ or INT when TP_INT closed
+ 29    | Gnd
+ 30    | Clk
+ 31    | Disp (low=off, high=on)
+ 32    | HSync
+ 33    | VSync
+ 34    | DE (Data Enable)
+ 35    | NC (Not Connected) or PWM (for LED)
+ 36    | Gnd
+ 37    | XR/X+ or SDA when TP_SDA closed
+ 38    | YD/Y- or SCL when TP_SCL closed
+ 39    | XL/X- or RST
+ 40    | YU/Y+ or INT when TP_INT closed
