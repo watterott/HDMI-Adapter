@@ -12,7 +12,8 @@ Universal HDMI/DVI Displays with Touch Panel based on TI TFP401 and Atmel ATmega
 * [Bundle: HDMI Adapter + 5" 800x480 Display with RTP](http://www.watterott.com/en/5-800x480-HDMI-Display-with-resistive-touch)
 * [Bundle: HDMI Adapter + 7" 800x480 Display with RTP](http://www.watterott.com/en/7-800x480-HDMI-Display-with-resistive-touch)
 * [Compatible TFT-Displays](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) *(check schematics/jumper settings before connecting the screen)*:
-  * [5" 800x480 TFT without Touchpanel](http://www.watterott.com/en/5-800x480-TFT-Display-without-TP)
+  * [4.3" 480x272 TFT with RTP - TFT043-3](http://www.watterott.com/en/43-480x272-TFT-Display)
+  * [5" 800x480 TFT without Touchpanel - TFT050-3](http://www.watterott.com/en/5-800x480-TFT-Display-without-TP)
   * [5" 800x480 TFT with RTP - TFT050-3](http://www.watterott.com/en/5-800x480-TFT-Display)
   * [7" 800x480 TFT with RTP - TFT070-4](http://www.watterott.com/en/7-800x480-TFT-Display)
   * [5" 800x480 TFT with CTP - HY050CTP-HD](http://www.watterott.com/en/5-inch-800x480-TFT-LCD-Display-with-capacitive-touch-panel)
