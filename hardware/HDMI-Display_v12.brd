@@ -1596,19 +1596,15 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <attribute name="NAME" x="7.14375" y="14.76375" size="0.8128" layer="25" font="vector" ratio="10" rot="R90" align="center"/>
 <attribute name="VALUE" x="4.60375" y="14.44625" size="0.8128" layer="27" font="vector" ratio="10" rot="R90" align="center"/>
 </element>
-<element name="L1" library="we-power" package="L_1212" value="10u@500mA" x="7.9375" y="10.95375" smashed="yes" rot="R90">
+<element name="L1" library="we-power" package="L_1212" value="10u/0.5A" x="7.9375" y="10.95375" smashed="yes" rot="R90">
 <attribute name="NAME" x="7.9375" y="10.95375" size="0.8128" layer="25" font="vector" ratio="10" rot="R90" align="center"/>
 <attribute name="VALUE" x="7.9375" y="9.04875" size="0.8128" layer="27" font="vector" ratio="10" align="center"/>
-</element>
-<element name="D6" library="we-rcl" package="SOD106" value="DIODE-SOD106" x="7.62" y="7.77875" smashed="yes" rot="R90">
-<attribute name="NAME" x="7.62" y="6.35" size="0.8128" layer="25" font="vector" ratio="10" align="center"/>
-<attribute name="VALUE" x="7.62" y="5.87375" size="0.8128" layer="27" font="vector" ratio="10" align="center"/>
 </element>
 <element name="RS2" library="we-rcl" package="C0402" value="15" x="11.58875" y="16.35125" smashed="yes" rot="R180">
 <attribute name="NAME" x="11.58875" y="18.415" size="0.8128" layer="25" font="vector" ratio="10" rot="R90" align="center"/>
 <attribute name="VALUE" x="10.31875" y="16.35125" size="0.8128" layer="27" font="vector" ratio="10" rot="R90" align="center"/>
 </element>
-<element name="C9" library="we-rcl" package="C0805" value="1u @ 40V" x="3.175" y="8.41375" smashed="yes">
+<element name="C9" library="we-rcl" package="C0805" value="1u/40V" x="3.175" y="8.41375" smashed="yes">
 <attribute name="NAME" x="3.175" y="6.35" size="0.8128" layer="25" font="vector" ratio="10" align="center"/>
 <attribute name="VALUE" x="4.7625" y="8.41375" size="0.8128" layer="27" font="vector" ratio="10" rot="R270" align="center"/>
 </element>
@@ -1767,7 +1763,7 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <attribute name="NAME" x="5.55625" y="12.3825" size="0.8128" layer="25" font="vector" ratio="10" align="center"/>
 <attribute name="VALUE" x="4.1275" y="12.3825" size="0.8128" layer="27" font="vector" ratio="10" align="center"/>
 </element>
-<element name="C7" library="we-rcl" package="C0402" value="2u" x="3.96875" y="10.95375" smashed="yes" rot="R90">
+<element name="C7" library="we-rcl" package="C0402" value="4u7" x="3.96875" y="10.95375" smashed="yes" rot="R90">
 <attribute name="NAME" x="5.55625" y="10.95375" size="0.8128" layer="25" font="vector" ratio="10" align="center"/>
 <attribute name="VALUE" x="4.1275" y="10.95375" size="0.8128" layer="27" font="vector" ratio="10" align="center"/>
 </element>
@@ -1958,6 +1954,7 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <element name="SW1" library="we-switch" package="PTS840P" value="SW-TACTILE-PTS840P" x="50.4" y="10.5" rot="R90">
 <attribute name="DIGIKEY" value="CKN10511DKR-ND" x="50.4" y="10.5" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
+<element name="D2" library="we-rcl" package="SOD106" value="40V/0.5A-SOD106" x="7.62" y="7.77875" rot="R90"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -3028,7 +3025,6 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 </signal>
 <signal name="LED+">
 <contactref element="IC3" pad="5"/>
-<contactref element="D6" pad="C"/>
 <contactref element="C9" pad="2"/>
 <wire x1="1.27" y1="16.66875" x2="1.27" y2="14.12875" width="0.6096" layer="1"/>
 <wire x1="3.175" y1="7.46375" x2="5.055" y2="7.46375" width="0.6096" layer="1"/>
@@ -3042,6 +3038,7 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <wire x1="3.1725" y1="7.46125" x2="3.175" y2="7.46375" width="0.254" layer="1"/>
 <contactref element="LED+" pad="1"/>
 <wire x1="1.27" y1="16.66875" x2="1.28125" y2="16.66875" width="0.2032" layer="1"/>
+<contactref element="D2" pad="C"/>
 </signal>
 <signal name="LIGHT">
 <contactref element="R16" pad="2"/>
@@ -3127,7 +3124,6 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <signal name="LX">
 <contactref element="L1" pad="2"/>
 <contactref element="IC3" pad="1"/>
-<contactref element="D6" pad="A"/>
 <wire x1="8.34375" y1="13.49625" x2="8.34375" y2="12.92875" width="0.4064" layer="1"/>
 <wire x1="8.34375" y1="12.92875" x2="9.04875" y2="12.22375" width="0.6096" layer="1"/>
 <wire x1="9.04875" y1="12.22375" x2="9.04875" y2="11.0425" width="0.4064" layer="1"/>
@@ -3136,6 +3132,7 @@ FCI 62684-401100AHLF -&gt; bottom contact&lt;br&gt;</description>
 <wire x1="9.1375" y1="9.595" x2="9.8425" y2="8.89" width="0.6096" layer="1"/>
 <wire x1="9.8425" y1="8.89" x2="9.8425" y2="7.80625" width="0.6096" layer="1"/>
 <wire x1="9.8425" y1="7.80625" x2="9.87" y2="7.77875" width="0.2032" layer="1"/>
+<contactref element="D2" pad="A"/>
 </signal>
 <signal name="X+">
 <contactref element="LCD_TOP" pad="37"/>
