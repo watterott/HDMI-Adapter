@@ -3,13 +3,13 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
 
 ## Files
 * [Arduino IDE](http://arduino.cc/en/Main/Software)
-* [Board Support Package (BSP)](https://github.com/watterott/wattuino/tree/master/software/Arduino#watterott-board-support-package)
+* [Arduino Boards Package (ATmega32u4)](https://github.com/watterott/Arduino-Boards#watterott-boards-package)
 * [HDMI-Display Firmware for ATmega32u4](https://github.com/watterott/HDMI-Display/archive/master.zip)
 
 
 ## Installation
 * Download and install the [Arduino IDE](http://arduino.cc/en/Main/Software).
-* Add the following URL to the Boards Manager. **File->Preferences->Additional Boards Manager URLs**: ```https://github.com/watterott/wattuino/raw/master/software/Arduino/package_watterott_index.json```
+* Add the following URL to the Boards Manager. **File->Preferences->Additional Boards Manager URLs**: ```https://github.com/watterott/Arduino-Boards/raw/master/package_watterott_index.json```
 * Install the *Watterott AVR Boards* via the Boards Manager. **Tools->Board->Boards Manager...**.
 * Download the [HDMI-Display Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Connect the USB Data port of the HDMI-Adapter (**without display**) to the computer.
