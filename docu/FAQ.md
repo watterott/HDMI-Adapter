@@ -70,6 +70,14 @@ Font size: 6x12 (framebuffer only)
     [Installation Guide](https://www.raspberrypi.org/forums/viewtopic.php?t=138575), [Source Code](https://github.com/Plippo/twofing)
 
 
+## Where can I found an on-screen keyboard?
+You can install *Florence Virtual Keyboard* or *Matchbox Virtual Keyboard* with the following commands:
+```
+sudo apt-get install florence
+sudo apt-get install matchbox-keyboard
+```
+
+
 ## Does Qt evdevtouch is working with the touchpanel/mouse?
 The Qt plugin *evdevtouch* is not working with the touchpanel, please use *tslib*.
 
