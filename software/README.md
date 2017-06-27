@@ -78,6 +78,9 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
   echo ATE >> /dev/ttyACM0
   ```
 
+  The firmware contains different EDID information and the respective data can be changed with the
+  commands for screen width ```ATS7=x``` and screen height ```ATS8=x```.
+
   *Note: If you are using a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming.*
 
 * After the EEPROM programming a computer can automatically detect the adatper with display via HDMI.
