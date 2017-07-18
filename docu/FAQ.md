@@ -123,7 +123,7 @@ A installation guide can be found [here](https://github.com/watterott/HDMI-Displ
 
 
 ## How to flash/update the EDID EEPROM?
-The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller, when the *SDA+SCL* jumpers are closed.
-The jumper settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
-The programming can be done via the firmware (serial interface command [*ATE*](https://github.com/watterott/HDMI-Display/tree/master/software#optional-edid-eeprom-programming)) or this [example](https://github.com/watterott/HDMI-Display/tree/master/software/EDID-Prog).
+The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller.
+The jumper/switch settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
+and the programming can be done via the firmware (see [EDID EEPROM Programming](https://github.com/watterott/HDMI-Display/tree/master/software#edid-eeprom-programming)).
 To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.

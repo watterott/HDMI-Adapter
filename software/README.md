@@ -1,5 +1,7 @@
 # HDMI-Display Firmware
-The firmware can be compiled and uploaded using the Arduino IDE with our board support package (BSP).
+The HDMI-Adapters are pre-programmed with the firmware.
+If you want to make changes then the firmware can be compiled and uploaded using the Arduino IDE with our board support package (BSP).
+
 
 ## Files
 * [Arduino IDE](http://arduino.cc/en/Main/Software)
@@ -67,8 +69,9 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
   * ```...```
 
 
-## Optional EDID EEPROM Programming
-* To program the [EDID (Extended Display Identification Data)](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) data into the EEPROM, close the jumpers *SDA+SCL* and hold the switch *SW1* on power up.
+## EDID EEPROM Programming
+* To program the [EDID (Extended Display Identification Data)](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) data into the EEPROM the switch next to the HDMI connector has to be set to *EDID prog.* (<=v1.1 close jumpers *SDA+SCL*) and hold the switch *SW1* on power up.
+  For the switch/jumper position have a look in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
   Or you can also send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
@@ -81,7 +84,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
   The firmware contains different EDID information and the respective data can be changed with the
   commands for screen width ```ATS7=x``` and screen height ```ATS8=x```.
 
-  *Note: If you are using a display with capacitive touchpanel the jumpers SDA+SCL have to be opened after the programming.*
+  *Note: If you are using a display with capacitive touchpanel the switch next to the HDMI connector has to be set not to EDID prog. (<=v1.1 jumpers SDA+SCL have to be opened) after the programming.*
 
 * After the EEPROM programming a computer can automatically detect the adatper with display via HDMI.
 
@@ -121,7 +124,7 @@ The firmware can be compiled and uploaded using the Arduino IDE with our board s
     When the red LED is blinking then the device is in error mode and the serial interface is deactivated.
 
 * **EDID Data:**
-    On a display with capacitive touchpanel the jumpers *SDA+SCL* have to be opened after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
+    On a display with capacitive touchpanel the the switch next to the HDMI connector has to be set not to *EDID prog.* (<=v1.1 jumpers SDA+SCL have to be opened) after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
     Because the display timings are not standard timings some operating systems ignore the settings. In this case the HDMI display settings have to be set by hand.
     See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md) for further infos.
 
