@@ -70,7 +70,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
 
 
 ## EDID EEPROM Programming
-* To program the [EDID (Extended Display Identification Data)](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) data into the EEPROM the switch next to the HDMI connector has to be set to *EDID prog.* (<=v1.1 close jumpers *SDA+SCL*) and hold the switch *SW1* on power up.
+* To program the [EDID (Extended Display Identification Data)](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) data into the EEPROM the switch next to the HDMI connector has to be set to *EDID prog.* (<=v1.1 close jumpers *SDA+SCL*) and hold the tactile switch *SW1* on power-up.
   For the switch/jumper position have a look in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
   Or you can also send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)).
   If the command is executed successfully ```OK``` will be returned.
