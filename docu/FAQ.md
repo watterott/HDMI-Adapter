@@ -7,7 +7,7 @@ If you have problems like a flickering screen, then check your USB cables. Some 
 
 
 ## What boards/computers are compatible with the HDMI-Display?
-In general all boards/computers with a HDMI output can drive the display and the respective settings are loaded from the EDID EEPROM automatically.
+In general all boards/computers with a HDMI output can drive the display and the respective settings are loaded from the EDID EEPROM (empty on new adapters) automatically.
 If there are any problems, then the settings can be made manually. For example the Raspberry Pi ignores no standard display timings.
 Infos about setting the display timings can be found here:
 [Raspberry Pi](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt),
@@ -123,7 +123,7 @@ A installation guide can be found [here](https://github.com/watterott/HDMI-Displ
 
 
 ## How to flash/update the EDID EEPROM?
-The EEPROM (I2C) can be flashed via the ATmega32u4 Microcontroller.
+The EEPROM (I2C) is empty on new adapters and can be flashed via the ATmega32u4 Microcontroller.
 The jumper/switch settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 and the programming can be done via the firmware (see [EDID EEPROM Programming](https://github.com/watterott/HDMI-Display/tree/master/software#edid-eeprom-programming)).
 To modify the EDID data under a Windows OS you can use *Raylar's Phoenix EDID Designer*.

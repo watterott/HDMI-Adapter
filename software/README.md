@@ -1,5 +1,5 @@
 # HDMI-Display Firmware
-The HDMI-Adapters are pre-programmed with the firmware.
+The HDMI-Adapters are pre-programmed with the firmware. But the EDID EEPROM is empty.
 If you want to make changes then the firmware can be compiled and uploaded using the Arduino IDE with our board support package (BSP).
 
 
