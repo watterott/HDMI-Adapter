@@ -133,7 +133,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
     This is the case when *Done uploading.* is not shown after the upload process.
     Check the driver state in the [Device Manager](https://github.com/watterott/wattuino/raw/master/software/Caterina/usb-devices.png), when the Bootloader is active (after the *Upload* is started).
     If you cannot install the driver on Windows 8 or higher then deactivate the [driver signature enforcement](https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8).
-    The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
+    The Sketch USB device and the Bootloader USB device use the same [caterina.inf driver file](https://github.com/watterott/Arduino-Boards/raw/master/files/caterina_driver.zip).
 
 * **Linux:**
     The Modem Manager detects the Serial Ports (e.g. Caterina Bootloader) as a modem and therefore a blacklist rule is needed.
