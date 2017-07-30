@@ -1,5 +1,5 @@
 # HDMI-Display
-Universal HDMI/DVI Displays with Touch Panel based on an adapter with TI TFP401 and Atmel/Microchip ATmega32u4 (with Arduino Leonardo compatible Bootloader).
+Universal HDMI/DVI Displays with Touch Panel based on an Adapter with TI TFP401 and Atmel/Microchip ATmega32u4.
 
 ![HDMI-Display](https://github.com/watterott/HDMI-Display/raw/master/hardware/HDMI-Display_v12.jpg)
 
