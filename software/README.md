@@ -15,7 +15,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
 * Install the *Watterott AVR Boards* via the Boards Manager. **Tools->Board->Boards Manager...**.
 * Download the [HDMI-Display Firmware](https://github.com/watterott/HDMI-Display/archive/master.zip).
 * Connect the USB Data port of the HDMI-Adapter (**without display**) to the computer.
-* On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/wattuino/raw/master/software/Caterina/driver.zip).
+* On a Windows operating system a driver installation will be started. The drivers are included with the BSP or you can find them [here](https://github.com/watterott/Arduino-Boards/raw/master/files/caterina_driver.zip).
 
 
 ## Build and Upload
@@ -37,12 +37,12 @@ If you want to make changes then the firmware can be compiled and uploaded using
   Note: Wrong settings can damage the HDMI-Adapter or display.
 * Connect the display to the HDMI-Adapter.
 * Now you can connect the HDMI-Adapter with display to your board or computer.
-* If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md). Or if you are using a Raspberry Pi then the display resolution has to be set in the [config.txt](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt).
+* If there is no output on the display or a flicker have a look in the [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docs/FAQ.md). Or if you are using a Raspberry Pi then the display resolution has to be set in the [config.txt](https://github.com/watterott/HDMI-Display/blob/master/docs/config.txt).
 * If the red LED is blinking then no touchpanel was found. Check your cable connections and the firmware configuration in this case.
 
 
 ## Touchpanel Orientation
-* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)) and the settings are working directly.
+* The touchpanel orientation (register 6) can be set via serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docs/serial-monitor.png)) and the settings are working directly.
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the commands can be send like this:
 
@@ -72,7 +72,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
 ## EDID EEPROM Programming
 * To program the [EDID (Extended Display Identification Data)](https://en.wikipedia.org/wiki/Extended_Display_Identification_Data) data into the EEPROM the switch next to the HDMI connector has to be set to *EDID prog.* (<=v1.1 close jumpers *SDA+SCL*) and hold the tactile switch *SW1* on power-up.
   For the switch/jumper position have a look in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
-  Or you can also send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)).
+  Or you can also send the serial command ```ATE``` (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docs/serial-monitor.png)).
   If the command is executed successfully ```OK``` will be returned.
   Under Linux the command can be send like this:
 
@@ -100,7 +100,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
 
 
 ## Serial Commands
-* Here is a list of all serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docu/serial-monitor.png)):
+* Here is a list of all serial commands (**9600 baud, 8N1, Newline (NL)**, [Arduino Serial Monitor](https://github.com/watterott/HDMI-Display/raw/master/docs/serial-monitor.png)):
   * ```AT```     -> Version and conig information
   * ```ATA```    -> Backlight on
   * ```ATH```    -> Backlight off
@@ -126,7 +126,7 @@ If you want to make changes then the firmware can be compiled and uploaded using
 * **EDID Data:**
     On a display with capacitive touchpanel the the switch next to the HDMI connector has to be set not to *EDID prog.* (<=v1.1 jumpers SDA+SCL have to be opened) after the programming. Otherwise a computer cannot read out the EDID from the EEPROM.
     Because the display timings are not standard timings some operating systems ignore the settings. In this case the HDMI display settings have to be set by hand.
-    See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docu/FAQ.md) for further infos.
+    See [FAQ](https://github.com/watterott/HDMI-Display/blob/master/docs/FAQ.md) for further infos.
 
 * **Windows:**
     Sometimes the driver for the USB Bootloader (Caterina) is not loaded correctly.

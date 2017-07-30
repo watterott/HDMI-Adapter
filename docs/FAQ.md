@@ -10,10 +10,10 @@ If you have problems like a flickering screen, then check your USB cables. Some 
 In general all boards/computers with a HDMI output can drive the display and the respective settings are loaded from the EDID EEPROM (empty on new adapters) automatically.
 If there are any problems, then the settings can be made manually. For example the Raspberry Pi ignores no standard display timings.
 Infos about setting the display timings can be found here:
-[Raspberry Pi](https://github.com/watterott/HDMI-Display/blob/master/docu/config.txt),
-[BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docu/uEnv.txt),
-[CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.scr),
-[ODROID](https://github.com/watterott/HDMI-Display/blob/master/docu/boot.ini),
+[Raspberry Pi](https://github.com/watterott/HDMI-Display/blob/master/docs/config.txt),
+[BeagleBone](https://github.com/watterott/HDMI-Display/blob/master/docs/uEnv.txt),
+[CubieBoard](https://github.com/watterott/HDMI-Display/blob/master/docs/boot.scr),
+[ODROID](https://github.com/watterott/HDMI-Display/blob/master/docs/boot.ini),
 [UDOO](http://www.elinux.org/UDOO_setup_lvds_panels)
 
 The touchpanel acts as USB HID mouse with absolute coordinates. So you do not need a special driver.
@@ -23,7 +23,7 @@ An inversion/rotation of the coordinates can be done via the [serial interface c
 ## What displays are compatible with HDMI to RGB Adapter board?
 All displays with the standard 40 pin connector (parallel RGB interface) are compatible.
 If the display has a touchpanel please make sure the jumpers are in the right position and the correct firmware is on the ATmega32u4 microcontroller, before connecting the screen.
-Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docu/Displays.md) with further infos 
+Here is a [Displays Compatibility List](https://github.com/watterott/HDMI-Display/blob/master/docs/Displays.md) with further infos 
 and the jumper settings can be found in the [schematics PDF file](https://github.com/watterott/HDMI-Display/tree/master/hardware).
 
 
