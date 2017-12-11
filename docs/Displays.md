@@ -20,6 +20,7 @@ Display                          | Size  | Resolution | LED
 **Hantronix**                    |       |            |
  HDA500-GH                       |  5.0" |  800 x 480 |  40mA @ 23V
 **HAOYU**                        |       |            |
+ HY43-LCD                        |  4.3" |  480 x 272 |  40mA @ 20V
  HY5-LCD-HD                      |  5.0" |  800 x 480 |  40mA @ 19V
  HY050CTP-HD***                  |  5.0" |  800 x 480 | 5V (40mA @ 19V)
  HY7-LCD                         |  7.0" |  800 x 480 | 140mA @ 10V
