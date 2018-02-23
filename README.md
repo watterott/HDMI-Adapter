@@ -32,7 +32,3 @@ Universal HDMI/DVI Displays with Touch Panel based on an Adapter with TI TFP401 
 
 
 ## [Documentation](http://learn.watterott.com/hdmi-adapter/)
-
-
-## Videos
-* [![HDMI-Display](http://img.youtube.com/vi/9wikp3G8xas/0.jpg)](https://www.youtube.com/watch?v=9wikp3G8xas)
