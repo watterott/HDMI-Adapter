@@ -7162,7 +7162,7 @@ HW</text>
 <part name="IC4" library="we-chip" deviceset="ATMEGA32U4" device="-MU"/>
 <part name="IC2" library="we-chip" deviceset="24LC*" device="-I/OT" value="24LC02B"/>
 <part name="HDMI" library="we-con" deviceset="HDMI" device="-A"/>
-<part name="USB" library="we-con" deviceset="USB" device="-MICROB"/>
+<part name="USB" library="we-con" deviceset="USB" device="-MICROB-2" value="USB-MICROB-2"/>
 <part name="IC3" library="we-power" deviceset="IS31BL3506A" device="-TTLS2"/>
 <part name="L1" library="we-power" deviceset="INDUCTOR" device="-1212" value="10u/0.5A"/>
 <part name="P+11" library="supply1" deviceset="+5V" device=""/>
