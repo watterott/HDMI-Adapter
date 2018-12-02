@@ -1,5 +1,5 @@
 # BeagleBone Settings - /boot/uEnv.txt
-# http://elinux.org/Beagleboard:BeagleBoneBlack_HDMI
+# https://elinux.org/Beagleboard:BeagleBoneBlack_HDMI
 # https://eewiki.net/display/linuxonarm/BeagleBone+Black
 # https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/tree/Documentation/fb/modedb.txt
 # Paramters after resolution (e.g. 800x480):
