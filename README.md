@@ -1,7 +1,7 @@
-# HDMI-Display
+# HDMI-Adapter
 Universal HDMI/DVI Displays with Touch Panel based on an Adapter with TI TFP401 and Microchip ATmega32u4.
 
-![HDMI-Display](https://github.com/watterott/HDMI-Display/raw/master/hardware/HDMI-Display_v13.jpg)
+![HDMI-Adapter](https://github.com/watterott/HDMI-Display/raw/master/hardware/HDMI-Display_v13.jpg)
 
 * [TI TFP401A](https://www.ti.com/product/TFP401A) HDMI to RGB Converter
 * HDMI compatible (DVI, no Sound, no HDCP, no CEC)
