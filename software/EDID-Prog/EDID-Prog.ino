@@ -2,6 +2,9 @@
   EDID I2C-EEPROM Programmer
   
   Note: SDA and SCL jumpers have to be closed.
+
+  Example source code free to use.
+  Further information: https://learn.watterott.com/license/
  */
 
 //uncomment one display/EDID data

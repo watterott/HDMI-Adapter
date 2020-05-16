@@ -1,5 +1,8 @@
 /*
   Backlight Test Program
+
+  Example source code free to use.
+  Further information: https://learn.watterott.com/license/
  */
 
 #define SW_1      (1<<5) //switch PD5
